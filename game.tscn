@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://sprites/blue.png" type="Texture" id=1]
 [ext_resource path="res://effects/vignette.shader" type="Shader" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://effects/shockwave.shader" type="Shader" id=7]
 [ext_resource path="res://effects/vignette.png" type="Texture" id=8]
 [ext_resource path="res://effects/crt.shader" type="Shader" id=9]
+[ext_resource path="res://effects/chromatic_aberration.shader" type="Shader" id=10]
 
 [sub_resource type="TileSet" id=1]
 
@@ -64,6 +65,11 @@ shader_param/aberration_speed = 2.27
 shader = ExtResource( 2 )
 shader_param/vignette = ExtResource( 8 )
 
+[sub_resource type="ShaderMaterial" id=10]
+shader = ExtResource( 10 )
+shader_param/apply = true
+shader_param/amount = 0.3
+
 [sub_resource type="Environment" id=2]
 tonemap_mode = 1
 glow_enabled = true
@@ -79,7 +85,7 @@ tile_set = SubResource( 1 )
 cell_size = Vector2( 256, 128 )
 format = 1
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Bg" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 1280.0
@@ -180,6 +186,15 @@ __meta__ = {
 [node name="Vignette" type="ColorRect" parent="CanvasLayer"]
 visible = false
 material = SubResource( 9 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ChromaticAberration" type="ColorRect" parent="CanvasLayer"]
+visible = false
+material = SubResource( 10 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
