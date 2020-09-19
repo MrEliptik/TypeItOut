@@ -30,21 +30,29 @@ func _process(delta):
 func init(type):
 	# TODO replace sprite depending on what object
 	self.type = type
-	$Sprite.texture = load(type_sprite[type])
-	$Sprite/VBoxContainer.visible = false
+	$Groupe/Sprite.texture = load(type_sprite[type])
+	$Groupe/VBoxContainer.visible = false
+	$AnimationPlayer.play("moving")
 	
 func place(where):
 	placed = true
 	global_position = where
 	# TODO: animate visibility (boucny effect?)
-	$Sprite/VBoxContainer.visible = true
+	$Groupe/VBoxContainer.visible = true
+	reset_pos()
+	$AnimationPlayer.play("place")
+	
+func reset_pos():
+	$Groupe/Sprite.scale = Vector2(1.0, 1.0)
+	$Groupe/Sprite.rotation_degrees = 0
+	$AnimationPlayer.stop()
 
 func cancel():
 	queue_free()
 
 func _on_Yes_pressed():
-	$Sprite/VBoxContainer.visible = false
+	$Groupe/VBoxContainer.visible = false
 
 func _on_No_pressed():
-	$Sprite/VBoxContainer.visible = false
+	$Groupe/VBoxContainer.visible = false
 	placed = false
