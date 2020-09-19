@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://sprites/space_iso/astronautA_E.png" type="Texture" id=1]
 [ext_resource path="res://sprites/space_iso/astronautA_S.png" type="Texture" id=2]
@@ -74,6 +74,10 @@ tracks/0/keys = {
 [sub_resource type="CircleShape2D" id=4]
 radius = 118.518
 
+[sub_resource type="CapsuleShape2D" id=5]
+radius = 21.983
+height = 25.8731
+
 [node name="Player" type="KinematicBody2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -90,7 +94,17 @@ autoplay = "idle"
 anims/idle = SubResource( 3 )
 
 [node name="DangerArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DangerArea"]
 position = Vector2( 0, 27.7496 )
 shape = SubResource( 4 )
+
+[node name="GameOverArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameOverArea"]
+position = Vector2( 0, 27.9986 )
+shape = SubResource( 5 )
