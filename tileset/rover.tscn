@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://sprites/floor_details/rover_NE.png" type="Texture" id=1]
+[ext_resource path="res://tileset/rover.gd" type="Script" id=2]
+[ext_resource path="res://sfx/rover/279012__visions68__machine2.wav" type="AudioStream" id=3]
+[ext_resource path="res://effects/particles/smoke_07.png" type="Texture" id=4]
+
+[sub_resource type="Curve" id=3]
+max_value = 0.3
+_data = [ Vector2( 0, 0.0102273 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0375 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=2]
+flag_disable_z = true
+direction = Vector3( -1, 0, 0 )
+spread = 25.59
+initial_velocity = 24.51
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 4 )
+
+[sub_resource type="Animation" id=1]
+resource_name = "work"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1.1 ), Vector2( 1, 1 ) ]
+}
+
+[node name="Rover" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="SmokeParticles" type="Particles2D" parent="."]
+position = Vector2( 0, -6 )
+amount = 10
+process_material = SubResource( 2 )
+texture = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+offset = Vector2( 0, -65 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/work = SubResource( 1 )
+
+[node name="EngineSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+autoplay = true
+max_distance = 600.0

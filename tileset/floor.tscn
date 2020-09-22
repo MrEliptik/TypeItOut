@@ -1,0 +1,417 @@
+[gd_scene load_steps=71 format=2]
+
+[ext_resource path="res://sprites/floor/platform_cornerOpen_NE.png" type="Texture" id=1]
+[ext_resource path="res://sprites/floor/platform_end_SW.png" type="Texture" id=2]
+[ext_resource path="res://sprites/floor/platform_cornerRound_SE.png" type="Texture" id=3]
+[ext_resource path="res://sprites/floor/platform_center_NE.png" type="Texture" id=4]
+[ext_resource path="res://sprites/floor/platform_cornerOpen_NW.png" type="Texture" id=5]
+[ext_resource path="res://sprites/floor/platform_cornerOpen_SE.png" type="Texture" id=6]
+[ext_resource path="res://sprites/floor/platform_corner_SW.png" type="Texture" id=7]
+[ext_resource path="res://sprites/floor/platform_cornerOpen_SW.png" type="Texture" id=8]
+[ext_resource path="res://sprites/floor/platform_cornerRound_NW.png" type="Texture" id=9]
+[ext_resource path="res://sprites/floor/platform_end_NW.png" type="Texture" id=10]
+[ext_resource path="res://sprites/floor/platform_cornerRound_SW.png" type="Texture" id=11]
+[ext_resource path="res://sprites/floor/platform_end_SE.png" type="Texture" id=12]
+[ext_resource path="res://sprites/floor/platform_cornerRound_NE.png" type="Texture" id=13]
+[ext_resource path="res://sprites/floor/platform_corner_NE.png" type="Texture" id=14]
+[ext_resource path="res://sprites/floor/platform_end_NE.png" type="Texture" id=15]
+[ext_resource path="res://sprites/floor/platform_corner_SE.png" type="Texture" id=16]
+[ext_resource path="res://sprites/floor/platform_corner_NW.png" type="Texture" id=17]
+[ext_resource path="res://sprites/floor/platform_side_NW.png" type="Texture" id=18]
+[ext_resource path="res://sprites/floor/platform_side_SE.png" type="Texture" id=19]
+[ext_resource path="res://sprites/floor/platform_side_SW.png" type="Texture" id=20]
+[ext_resource path="res://sprites/floor/platform_side_NE.png" type="Texture" id=21]
+[ext_resource path="res://sprites/floor/platform_straight_NE.png" type="Texture" id=22]
+[ext_resource path="res://sprites/floor/platform_straight_SE.png" type="Texture" id=23]
+[ext_resource path="res://sprites/floor/platform_straight_NW.png" type="Texture" id=24]
+[ext_resource path="res://sprites/floor/platform_straight_SW.png" type="Texture" id=25]
+[ext_resource path="res://sprites/floor/terrain_roadCross_SE.png" type="Texture" id=26]
+[ext_resource path="res://sprites/floor/terrain_roadCross_SW.png" type="Texture" id=27]
+[ext_resource path="res://sprites/floor/terrain_roadSplit_SE.png" type="Texture" id=28]
+[ext_resource path="res://sprites/floor/terrain_roadSplit_NW.png" type="Texture" id=29]
+[ext_resource path="res://sprites/floor/terrain_roadStraight_NE.png" type="Texture" id=30]
+[ext_resource path="res://sprites/floor/terrain_roadSplit_SW.png" type="Texture" id=31]
+[ext_resource path="res://sprites/floor/terrain_roadStraight_NW.png" type="Texture" id=32]
+[ext_resource path="res://sprites/floor/terrain_roadStraight_SE.png" type="Texture" id=33]
+[ext_resource path="res://sprites/floor/terrain_roadStraight_SW.png" type="Texture" id=34]
+[ext_resource path="res://sprites/floor/terrain_SE.png" type="Texture" id=35]
+[ext_resource path="res://sprites/floor/terrain_SW.png" type="Texture" id=36]
+[ext_resource path="res://sprites/floor/terrain_roadCross_NE.png" type="Texture" id=37]
+[ext_resource path="res://sprites/floor/terrain_roadCorner_SE.png" type="Texture" id=38]
+[ext_resource path="res://sprites/floor/terrain_roadCorner_SW.png" type="Texture" id=39]
+[ext_resource path="res://sprites/floor/terrain_roadCross_NW.png" type="Texture" id=40]
+[ext_resource path="res://sprites/floor/terrain_roadCorner_NW.png" type="Texture" id=41]
+[ext_resource path="res://sprites/floor/terrain_roadCorner_NE.png" type="Texture" id=42]
+[ext_resource path="res://sprites/floor/terrain_roadEnd_NE.png" type="Texture" id=43]
+[ext_resource path="res://sprites/floor/terrain_roadEnd_SE.png" type="Texture" id=44]
+[ext_resource path="res://sprites/floor/terrain_roadEnd_NW.png" type="Texture" id=45]
+[ext_resource path="res://sprites/floor/terrain_roadEnd_SW.png" type="Texture" id=46]
+[ext_resource path="res://sprites/floor/terrain_roadSplit_NE.png" type="Texture" id=47]
+[ext_resource path="res://sprites/floor/platform_large_SW.png" type="Texture" id=48]
+[ext_resource path="res://sprites/floor/platform_low_NE.png" type="Texture" id=49]
+
+[sub_resource type="NavigationPolygon" id=1]
+vertices = PoolVector2Array( -127, 225, -192, 258, -257, 225, -192, 193 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( -192, 193, -257, 225, -192, 258, -127, 225 ) ]
+
+[sub_resource type="NavigationPolygon" id=2]
+vertices = PoolVector2Array( -143, 217, -192, 242, -241, 217, -192, 193 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( -192, 193, -241, 217, -192, 242, -143, 217 ) ]
+
+[sub_resource type="NavigationPolygon" id=3]
+vertices = PoolVector2Array( -256, 225, -205, 199, -154, 225, -205, 251 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( -256, 225, -205, 199, -154, 225, -205, 251 ) ]
+
+[sub_resource type="NavigationPolygon" id=4]
+vertices = PoolVector2Array( -179, 251, -229, 225, -179, 200, -128, 225 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( -128, 225, -179, 200, -229, 225, -179, 251 ) ]
+
+[sub_resource type="NavigationPolygon" id=5]
+vertices = PoolVector2Array( -192, 258, -243, 232, -192, 206, -141, 232 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( -141, 232, -192, 206, -243, 232, -192, 258 ) ]
+
+[sub_resource type="NavigationPolygon" id=6]
+vertices = PoolVector2Array( -198, 225, -214, 224, -230, 220, -240, 217, -205, 200, -200, 202, -179, 200, -144, 217, -150, 219, -185, 202, -162, 223, -178, 225, -193, 203 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 6, 7, 8 ), PoolIntArray( 9, 6, 8, 10, 11, 0 ), PoolIntArray( 12, 9, 0 ), PoolIntArray( 0, 5, 12 ) ]
+outlines = [ PoolVector2Array( -205, 200, -240, 217, -230, 220, -214, 224, -198, 225, -178, 225, -162, 223, -150, 219, -144, 217, -179, 200, -185, 202, -193, 203, -200, 202 ) ]
+
+[sub_resource type="NavigationPolygon" id=7]
+vertices = PoolVector2Array( -238, 221, -242, 218, -205, 199, -196, 206, -197, 244, -205, 252, -243, 232, -238, 226, -187, 235, -188, 214, -184, 223 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 6, 7, 3 ), PoolIntArray( 7, 0, 3 ), PoolIntArray( 8, 4, 3, 9, 10 ) ]
+outlines = [ PoolVector2Array( -205, 199, -242, 218, -238, 221, -238, 226, -243, 232, -205, 252, -197, 244, -187, 235, -184, 223, -188, 214, -196, 206 ) ]
+
+[sub_resource type="NavigationPolygon" id=8]
+vertices = PoolVector2Array( -146, 228, -141, 232, -179, 251, -188, 244, -191, 208, -179, 200, -142, 218, -146, 222, -197, 235, -199, 224, -198, 216 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 6, 7, 3, 8, 9, 10 ), PoolIntArray( 7, 0, 3 ) ]
+outlines = [ PoolVector2Array( -179, 200, -142, 218, -146, 222, -146, 228, -141, 232, -179, 251, -188, 244, -197, 235, -199, 224, -198, 216, -191, 208 ) ]
+
+[sub_resource type="NavigationPolygon" id=9]
+vertices = PoolVector2Array( -189, 222, -170, 223, -153, 227, -141, 232, -179, 251, -188, 248, -196, 248, -204, 252, -243, 232, -234, 228, -225, 226, -210, 223 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 6, 7, 8, 9, 10, 11, 0 ), PoolIntArray( 5, 6, 0 ) ]
+outlines = [ PoolVector2Array( -141, 232, -153, 227, -170, 223, -189, 222, -210, 223, -225, 226, -234, 228, -243, 232, -204, 252, -196, 248, -188, 248, -179, 251 ) ]
+
+[sub_resource type="NavigationPolygon" id=10]
+vertices = PoolVector2Array( -178, 200, -142, 218, -193, 243, -192, 207, -242, 218, -206, 200 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 2, 4, 5, 3 ) ]
+outlines = [ PoolVector2Array( -206, 200, -242, 218, -193, 243, -142, 218, -178, 200, -192, 207 ) ]
+
+[sub_resource type="NavigationPolygon" id=11]
+vertices = PoolVector2Array( -206, 200, -155, 225, -205, 251, -230, 225, -243, 232, -242, 218 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 2, 4, 3 ), PoolIntArray( 0, 3, 5 ) ]
+outlines = [ PoolVector2Array( -243, 232, -205, 251, -155, 225, -206, 200, -242, 218, -230, 225 ) ]
+
+[sub_resource type="NavigationPolygon" id=12]
+vertices = PoolVector2Array( -179, 200, -142, 219, -154, 225, -179, 251, -229, 225, -141, 232 )
+polygons = [ PoolIntArray( 0, 1, 2 ), PoolIntArray( 3, 4, 0, 2 ), PoolIntArray( 3, 2, 5 ) ]
+outlines = [ PoolVector2Array( -179, 200, -229, 225, -179, 251, -141, 232, -154, 225, -142, 219 ) ]
+
+[sub_resource type="NavigationPolygon" id=13]
+vertices = PoolVector2Array( -205, 251, -244, 232, -192, 206, -192, 244, -141, 232, -179, 251 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 2, 4, 5, 3 ) ]
+outlines = [ PoolVector2Array( -192, 206, -244, 232, -205, 251, -192, 244, -179, 251, -141, 232 ) ]
+
+[sub_resource type="NavigationPolygon" id=14]
+vertices = PoolVector2Array( -179, 251, -242, 219, -192, 193, -128, 225 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( -128, 225, -192, 193, -242, 219, -179, 251 ) ]
+
+[sub_resource type="NavigationPolygon" id=15]
+vertices = PoolVector2Array( -192, 193, -142, 218, -205, 251, -256, 225 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( -256, 225, -205, 251, -142, 218, -192, 193 ) ]
+
+[sub_resource type="NavigationPolygon" id=16]
+vertices = PoolVector2Array( -192, 257, -243, 232, -179, 199, -128, 225 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( -192, 257, -243, 232, -179, 199, -128, 225 ) ]
+
+[sub_resource type="NavigationPolygon" id=17]
+vertices = PoolVector2Array( -141, 232, -192, 258, -257, 225, -205, 200 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( -205, 200, -257, 225, -192, 258, -141, 232 ) ]
+
+[sub_resource type="NavigationPolygon" id=18]
+vertices = PoolVector2Array( -140, 232, -178, 252, -244, 218, -206, 199 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( -206, 199, -244, 218, -178, 252, -140, 232 ) ]
+
+[sub_resource type="NavigationPolygon" id=19]
+vertices = PoolVector2Array( -205, 251, -243, 232, -179, 200, -142, 218 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( -205, 251, -243, 232, -179, 200, -142, 218 ) ]
+
+[sub_resource type="NavigationPolygon" id=20]
+vertices = PoolVector2Array( -244, 232, -179, 200, -142, 218, -205, 251 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( -244, 232, -179, 200, -142, 218, -205, 251 ) ]
+
+[sub_resource type="NavigationPolygon" id=21]
+vertices = PoolVector2Array( -243, 218, -206, 199, -172.6, 215.7, -140, 232, -179, 252 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4 ) ]
+outlines = [ PoolVector2Array( -179, 252, -140, 232, -172.6, 215.7, -206, 199, -243, 218 ) ]
+
+[node name="Floor" type="Node2D"]
+
+[node name="platform_center_NE" type="Sprite" parent="."]
+texture = ExtResource( 4 )
+offset = Vector2( -192, 170 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="platform_center_NE"]
+navpoly = SubResource( 1 )
+
+[node name="platform_cornerOpen_NE" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+offset = Vector2( -192, 170 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="platform_cornerOpen_NE"]
+navpoly = SubResource( 2 )
+
+[node name="platform_cornerOpen_NW" type="Sprite" parent="."]
+texture = ExtResource( 5 )
+offset = Vector2( -192, 170 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="platform_cornerOpen_NW"]
+navpoly = SubResource( 3 )
+
+[node name="platform_cornerOpen_SE" type="Sprite" parent="."]
+texture = ExtResource( 6 )
+offset = Vector2( -192, 170 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="platform_cornerOpen_SE"]
+navpoly = SubResource( 4 )
+
+[node name="platform_cornerOpen_SW" type="Sprite" parent="."]
+texture = ExtResource( 8 )
+offset = Vector2( -192, 170 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="platform_cornerOpen_SW"]
+navpoly = SubResource( 5 )
+
+[node name="platform_cornerRound_NE" type="Sprite" parent="."]
+texture = ExtResource( 13 )
+offset = Vector2( -192, 170 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="platform_cornerRound_NE"]
+navpoly = SubResource( 6 )
+
+[node name="platform_cornerRound_NW" type="Sprite" parent="."]
+texture = ExtResource( 9 )
+offset = Vector2( -192, 170 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="platform_cornerRound_NW"]
+navpoly = SubResource( 7 )
+
+[node name="platform_cornerRound_SE" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+offset = Vector2( -192, 170 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="platform_cornerRound_SE"]
+navpoly = SubResource( 8 )
+
+[node name="platform_cornerRound_SW" type="Sprite" parent="."]
+texture = ExtResource( 11 )
+offset = Vector2( -192, 170 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="platform_cornerRound_SW"]
+navpoly = SubResource( 9 )
+
+[node name="platform_corner_NE" type="Sprite" parent="."]
+texture = ExtResource( 14 )
+offset = Vector2( -192, 170 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="platform_corner_NE"]
+navpoly = SubResource( 10 )
+
+[node name="platform_corner_NW" type="Sprite" parent="."]
+texture = ExtResource( 17 )
+offset = Vector2( -192, 170 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="platform_corner_NW"]
+navpoly = SubResource( 11 )
+
+[node name="platform_corner_SE" type="Sprite" parent="."]
+texture = ExtResource( 16 )
+offset = Vector2( -192, 170 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="platform_corner_SE"]
+navpoly = SubResource( 12 )
+
+[node name="platform_corner_SW" type="Sprite" parent="."]
+texture = ExtResource( 7 )
+offset = Vector2( -192, 170 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="platform_corner_SW"]
+navpoly = SubResource( 13 )
+
+[node name="platform_end_NE" type="Sprite" parent="."]
+texture = ExtResource( 15 )
+offset = Vector2( -192, 170 )
+
+[node name="platform_end_NW" type="Sprite" parent="."]
+texture = ExtResource( 10 )
+offset = Vector2( -192, 170 )
+
+[node name="platform_end_SE" type="Sprite" parent="."]
+texture = ExtResource( 12 )
+offset = Vector2( -192, 170 )
+
+[node name="platform_end_SW" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+offset = Vector2( -192, 170 )
+
+[node name="platform_side_NE" type="Sprite" parent="."]
+texture = ExtResource( 21 )
+offset = Vector2( -192, 170 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="platform_side_NE"]
+navpoly = SubResource( 14 )
+
+[node name="platform_side_NW" type="Sprite" parent="."]
+texture = ExtResource( 18 )
+offset = Vector2( -192, 170 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="platform_side_NW"]
+navpoly = SubResource( 15 )
+
+[node name="platform_side_SE" type="Sprite" parent="."]
+texture = ExtResource( 19 )
+offset = Vector2( -192, 170 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="platform_side_SE"]
+navpoly = SubResource( 16 )
+
+[node name="platform_side_SW" type="Sprite" parent="."]
+texture = ExtResource( 20 )
+offset = Vector2( -192, 170 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="platform_side_SW"]
+navpoly = SubResource( 17 )
+
+[node name="platform_straight_NE" type="Sprite" parent="."]
+texture = ExtResource( 22 )
+offset = Vector2( -192, 170 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="platform_straight_NE"]
+navpoly = SubResource( 18 )
+
+[node name="platform_straight_NW" type="Sprite" parent="."]
+texture = ExtResource( 24 )
+offset = Vector2( -192, 170 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="platform_straight_NW"]
+navpoly = SubResource( 19 )
+
+[node name="platform_straight_SE" type="Sprite" parent="."]
+texture = ExtResource( 23 )
+offset = Vector2( -192, 170 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="platform_straight_SE"]
+navpoly = SubResource( 20 )
+
+[node name="platform_straight_SW" type="Sprite" parent="."]
+texture = ExtResource( 25 )
+offset = Vector2( -192, 170 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="platform_straight_SW"]
+navpoly = SubResource( 21 )
+
+[node name="platform_large_SW" type="Sprite" parent="."]
+texture = ExtResource( 48 )
+offset = Vector2( -192, 180 )
+
+[node name="platform_low_NE" type="Sprite" parent="."]
+texture = ExtResource( 49 )
+offset = Vector2( -192, 170 )
+
+[node name="terrain_roadCorner_NE" type="Sprite" parent="."]
+texture = ExtResource( 42 )
+offset = Vector2( -192, 170 )
+
+[node name="terrain_roadCorner_NW" type="Sprite" parent="."]
+texture = ExtResource( 41 )
+offset = Vector2( -192, 170 )
+
+[node name="terrain_roadCorner_SE" type="Sprite" parent="."]
+texture = ExtResource( 38 )
+offset = Vector2( -192, 170 )
+
+[node name="terrain_roadCorner_SW" type="Sprite" parent="."]
+texture = ExtResource( 39 )
+offset = Vector2( -192, 170 )
+
+[node name="terrain_roadCross_NE" type="Sprite" parent="."]
+texture = ExtResource( 37 )
+offset = Vector2( -192, 170 )
+
+[node name="terrain_roadCross_NW" type="Sprite" parent="."]
+texture = ExtResource( 40 )
+offset = Vector2( -192, 170 )
+
+[node name="terrain_roadCross_SE" type="Sprite" parent="."]
+texture = ExtResource( 26 )
+offset = Vector2( -192, 170 )
+
+[node name="terrain_roadCross_SW" type="Sprite" parent="."]
+texture = ExtResource( 27 )
+offset = Vector2( -192, 170 )
+
+[node name="terrain_roadEnd_NE" type="Sprite" parent="."]
+texture = ExtResource( 43 )
+offset = Vector2( -192, 170 )
+
+[node name="terrain_roadEnd_NW" type="Sprite" parent="."]
+texture = ExtResource( 45 )
+offset = Vector2( -192, 170 )
+
+[node name="terrain_roadEnd_SE" type="Sprite" parent="."]
+texture = ExtResource( 44 )
+offset = Vector2( -192, 170 )
+
+[node name="terrain_roadEnd_SW" type="Sprite" parent="."]
+texture = ExtResource( 46 )
+offset = Vector2( -192, 170 )
+
+[node name="terrain_roadSplit_NE" type="Sprite" parent="."]
+texture = ExtResource( 47 )
+offset = Vector2( -192, 170 )
+
+[node name="terrain_roadSplit_NW" type="Sprite" parent="."]
+texture = ExtResource( 29 )
+offset = Vector2( -192, 170 )
+
+[node name="terrain_roadSplit_SE" type="Sprite" parent="."]
+texture = ExtResource( 28 )
+offset = Vector2( -192, 170 )
+
+[node name="terrain_roadSplit_SW" type="Sprite" parent="."]
+texture = ExtResource( 31 )
+offset = Vector2( -192, 170 )
+
+[node name="terrain_roadStraight_NE" type="Sprite" parent="."]
+texture = ExtResource( 30 )
+offset = Vector2( -192, 170 )
+
+[node name="terrain_roadStraight_NW" type="Sprite" parent="."]
+texture = ExtResource( 32 )
+offset = Vector2( -192, 170 )
+
+[node name="terrain_roadStraight_SE" type="Sprite" parent="."]
+texture = ExtResource( 33 )
+offset = Vector2( -192, 170 )
+
+[node name="terrain_roadStraight_SW" type="Sprite" parent="."]
+texture = ExtResource( 34 )
+offset = Vector2( -192, 170 )
+
+[node name="terrain_SE" type="Sprite" parent="."]
+texture = ExtResource( 35 )
+offset = Vector2( -192, 170 )
+
+[node name="terrain_SW" type="Sprite" parent="."]
+texture = ExtResource( 36 )
+offset = Vector2( -192, 170 )
