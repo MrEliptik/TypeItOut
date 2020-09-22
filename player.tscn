@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://sprites/space_iso/astronautA_E.png" type="Texture" id=1]
 [ext_resource path="res://sprites/space_iso/astronautA_S.png" type="Texture" id=2]
@@ -8,32 +8,26 @@
 [ext_resource path="res://sprites/space_iso/astronautA_SE.png" type="Texture" id=6]
 [ext_resource path="res://sprites/space_iso/astronautA_SW.png" type="Texture" id=7]
 [ext_resource path="res://sprites/space_iso/astronautA_W.png" type="Texture" id=8]
+[ext_resource path="res://effects/outline.shader" type="Shader" id=9]
+[ext_resource path="res://player.gd" type="Script" id=10]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 23.3251, 34.9147 )
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="CircleShape2D" id=3]
+radius = 222.79
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 23.5102
+height = 25.8731
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = ExtResource( 9 )
+shader_param/width = 3.5
+shader_param/outline_color = Color( 0.611765, 0.839216, 0.243137, 1 )
+
+[sub_resource type="SpriteFrames" id=5]
 animations = [ {
-"frames": [ ExtResource( 7 ) ],
-"loop": true,
-"name": "SW",
-"speed": 0.0
-}, {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "NE",
-"speed": 0.0
-}, {
-"frames": [ ExtResource( 5 ) ],
-"loop": true,
-"name": "NW",
-"speed": 0.0
-}, {
-"frames": [ ExtResource( 6 ) ],
-"loop": true,
-"name": "SE",
-"speed": 0.0
-}, {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "S",
@@ -53,10 +47,29 @@ animations = [ {
 "loop": true,
 "name": "E",
 "speed": 0.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "NE",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "NW",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "SW",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "SE",
+"speed": 0.0
 } ]
 
-[sub_resource type="Animation" id=3]
-resource_name = "idle"
+[sub_resource type="Animation" id=6]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:scale")
@@ -71,40 +84,40 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1, 0.95 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="CircleShape2D" id=4]
-radius = 118.518
-
-[sub_resource type="CapsuleShape2D" id=5]
-radius = 21.983
-height = 25.8731
-
 [node name="Player" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.138077, 28.808 )
-shape = SubResource( 1 )
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 1, 0.950091 )
-frames = SubResource( 2 )
-animation = "S"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "idle"
-anims/idle = SubResource( 3 )
+position = Vector2( 0.138077, -34.7008 )
+shape = SubResource( 2 )
 
 [node name="DangerArea" type="Area2D" parent="."]
+position = Vector2( 0, -61.5088 )
 collision_layer = 4
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DangerArea"]
 position = Vector2( 0, 27.7496 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="GameOverArea" type="Area2D" parent="."]
+position = Vector2( 0, -61.5088 )
 collision_layer = 4
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameOverArea"]
-position = Vector2( 0, 27.9986 )
-shape = SubResource( 5 )
+position = Vector2( 0.140312, 26.7358 )
+shape = SubResource( 4 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 7 )
+position = Vector2( 0, -4.209 )
+frames = SubResource( 5 )
+animation = "S"
+offset = Vector2( 0, -60 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+anims/idle = SubResource( 6 )

@@ -1,6 +1,6 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=24 format=2]
 
-[ext_resource path="res://sprites/blue.png" type="Texture" id=1]
+[ext_resource path="res://pauseMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://effects/vignette.shader" type="Shader" id=2]
 [ext_resource path="res://player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://game.gd" type="Script" id=4]
@@ -10,10 +10,47 @@
 [ext_resource path="res://effects/vignette.png" type="Texture" id=8]
 [ext_resource path="res://effects/crt.shader" type="Shader" id=9]
 [ext_resource path="res://effects/chromatic_aberration.shader" type="Shader" id=10]
+[ext_resource path="res://map.tscn" type="PackedScene" id=11]
+[ext_resource path="res://dictionary.tscn" type="PackedScene" id=12]
+[ext_resource path="res://enemy.tscn" type="PackedScene" id=13]
+[ext_resource path="res://gameOver.tscn" type="PackedScene" id=14]
+[ext_resource path="res://sfx/typing/error_006.ogg" type="AudioStream" id=15]
+[ext_resource path="res://sfx/typing/impactMining_004.ogg" type="AudioStream" id=16]
+[ext_resource path="res://sfx/environment/435730__scivirus__motor-noise.wav" type="AudioStream" id=17]
 
-[sub_resource type="TileSet" id=1]
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 7 )
+shader_param/center = Vector2( 0.5, 0.5 )
+shader_param/force = 5.55227e-06
+shader_param/size = 0.000518582
+shader_param/thickness = 0.131
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 9 )
+shader_param/boost = 1.0
+shader_param/grille_opacity = 1.0
+shader_param/scanlines_opacity = 1.0
+shader_param/vignette_opacity = 0.16
+shader_param/scanlines_speed = 1.0
+shader_param/show_grille = false
+shader_param/show_scanlines = false
+shader_param/show_vignette = true
+shader_param/show_curvature = true
+shader_param/screen_size = Vector2( 320, 180 )
+shader_param/aberration_amount = 0.0
+shader_param/move_aberration = true
+shader_param/aberration_speed = 8.89
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 2 )
+shader_param/vignette = ExtResource( 8 )
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 10 )
+shader_param/apply = true
+shader_param/amount = 0.3
+
+[sub_resource type="Animation" id=1]
 resource_name = "shockwave"
 length = 0.3
 step = 0.01
@@ -38,171 +75,179 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.3 )
 }
 
-[sub_resource type="ShaderMaterial" id=4]
-shader = ExtResource( 7 )
-shader_param/center = Vector2( 0.5, 0.5 )
-shader_param/force = 0.01
-shader_param/size = 0.934
-shader_param/thickness = 0.131
-
-[sub_resource type="ShaderMaterial" id=7]
-shader = ExtResource( 9 )
-shader_param/boost = 1.63
-shader_param/grille_opacity = 0.83
-shader_param/scanlines_opacity = 0.93
-shader_param/vignette_opacity = 0.22
-shader_param/scanlines_speed = 1.0
-shader_param/show_grille = true
-shader_param/show_scanlines = true
-shader_param/show_vignette = true
-shader_param/show_curvature = true
-shader_param/screen_size = Vector2( 320, 180 )
-shader_param/aberration_amount = 1.0
-shader_param/move_aberration = true
-shader_param/aberration_speed = 2.27
-
-[sub_resource type="ShaderMaterial" id=9]
-shader = ExtResource( 2 )
-shader_param/vignette = ExtResource( 8 )
-
-[sub_resource type="ShaderMaterial" id=10]
-shader = ExtResource( 10 )
-shader_param/apply = true
-shader_param/amount = 0.3
-
-[sub_resource type="Environment" id=2]
+[sub_resource type="Environment" id=6]
+fog_color = Color( 0.215686, 0.215686, 0.215686, 1 )
+fog_depth_begin = 0.0
+fog_depth_end = 80.7
 tonemap_mode = 1
 glow_enabled = true
-adjustment_enabled = true
+glow_bicubic_upscale = true
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 4 )
 
-[node name="TileMap" type="TileMap" parent="."]
-visible = false
-mode = 1
-tile_set = SubResource( 1 )
-cell_size = Vector2( 256, 128 )
-format = 1
-
-[node name="Bg" type="TextureRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = 1280.0
-margin_bottom = 720.0
-texture = ExtResource( 1 )
-expand = true
-stretch_mode = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Map" parent="." instance=ExtResource( 11 )]
 
 [node name="SpawnPoints" type="Node" parent="."]
 
 [node name="Node2D" type="Node2D" parent="SpawnPoints"]
+position = Vector2( -128.586, 29.6985 )
 
 [node name="Node2D2" type="Node2D" parent="SpawnPoints"]
-position = Vector2( 0, 100 )
+position = Vector2( -132.121, 157.536 )
 
 [node name="Node2D3" type="Node2D" parent="SpawnPoints"]
-position = Vector2( 0, 200 )
+position = Vector2( -130.707, 286.08 )
 
 [node name="Node2D4" type="Node2D" parent="SpawnPoints"]
-position = Vector2( 0, 300 )
+position = Vector2( -132.121, 481.092 )
 
 [node name="Node2D5" type="Node2D" parent="SpawnPoints"]
-position = Vector2( 0, 400 )
+position = Vector2( -131.414, 607.515 )
 
 [node name="Node2D6" type="Node2D" parent="SpawnPoints"]
-position = Vector2( 0, 500 )
+position = Vector2( -130.707, 800.406 )
 
 [node name="Node2D7" type="Node2D" parent="SpawnPoints"]
-position = Vector2( 0, 600 )
+position = Vector2( -130, 924 )
 
 [node name="Node2D8" type="Node2D" parent="SpawnPoints"]
-position = Vector2( 0, 700 )
+position = Vector2( -130, 1080 )
 
 [node name="Node2D9" type="Node2D" parent="SpawnPoints"]
-position = Vector2( 1280, 0 )
+position = Vector2( 2050, 0 )
 
 [node name="Node2D10" type="Node2D" parent="SpawnPoints"]
-position = Vector2( 1280, 100 )
+position = Vector2( 2050, 154 )
 
 [node name="Node2D11" type="Node2D" parent="SpawnPoints"]
-position = Vector2( 1280, 200 )
+position = Vector2( 2050, 308 )
 
 [node name="Node2D12" type="Node2D" parent="SpawnPoints"]
-position = Vector2( 1280, 300 )
+position = Vector2( 2050, 462 )
 
 [node name="Node2D13" type="Node2D" parent="SpawnPoints"]
-position = Vector2( 1280, 400 )
+position = Vector2( 2050, 616 )
 
 [node name="Node2D14" type="Node2D" parent="SpawnPoints"]
-position = Vector2( 1280, 500 )
+position = Vector2( 2050, 770 )
 
 [node name="Node2D15" type="Node2D" parent="SpawnPoints"]
-position = Vector2( 1280, 600 )
+position = Vector2( 2050, 924 )
 
 [node name="Node2D16" type="Node2D" parent="SpawnPoints"]
-position = Vector2( 1280, 700 )
+position = Vector2( 2050, 1080 )
 
 [node name="Enemies" type="Node" parent="."]
+
+[node name="Bullets" type="Node" parent="."]
 
 [node name="Defenses" type="Node" parent="."]
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 640, 360 )
+position = Vector2( 959.404, 555.362 )
+z_index = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2( 640, 360 )
+offset = Vector2( 960, 540 )
 current = true
-zoom = Vector2( 0.9, 0.9 )
 smoothing_enabled = true
 smoothing_speed = 10.0
 script = ExtResource( 5 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/shockwave = SubResource( 5 )
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Shockwave" type="ColorRect" parent="CanvasLayer"]
-material = SubResource( 4 )
+visible = false
+material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="CRT" type="ColorRect" parent="CanvasLayer"]
 visible = false
-material = SubResource( 7 )
+material = SubResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Vignette" type="ColorRect" parent="CanvasLayer"]
 visible = false
-material = SubResource( 9 )
+material = SubResource( 4 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ChromaticAberration" type="ColorRect" parent="CanvasLayer"]
 visible = false
-material = SubResource( 10 )
+material = SubResource( 5 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="GUI" parent="CanvasLayer" instance=ExtResource( 6 )]
+margin_left = -1.06067
+margin_top = -11.3137
+margin_right = -1.06067
+margin_bottom = -11.3137
+mouse_filter = 1
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource( 1 )]
+visible = false
+
+[node name="GameOver" parent="CanvasLayer" instance=ExtResource( 14 )]
+visible = false
+
+[node name="Dictionary" parent="." instance=ExtResource( 12 )]
+
+[node name="Line2D" type="Line2D" parent="."]
+
+[node name="Enemy" parent="." instance=ExtResource( 13 )]
+visible = false
+position = Vector2( 44.5448, 434.759 )
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="TypingErrorSound" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 15 )
+
+[node name="GoodTypingSound" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 16 )
+
+[node name="Environment" type="Node" parent="SFX"]
+
+[node name="Drill" type="AudioStreamPlayer" parent="SFX/Environment"]
+stream = ExtResource( 17 )
+volume_db = -3.782
+pitch_scale = 0.89
+
+[node name="FreezeTimer" type="Timer" parent="."]
+pause_mode = 2
+wait_time = 0.075
+one_shot = true
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/shockwave = SubResource( 1 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 2 )
+environment = SubResource( 6 )
 [connection signal="picked_from_inventory" from="CanvasLayer/GUI" to="." method="_on_GUI_picked_from_inventory"]
+[connection signal="timeout" from="FreezeTimer" to="." method="_on_FreezeTimer_timeout"]
+
+[editable path="Map"]
+
+[editable path="Map/Navigation2D/TileMap"]

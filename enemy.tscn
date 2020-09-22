@@ -1,16 +1,16 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://sprites/tower_def_iso/enemy_ufoRed_E.png" type="Texture" id=1]
 [ext_resource path="res://fonts/Rubik-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://enemy.gd" type="Script" id=3]
 [ext_resource path="res://effects/outline.shader" type="Shader" id=4]
 [ext_resource path="res://effects/particles/star_07.png" type="Texture" id=5]
-[ext_resource path="res://effects/particles/light_03.png" type="Texture" id=6]
+[ext_resource path="res://sfx/enemy/51751__erkanozan__ufo-sweep-01.wav" type="AudioStream" id=6]
 [ext_resource path="res://effects/emote_exclamation.png" type="Texture" id=7]
-[ext_resource path="res://sprites/tower_def_iso/weapon_ballista_S.png" type="Texture" id=8]
+[ext_resource path="res://sfx/enemy/72447__rockwehrmann__ufo1.wav" type="AudioStream" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 45.4088, 37.5595 )
+extents = Vector2( 53.62, 39.0067 )
 
 [sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
@@ -31,32 +31,38 @@ shader = ExtResource( 4 )
 shader_param/width = 2.0
 shader_param/outline_color = Color( 0.960784, 0.921569, 0.592157, 1 )
 
-[sub_resource type="DynamicFont" id=5]
-size = 32
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.133333, 0.133333, 0.133333, 0 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 42
+outline_size = 2
+use_filter = true
+extra_spacing_char = 1
 font_data = ExtResource( 2 )
 
-[sub_resource type="Gradient" id=6]
+[sub_resource type="Gradient" id=7]
 offsets = PoolRealArray( 0.0148148, 0.57037, 1 )
 colors = PoolColorArray( 0.972656, 0.971231, 0.94986, 1, 0.571699, 0.893915, 0.969238, 1, 0.0419922, 0.00164032, 0.00164032, 0 )
 
-[sub_resource type="GradientTexture" id=7]
-gradient = SubResource( 6 )
+[sub_resource type="GradientTexture" id=8]
+gradient = SubResource( 7 )
 
-[sub_resource type="Curve" id=8]
+[sub_resource type="Curve" id=9]
 _data = [ Vector2( 0.00632912, 0.155682 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.465909 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=9]
-curve = SubResource( 8 )
+[sub_resource type="CurveTexture" id=10]
+curve = SubResource( 9 )
 
-[sub_resource type="Curve" id=10]
+[sub_resource type="Curve" id=11]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.454545 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=11]
-curve = SubResource( 10 )
+[sub_resource type="CurveTexture" id=12]
+curve = SubResource( 11 )
 
-[sub_resource type="ParticlesMaterial" id=12]
+[sub_resource type="ParticlesMaterial" id=13]
 lifetime_randomness = 0.04
-trail_size_modifier = SubResource( 11 )
+trail_size_modifier = SubResource( 12 )
 emission_shape = 2
 emission_box_extents = Vector3( 1, 1, 1 )
 flag_disable_z = true
@@ -69,11 +75,12 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 132.4
 angle_random = 0.46
-scale_curve = SubResource( 9 )
-color_ramp = SubResource( 7 )
+scale_curve = SubResource( 10 )
+color_ramp = SubResource( 8 )
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=14]
 length = 0.5
+step = 0.01
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("Sprite:scale:x")
 tracks/0/interp = 1
@@ -104,64 +111,167 @@ tracks/2/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -360, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.5 )
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite/Collectable:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite/AnimatedSprite:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("DieSound:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=15]
 length = 2.0
 loop = true
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("Sprite:position:y")
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 10, -0.25, 0, 0.25, 0, -10, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5, 1.5, 2 )
+"times": PoolRealArray( 0, 0.5, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -10.0, 0.0, 10.0, 0.0 ]
 }
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("Sprite:rotation_degrees")
+
+[sub_resource type="Animation" id=16]
+length = 0.3
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite/AnimatedSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/AnimatedSprite:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 9.4, -0.25, 0, 0.25, 0, -9.3, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5, 1.5, 2 )
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 1.4, 1.4 ), Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite/AnimatedSprite:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite/AnimatedSprite:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -80 ), Vector2( 0, -62 ) ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=17]
+resource_name = "danger_active"
+length = 0.6
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite/AnimatedSprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.45, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 10.0, -10.0, 0.0 ]
+}
 
 [node name="Enemy" type="KinematicBody2D"]
+collision_layer = 23
+collision_mask = 23
 script = ExtResource( 3 )
 
+[node name="ParticlesContainer" type="Node" parent="."]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 1.52588e-05, 41.8923 )
+position = Vector2( 0.132889, -4.61152 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 2 )
-rotation = 0.000872658
+z_index = 1
 texture = ExtResource( 1 )
+offset = Vector2( 0, -45 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Sprite"]
 visible = false
-position = Vector2( 0, -15.1453 )
+scale = Vector2( 1e-05, 1e-05 )
 frames = SubResource( 3 )
 animation = "danger"
 
 [node name="Collectable" type="Sprite" parent="Sprite"]
+visible = false
 material = SubResource( 4 )
 position = Vector2( 37.1314, -41.6098 )
 rotation = -0.000872658
-texture = ExtResource( 8 )
 
 [node name="Word" type="RichTextLabel" parent="."]
-margin_left = -307.0
-margin_top = 80.0
-margin_right = 306.0
-margin_bottom = 119.0
+margin_left = -154.745
+margin_top = 36.0379
+margin_right = 155.255
+margin_bottom = 86.0379
 size_flags_horizontal = 3
-custom_fonts/normal_font = SubResource( 5 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/normal_font = SubResource( 6 )
+custom_colors/default_color = Color( 0.117647, 0.117647, 0.117647, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]TEST[/center]"
 text = "TEST"
@@ -171,28 +281,28 @@ __meta__ = {
 }
 
 [node name="Particles2D" type="Particles2D" parent="."]
-position = Vector2( 0.8909, 40.7586 )
 emitting = false
 amount = 500
 lifetime = 2.5
-process_material = SubResource( 12 )
+process_material = SubResource( 13 )
 texture = ExtResource( 5 )
 
-[node name="Particles2D2" type="Particles2D" parent="."]
-position = Vector2( 0.8909, 40.7586 )
-emitting = false
-amount = 1
-lifetime = 0.6
-one_shot = true
-process_material = SubResource( 12 )
-texture = ExtResource( 6 )
+[node name="DieSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[node name="MoveSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -6.618
+autoplay = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "move"
-anims/die = SubResource( 13 )
-anims/move = SubResource( 14 )
+anims/die = SubResource( 14 )
+anims/move = SubResource( 15 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
-anims/danger = SubResource( 15 )
+anims/danger = SubResource( 16 )
+anims/danger_active = SubResource( 17 )
 
 [node name="Tween" type="Tween" parent="."]
+[connection signal="animation_finished" from="AnimationPlayer2" to="." method="_on_AnimationPlayer2_animation_finished"]

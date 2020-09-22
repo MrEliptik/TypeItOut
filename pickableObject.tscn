@@ -1,180 +1,303 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://sprites/ui/green_boxCheckmark.png" type="Texture" id=1]
 [ext_resource path="res://sprites/ui/red_boxCross.png" type="Texture" id=2]
-[ext_resource path="res://sprites/weapon_catapult_E.png" type="Texture" id=3]
+[ext_resource path="res://sprites/defenses/turret_single.tres" type="SpriteFrames" id=3]
 [ext_resource path="res://fonts/Rubik-Regular.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://pickableObject.gd" type="Script" id=5]
+[ext_resource path="res://sfx/turret/impactSoft_heavy_000.ogg" type="AudioStream" id=6]
+[ext_resource path="res://effects/particles/smoke_05.png" type="Texture" id=7]
+[ext_resource path="res://effects/particles/dirt_01.png" type="Texture" id=8]
+[ext_resource path="res://sfx/turret/321215__hybrid-v__sci-fi-weapons-deploy.wav" type="AudioStream" id=9]
+[ext_resource path="res://sfx/ui/click_003.ogg" type="AudioStream" id=10]
+[ext_resource path="res://sfx/ui/click_005.ogg" type="AudioStream" id=11]
+[ext_resource path="res://sfx/turret/minimize_003.ogg" type="AudioStream" id=12]
 
-[sub_resource type="DynamicFont" id=1]
-size = 24
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.67027, 1 )
+colors = PoolColorArray( 0.629883, 0.381403, 0.123024, 1, 0.71, 0.544925, 0.3905, 0.901961, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="Curve" id=3]
+max_value = 0.4
+_data = [ Vector2( 0, 0.0881818 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.146364 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+lifetime_randomness = 0.83
+emission_shape = 2
+emission_box_extents = Vector3( 3, 3, 1 )
+flag_disable_z = true
+direction = Vector3( 1, -1, 0 )
+spread = 180.0
+initial_velocity = 107.85
+angular_velocity = 171.97
+angular_velocity_random = 0.7
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+lifetime_randomness = 0.83
+emission_shape = 2
+emission_box_extents = Vector3( 3, 3, 1 )
+flag_disable_z = true
+direction = Vector3( 1, -1, 0 )
+spread = 180.0
+initial_velocity = 186.28
+angular_velocity = 49.41
+angular_velocity_random = 0.29
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
+
+[sub_resource type="CircleShape2D" id=7]
+radius = 35.2881
+
+[sub_resource type="CircleShape2D" id=8]
+radius = 168.074
+
+[sub_resource type="DynamicFont" id=9]
+size = 32
 font_data = ExtResource( 4 )
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=10]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=11]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
-[sub_resource type="Animation" id=4]
-resource_name = "moving"
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="Animation" id=14]
 length = 0.6
 loop = true
-step = 0.01
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("Groupe/Sprite:rotation_degrees")
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Groupe/AnimatedSprite:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 7.4, -0.25, 0, 0.25, 0, -7.4, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.2, 0.6 )
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("Groupe/Sprite:scale:x")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1.2, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 )
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("Groupe/Sprite:scale:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1.1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.2, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 )
-}
-tracks/3/type = "bezier"
-tracks/3/path = NodePath("Groupe/Sprite:position:x")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = false
-tracks/3/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -1.78814e-07, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.2, 0.6 )
-}
-tracks/4/type = "bezier"
-tracks/4/path = NodePath("Groupe/Sprite:position:y")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = false
-tracks/4/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 12, -0.25, 0, 0.25, 0, -12, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.2, 0.6 )
+"times": PoolRealArray( 0, 0.15, 0.45, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -10.0, 10.0, 0.1 ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "place"
+[sub_resource type="Animation" id=15]
+length = 2.2
 step = 0.01
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("Groupe/Sprite:position:x")
+tracks/0/type = "value"
+tracks/0/path = NodePath("Groupe/AnimatedSprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.3 )
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -1000 ), Vector2( 0, 0 ) ]
 }
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("Groupe/Sprite:position:y")
+tracks/1/type = "value"
+tracks/1/path = NodePath("Groupe/AnimatedSprite:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( -1000, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.3 )
+"times": PoolRealArray( 0, 0.3, 0.39, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1.2, 0.8 ), Vector2( 1, 1.05 ) ]
 }
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("Groupe/Sprite:rotation_degrees")
+tracks/2/type = "value"
+tracks/2/path = NodePath("ImpactSound:playing")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
-tracks/3/type = "bezier"
-tracks/3/path = NodePath("Groupe/Sprite:scale:x")
+tracks/3/type = "value"
+tracks/3/path = NodePath("SmokeParticles:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.4, -0.25, 0, 0.25, 0, 0.9, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.27, 0.33, 0.4, 0.5 )
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
-tracks/4/type = "bezier"
-tracks/4/path = NodePath("Groupe/Sprite:scale:y")
+tracks/4/type = "value"
+tracks/4/path = NodePath("DirtParticles:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0, 1.3, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.27, 0.33, 0.4, 0.5 )
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("DeployementSound:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = false
+tracks/5/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [node name="PickableObject" type="Node2D"]
+z_index = 1
 script = ExtResource( 5 )
+
+[node name="SmokeParticles" type="Particles2D" parent="."]
+position = Vector2( 0, 30 )
+emitting = false
+amount = 20
+lifetime = 1.1
+one_shot = true
+explosiveness = 1.0
+randomness = 0.5
+process_material = SubResource( 5 )
+texture = ExtResource( 7 )
+
+[node name="DirtParticles" type="Particles2D" parent="."]
+position = Vector2( 0, 30 )
+emitting = false
+amount = 10
+lifetime = 0.6
+one_shot = true
+explosiveness = 1.0
+randomness = 0.5
+process_material = SubResource( 6 )
+texture = ExtResource( 8 )
 
 [node name="Groupe" type="Node2D" parent="."]
 
-[node name="Sprite" type="Sprite" parent="Groupe"]
-texture = ExtResource( 3 )
+[node name="Area2D" type="Area2D" parent="Groupe"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Groupe/Area2D"]
+position = Vector2( -2, -0.5 )
+shape = SubResource( 7 )
+
+[node name="AttackArea" type="Area2D" parent="Groupe"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Groupe/AttackArea"]
+shape = SubResource( 8 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Groupe"]
+rotation = 1.66448e-08
+scale = Vector2( 1, 1.05 )
+frames = ExtResource( 3 )
+animation = "SW"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Groupe"]
-margin_left = -40.0
-margin_top = -104.0
-margin_right = 40.0
-margin_bottom = -35.0
+margin_left = -67.0
+margin_top = -147.0
+margin_right = 75.0
+margin_bottom = -49.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="Groupe/VBoxContainer"]
-margin_right = 80.0
-margin_bottom = 29.0
-custom_fonts/font = SubResource( 1 )
+margin_right = 142.0
+margin_bottom = 38.0
+custom_fonts/font = SubResource( 9 )
 text = "Place?"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Groupe/VBoxContainer"]
-margin_top = 33.0
-margin_right = 80.0
-margin_bottom = 69.0
+margin_top = 42.0
+margin_right = 142.0
+margin_bottom = 98.0
+size_flags_vertical = 3
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Yes" type="Button" parent="Groupe/VBoxContainer/HBoxContainer"]
-margin_right = 38.0
-margin_bottom = 36.0
-custom_styles/normal = SubResource( 2 )
+margin_right = 69.0
+margin_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = SubResource( 10 )
+custom_styles/normal = SubResource( 11 )
 icon = ExtResource( 1 )
+expand_icon = true
 
 [node name="No" type="Button" parent="Groupe/VBoxContainer/HBoxContainer"]
-margin_left = 42.0
-margin_right = 80.0
-margin_bottom = 36.0
-custom_styles/normal = SubResource( 3 )
+margin_left = 73.0
+margin_right = 142.0
+margin_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = SubResource( 12 )
+custom_styles/normal = SubResource( 13 )
 icon = ExtResource( 2 )
+expand_icon = true
+
+[node name="ImpactSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = 8.036
+pitch_scale = 0.64
+
+[node name="DeployementSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -5.098
+
+[node name="YesSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+
+[node name="NoSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+
+[node name="AttackSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/moving = SubResource( 4 )
-anims/place = SubResource( 5 )
+anims/moving = SubResource( 14 )
+anims/place = SubResource( 15 )
+
+[node name="AttackTimer" type="Timer" parent="."]
+[connection signal="mouse_entered" from="Groupe/Area2D" to="." method="_on_Area2D_mouse_entered"]
+[connection signal="mouse_exited" from="Groupe/Area2D" to="." method="_on_Area2D_mouse_exited"]
+[connection signal="body_entered" from="Groupe/AttackArea" to="." method="_on_AttackArea_body_entered"]
+[connection signal="body_exited" from="Groupe/AttackArea" to="." method="_on_AttackArea_body_exited"]
 [connection signal="pressed" from="Groupe/VBoxContainer/HBoxContainer/Yes" to="." method="_on_Yes_pressed"]
 [connection signal="pressed" from="Groupe/VBoxContainer/HBoxContainer/No" to="." method="_on_No_pressed"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]

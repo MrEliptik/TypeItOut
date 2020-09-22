@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://effects/particles/star_05.png" type="Texture" id=1]
+
+[sub_resource type="CanvasItemMaterial" id=7]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.432432, 0.737838, 1 )
+colors = PoolColorArray( 0.321507, 0.0306511, 0.784668, 1, 0.509804, 0.14902, 0.329412, 1, 0.897949, 0.196426, 0.358791, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="Curve" id=5]
+_data = [ Vector2( 0, 0.753409 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.998864 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 4.9
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.1
+scale_curve = SubResource( 6 )
+color_ramp = SubResource( 3 )
+
+[node name="BulletParticles" type="Particles2D"]
+material = SubResource( 7 )
+amount = 300
+lifetime = 6.72
+speed_scale = 4.0
+local_coords = false
+process_material = SubResource( 4 )
+texture = ExtResource( 1 )
