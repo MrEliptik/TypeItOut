@@ -23,7 +23,7 @@ func _ready():
 	pass # Replace with function body.
 
 func add_inventory(collectable):
-	if inventory < inventory_size:
+	if inventory.size() < inventory_size:
 		inventory.append(collectable)
 		
 func remove_inventory(collectable):

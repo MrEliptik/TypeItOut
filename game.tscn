@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://pauseMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://effects/vignette.shader" type="Shader" id=2]
@@ -12,20 +12,19 @@
 [ext_resource path="res://effects/chromatic_aberration.shader" type="Shader" id=10]
 [ext_resource path="res://map.tscn" type="PackedScene" id=11]
 [ext_resource path="res://dictionary.tscn" type="PackedScene" id=12]
-[ext_resource path="res://enemy.tscn" type="PackedScene" id=13]
 [ext_resource path="res://gameOver.tscn" type="PackedScene" id=14]
 [ext_resource path="res://sfx/typing/error_006.ogg" type="AudioStream" id=15]
 [ext_resource path="res://sfx/typing/impactMining_004.ogg" type="AudioStream" id=16]
 [ext_resource path="res://sfx/environment/435730__scivirus__motor-noise.wav" type="AudioStream" id=17]
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
 shader_param/center = Vector2( 0.5, 0.5 )
 shader_param/force = 5.55227e-06
 shader_param/size = 0.000518582
 shader_param/thickness = 0.131
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 9 )
 shader_param/boost = 1.0
 shader_param/grille_opacity = 1.0
@@ -41,17 +40,16 @@ shader_param/aberration_amount = 0.0
 shader_param/move_aberration = true
 shader_param/aberration_speed = 8.89
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 2 )
 shader_param/vignette = ExtResource( 8 )
 
-[sub_resource type="ShaderMaterial" id=5]
+[sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 10 )
 shader_param/apply = true
 shader_param/amount = 0.3
 
-[sub_resource type="Animation" id=1]
-resource_name = "shockwave"
+[sub_resource type="Animation" id=5]
 length = 0.3
 step = 0.01
 tracks/0/type = "bezier"
@@ -91,52 +89,49 @@ script = ExtResource( 4 )
 [node name="SpawnPoints" type="Node" parent="."]
 
 [node name="Node2D" type="Node2D" parent="SpawnPoints"]
-position = Vector2( -128.586, 29.6985 )
+position = Vector2( -175.256, 9.93743 )
 
 [node name="Node2D2" type="Node2D" parent="SpawnPoints"]
-position = Vector2( -132.121, 157.536 )
+position = Vector2( -166.598, 139.457 )
 
 [node name="Node2D3" type="Node2D" parent="SpawnPoints"]
-position = Vector2( -130.707, 286.08 )
+position = Vector2( -163.922, 269.262 )
 
 [node name="Node2D4" type="Node2D" parent="SpawnPoints"]
-position = Vector2( -132.121, 481.092 )
+position = Vector2( -156.087, 489.921 )
 
 [node name="Node2D5" type="Node2D" parent="SpawnPoints"]
-position = Vector2( -131.414, 607.515 )
+position = Vector2( -157.061, 615.504 )
 
 [node name="Node2D6" type="Node2D" parent="SpawnPoints"]
-position = Vector2( -130.707, 800.406 )
+position = Vector2( -157.616, 813.44 )
 
 [node name="Node2D7" type="Node2D" parent="SpawnPoints"]
-position = Vector2( -130, 924 )
+position = Vector2( -160.272, 944.182 )
 
 [node name="Node2D8" type="Node2D" parent="SpawnPoints"]
-position = Vector2( -130, 1080 )
+position = Vector2( -156.068, 1136.34 )
 
 [node name="Node2D9" type="Node2D" parent="SpawnPoints"]
-position = Vector2( 2050, 0 )
+position = Vector2( 2075.4, -46.8283 )
 
 [node name="Node2D10" type="Node2D" parent="SpawnPoints"]
-position = Vector2( 2050, 154 )
+position = Vector2( 2078.57, 150.031 )
 
 [node name="Node2D11" type="Node2D" parent="SpawnPoints"]
-position = Vector2( 2050, 308 )
-
-[node name="Node2D12" type="Node2D" parent="SpawnPoints"]
-position = Vector2( 2050, 462 )
+position = Vector2( 2075.39, 332.07 )
 
 [node name="Node2D13" type="Node2D" parent="SpawnPoints"]
-position = Vector2( 2050, 616 )
+position = Vector2( 2061.11, 610.444 )
 
 [node name="Node2D14" type="Node2D" parent="SpawnPoints"]
-position = Vector2( 2050, 770 )
+position = Vector2( 2068.25, 810.479 )
 
 [node name="Node2D15" type="Node2D" parent="SpawnPoints"]
-position = Vector2( 2050, 924 )
+position = Vector2( 2065.87, 1001.78 )
 
 [node name="Node2D16" type="Node2D" parent="SpawnPoints"]
-position = Vector2( 2050, 1080 )
+position = Vector2( 2003.17, 1160.96 )
 
 [node name="Enemies" type="Node" parent="."]
 
@@ -159,7 +154,7 @@ script = ExtResource( 5 )
 
 [node name="Shockwave" type="ColorRect" parent="CanvasLayer"]
 visible = false
-material = SubResource( 2 )
+material = SubResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 1
@@ -169,7 +164,7 @@ __meta__ = {
 
 [node name="CRT" type="ColorRect" parent="CanvasLayer"]
 visible = false
-material = SubResource( 3 )
+material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 1
@@ -179,7 +174,7 @@ __meta__ = {
 
 [node name="Vignette" type="ColorRect" parent="CanvasLayer"]
 visible = false
-material = SubResource( 4 )
+material = SubResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 1
@@ -189,7 +184,7 @@ __meta__ = {
 
 [node name="ChromaticAberration" type="ColorRect" parent="CanvasLayer"]
 visible = false
-material = SubResource( 5 )
+material = SubResource( 4 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 1
@@ -214,10 +209,6 @@ visible = false
 
 [node name="Line2D" type="Line2D" parent="."]
 
-[node name="Enemy" parent="." instance=ExtResource( 13 )]
-visible = false
-position = Vector2( 44.5448, 434.759 )
-
 [node name="SFX" type="Node" parent="."]
 
 [node name="TypingErrorSound" type="AudioStreamPlayer" parent="SFX"]
@@ -238,15 +229,19 @@ pause_mode = 2
 wait_time = 0.075
 one_shot = true
 
+[node name="InBetweenWaveTimer" type="Timer" parent="."]
+wait_time = 25.0
+
 [node name="Tween" type="Tween" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/shockwave = SubResource( 1 )
+anims/shockwave = SubResource( 5 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 6 )
 [connection signal="picked_from_inventory" from="CanvasLayer/GUI" to="." method="_on_GUI_picked_from_inventory"]
 [connection signal="timeout" from="FreezeTimer" to="." method="_on_FreezeTimer_timeout"]
+[connection signal="timeout" from="InBetweenWaveTimer" to="." method="_on_InBetweenWaveTimer_timeout"]
 
 [editable path="Map"]
 

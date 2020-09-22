@@ -292,8 +292,7 @@ stream = ExtResource( 6 )
 
 [node name="MoveSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
-volume_db = -6.618
-autoplay = true
+volume_db = -8.982
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "move"

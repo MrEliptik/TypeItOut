@@ -20,10 +20,23 @@ const MAX_CAMERA_LEANING = 1.5
 var active_enemy = null
 var curr_letter_idx: int = -1
 
-var enemy_number = 6
 var text
 
 var wave_number = 1
+var enemy_number = 6
+var enemy_speed = 50.0
+
+var enemy_speed_increment = 15
+
+var in_between_wave = false
+
+var data = {
+	"errors": 0,
+	"enemies": 0,
+	"word_time":0,
+}
+
+var start_word_time
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -55,6 +68,10 @@ func spawn_enemies():
 		# TEST: to remove
 		$Dictionary.request(enemy_instance.get_prompt())
 	
+func _process(delta):
+	if check_enemy_number() == 0 && !in_between_wave:
+		in_between_wave = true
+		next_wave()
 
 func _physics_process(delta):
 	for enemy in enemies_container.get_children():
@@ -65,11 +82,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		# TEST: To remove
 		if Input.is_action_pressed("left_click"):
-			pass
-#			print("Enemy: %s , mouse: %s", [$Enemy.global_position, get_global_mouse_position()])
-#			var points = nav_2d.get_simple_path($Enemy.global_position, get_global_mouse_position())
-#			print(points)
-#			$Line2D.points = points
+			var points = nav_2d.get_simple_path(player.global_position, get_global_mouse_position())
+			$Line2D.points = points
 	
 	if event is InputEventKey and not event.is_pressed():
 		var typed_event = event as InputEventKey
@@ -105,12 +119,17 @@ func _unhandled_input(event: InputEvent) -> void:
 					print("done")
 					curr_letter_idx = -1
 					get_tree().paused = true
+					data["enemies"] += 1
+					
+					calculate_wpm(OS.get_ticks_msec() - start_word_time, prompt)
+					
 					$FreezeTimer.start()
 			else:
 				print("incorrectly type %s instead of %s" % [key_typed, next_char])
 				player.emit_lost_letter(key_typed)
 				$SFX/TypingErrorSound.play()
 				camera.shake(0.5, 50, 20)
+				data["errors"] += 1
 	
 func fire_bullet(shooter, target, letter):
 	var bullet_instance = bullet.instance()
@@ -136,6 +155,7 @@ func find_new_active_enemy(typed_character: String):
 		var next_char = prompt.substr(0, 1)
 		if prompt.substr(0, 1) == typed_character:
 			print("found new enemy that starts with %s" % next_char)
+			start_word_time = OS.get_ticks_msec()
 			active_enemy = enemy
 			curr_letter_idx = 1
 			lean_camera_towards(active_enemy)
@@ -152,8 +172,27 @@ func find_new_active_enemy(typed_character: String):
 func check_enemy_number():
 	return enemies_container.get_child_count()
 	
-func next_wave():
+func next_wave():	
+	# Display collected data (errors, wpm ?)
+	$CanvasLayer/GUI.start_wave_finished(wave_number, data)
+	
 	wave_number += 1
+	# Make number of enemies and speed increase
+	enemy_speed += enemy_speed_increment
+	enemy_number += 2
+	reset_data()
+	
+	# Launch timer
+	$InBetweenWaveTimer.start()
+	
+func reset_data():
+	data["enemies"] = 0
+	data["errors"] = 0
+	data["word_time"] = 0
+	
+func calculate_wpm(time, word):
+	data["word_time"] += time 
+	data["word_time"] /= 2
 		
 func load_text_file(path):
 	var f = File.new()
@@ -215,5 +254,9 @@ func _on_FreezeTimer_timeout():
 	active_enemy.queue_free()
 	active_enemy = null
 	reset_lean_camera()
-	if check_enemy_number() == 0:
-		next_wave()
+
+func _on_InBetweenWaveTimer_timeout():
+	$CanvasLayer/GUI.start_wave(wave_number)
+	# Start next wave
+	spawn_enemies()
+	in_between_wave = false

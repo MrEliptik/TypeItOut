@@ -14,6 +14,9 @@ func _ready():
 	Inventory.inventory.append(Inventory.TYPE.SINGLE_TURRET)
 	update_inventory()
 	
+func _process(delta):
+	set_time_left($ShowFinishedTimer.time_left)
+	
 func update_inventory():
 	for i in range(Inventory.inventory_size):
 		# Clear first
@@ -21,6 +24,40 @@ func update_inventory():
 		# Update where needed
 		if i < Inventory.inventory.size():
 			$HBoxContainer2.get_child(i).texture = load(Inventory.type_Sprite[Inventory.inventory[i]])
+			
+func start_wave_finished(number, data):
+	get_parent().get_node("Vignette").visible = true
+	$ShowFinishedTimer.start()
+	$WaveFinished/Label.text = "WAVE " + str(number) + " FINISHED!"
+	$AnimationPlayer.play("wave_finished")
+	display_data(data)
+	$StatsContainer.visible = true
+	toggle_hide_inventory()
+	$TimerContainer.visible = true
+
+func hide_wave_finished():
+	$WaveFinished.visible = false
+	$StatsContainer.visible = false
+	$TimerContainer.visible = false	
+	get_parent().get_node("Vignette").visible = false
+	
+func start_wave(number):
+	$WaveStart/Label.text = "WAVE " + str(number) + " START!"
+	$AnimationPlayer.play("wave_start")
+	toggle_hide_inventory()
+
+func toggle_hide_inventory():
+	$HBoxContainer.visible = !$HBoxContainer.visible
+	$HBoxContainer2.visible = !$HBoxContainer2.visible
+	$ColorRect.visible= !$ColorRect.visible
+	
+func display_data(data):
+	$StatsContainer/EnemiesKillerContainer/Value.text = str(data["enemies"])
+	$StatsContainer/ErrorsContainer/Value.text = str(data["errors"])
+	$StatsContainer/WordTimeContainer/Value.text = str(stepify(data["word_time"], 0.1))
+	
+func set_time_left(time):
+	$TimerContainer/NextWaveTime.text = str(stepify(time, 1))
 
 func _on_TextureButton_pressed():
 	var item = Inventory.get_item(0)
@@ -52,3 +89,6 @@ func _on_TextureButton_mouse_entered():
 
 func _on_TextureButton_mouse_exited():
 	Input.set_custom_mouse_cursor(arrow)
+
+func _on_ShowFinishedTimer_timeout():
+	hide_wave_finished()
