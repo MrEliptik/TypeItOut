@@ -33,3 +33,6 @@ func get_item(idx):
 	if idx < inventory.size():
 		return inventory[idx]
 	else: return null
+	
+func clear_inventory():
+	inventory = Array()
