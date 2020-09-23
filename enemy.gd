@@ -1,19 +1,22 @@
-extends KinematicBody2D
+extends Area2D
 
-export (Color) var blue = Color("#4682b4")
-export (Color) var green = Color("#639765")
-export (Color) var red = Color("#a65455")
+export (Color) var blue = Color("#45abff")
+export (Color) var green = Color("#63c766")
+export (Color) var red = Color("#e83f40")
 
 const hit_particles = preload("res://hitEnemyParticles.tscn")
 const letter_particle = preload("res://lostLetter.tscn")
 
-onready var prompt = $Word
+const COLOR_PADDING = 15
+
+onready var prompt = $LabelContainer/Word
 onready var prompt_text = prompt.text.to_lower()
 
 var sprites = ["res://sprites/enemy/enemy_ufoGreen_E.png", "res://sprites/enemy/enemy_ufoPurple_E.png",
 	"res://sprites/enemy/enemy_ufoRed_E.png", "res://sprites/enemy/enemy_ufoYellow_E.png"]
 
-var speed = 50.0
+var speed = 35.0
+var speed_random_range = 10.0
 var collectable_chance = 0.10
 
 var curr_letter = null
@@ -34,9 +37,9 @@ func _ready():
 		var idx = int(rand_range(0, Inventory.type_Sprite.size()))
 		collectable = idx
 		
-		var sprite = $Sprite/Collectable
+		var sprite = $LabelContainer/Label/Circle/Collectable
 		sprite.texture = load(Inventory.type_Sprite[idx])
-		sprite.visible = true
+		$LabelContainer/Label/Circle.visible = true
 		sprite.material = ShaderMaterial.new()
 		sprite.material.shader = load("res://effects/outline.shader")
 		sprite.material.set_shader_param("outline_color", Color("#f5eb97"))
@@ -67,22 +70,51 @@ func has_collectable():
 func is_enemy():
 	return true
 	
+func set_speed(value):
+	# Add some randomness
+	var speed_random = rand_range(-speed_random_range, speed_random_range)
+	speed = value + speed_random
+	print("Value: "+str(value)+" Rand: "+str(speed_random)+" Speed: "+str(speed))
+	
 func set_target(target):
 	self.target = target
 	
 func set_path(value: PoolVector2Array) -> void:
+#	var trail  = Line2D.new()
+#	get_parent().get_parent().add_child(trail)
+#	trail.points = value
+	
 	path = value
 	if value.size() == 0:
 		return
 	else:
 		set_process(true)
 
-func set_prompt(prompt: String):
-	prompt_text = prompt
-	self.prompt.bbcode_text = "[center]" + prompt_text + "[/center]"
+func set_prompt(value: String):
+	prompt_text = value.to_lower()
+	prompt.bbcode_text = "[center]" + prompt_text + "[/center]"
+	adjust_word_size() 
 
 func get_prompt() -> String:
 	return prompt_text
+	
+func adjust_word_size():
+	# Calculate the desired size
+	var font = prompt.get_font("normal_font")
+	var pixel_length = font.get_string_size(prompt_text)
+	
+	# To avoid scaling the font, we need to set the rect size,
+	# but also to move it to make it centererd
+	var difference = (prompt.rect_size.x - pixel_length.x) - COLOR_PADDING
+	prompt.rect_size.x -= difference
+	prompt.rect_position.x += difference/2
+	
+	var ratio = prompt.rect_size.x/pixel_length.x
+	
+	difference = ($LabelContainer/Label.rect_size.x - pixel_length.x) - 80
+	$LabelContainer/Label.rect_size.x -= difference
+	$LabelContainer/Label.rect_position.x += difference/2
+	$LabelContainer/Label.rect_pivot_offset.x = $LabelContainer/Label.rect_size.x/2
 	
 func set_next_character(next_char_idx: int):
 	curr_letter = prompt_text.substr(next_char_idx, 1)
@@ -107,15 +139,19 @@ func select():
 	$Sprite.material.set_shader_param("width", 1.655)
 	z_index = 50
 	
+func die():
+	$AnimationPlayer.play("die")
+	
 func correctly_type():
-	var instance = hit_particles.instance()
-	add_child(instance)
-	instance.start()
-	emit_letter(curr_letter)
+	#var instance = hit_particles.instance()
+	#$ParticlesContainer.add_child(instance)
+	#instance.start()
+	#emit_letter(curr_letter)
+	pass
 	
 func emit_letter(letter):
 	var instance = letter_particle.instance()
-	add_child(instance)
+	$ParticlesContainer.add_child(instance)
 	instance.set_letter(letter)
 	instance.start()
 	
@@ -126,3 +162,7 @@ func _on_AnimationPlayer2_animation_finished(anim_name):
 	if anim_name == "danger":
 		# play danger_active
 		$AnimationPlayer2.play("danger_active")
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "die":
+		queue_free()

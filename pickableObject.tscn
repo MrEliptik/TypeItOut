@@ -61,7 +61,7 @@ color_ramp = SubResource( 2 )
 radius = 35.2881
 
 [sub_resource type="CircleShape2D" id=8]
-radius = 168.074
+radius = 222.316
 
 [sub_resource type="DynamicFont" id=9]
 size = 32
@@ -207,6 +207,8 @@ position = Vector2( -2, -0.5 )
 shape = SubResource( 7 )
 
 [node name="AttackArea" type="Area2D" parent="Groupe"]
+collision_layer = 4
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Groupe/AttackArea"]
 shape = SubResource( 8 )
@@ -296,8 +298,8 @@ anims/place = SubResource( 15 )
 [node name="AttackTimer" type="Timer" parent="."]
 [connection signal="mouse_entered" from="Groupe/Area2D" to="." method="_on_Area2D_mouse_entered"]
 [connection signal="mouse_exited" from="Groupe/Area2D" to="." method="_on_Area2D_mouse_exited"]
-[connection signal="body_entered" from="Groupe/AttackArea" to="." method="_on_AttackArea_body_entered"]
-[connection signal="body_exited" from="Groupe/AttackArea" to="." method="_on_AttackArea_body_exited"]
+[connection signal="area_entered" from="Groupe/AttackArea" to="." method="_on_AttackArea_area_entered"]
+[connection signal="area_exited" from="Groupe/AttackArea" to="." method="_on_AttackArea_area_exited"]
 [connection signal="pressed" from="Groupe/VBoxContainer/HBoxContainer/Yes" to="." method="_on_Yes_pressed"]
 [connection signal="pressed" from="Groupe/VBoxContainer/HBoxContainer/No" to="." method="_on_No_pressed"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]

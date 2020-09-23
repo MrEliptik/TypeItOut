@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://sprites/tower_def_iso/enemy_ufoRed_E.png" type="Texture" id=1]
 [ext_resource path="res://fonts/Rubik-Regular.ttf" type="DynamicFontData" id=2]
@@ -8,6 +8,9 @@
 [ext_resource path="res://sfx/enemy/51751__erkanozan__ufo-sweep-01.wav" type="AudioStream" id=6]
 [ext_resource path="res://effects/emote_exclamation.png" type="Texture" id=7]
 [ext_resource path="res://sfx/enemy/72447__rockwehrmann__ufo1.wav" type="AudioStream" id=8]
+[ext_resource path="res://effects/label/label.png" type="Texture" id=9]
+[ext_resource path="res://effects/label/circle.png" type="Texture" id=10]
+[ext_resource path="res://sprites/defenses/turret_double_NE.png" type="Texture" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 53.62, 39.0067 )
@@ -18,51 +21,40 @@ shader = ExtResource( 4 )
 shader_param/width = 0.0
 shader_param/outline_color = Color( 0.0117647, 0.964706, 0.984314, 1 )
 
-[sub_resource type="SpriteFrames" id=3]
-animations = [ {
-"frames": [ ExtResource( 7 ) ],
-"loop": true,
-"name": "danger",
-"speed": 0.0
-} ]
-
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 4 )
 shader_param/width = 2.0
 shader_param/outline_color = Color( 0.960784, 0.921569, 0.592157, 1 )
 
-[sub_resource type="StyleBoxFlat" id=5]
-bg_color = Color( 0.133333, 0.133333, 0.133333, 0 )
-
-[sub_resource type="DynamicFont" id=6]
-size = 42
+[sub_resource type="DynamicFont" id=4]
+size = 48
 outline_size = 2
 use_filter = true
 extra_spacing_char = 1
 font_data = ExtResource( 2 )
 
-[sub_resource type="Gradient" id=7]
+[sub_resource type="Gradient" id=5]
 offsets = PoolRealArray( 0.0148148, 0.57037, 1 )
 colors = PoolColorArray( 0.972656, 0.971231, 0.94986, 1, 0.571699, 0.893915, 0.969238, 1, 0.0419922, 0.00164032, 0.00164032, 0 )
 
-[sub_resource type="GradientTexture" id=8]
-gradient = SubResource( 7 )
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
+
+[sub_resource type="Curve" id=7]
+_data = [ Vector2( 0.00632912, 0.155682 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.465909 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=8]
+curve = SubResource( 7 )
 
 [sub_resource type="Curve" id=9]
-_data = [ Vector2( 0.00632912, 0.155682 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.465909 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.454545 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=10]
 curve = SubResource( 9 )
 
-[sub_resource type="Curve" id=11]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.454545 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=12]
-curve = SubResource( 11 )
-
-[sub_resource type="ParticlesMaterial" id=13]
+[sub_resource type="ParticlesMaterial" id=11]
 lifetime_randomness = 0.04
-trail_size_modifier = SubResource( 12 )
+trail_size_modifier = SubResource( 10 )
 emission_shape = 2
 emission_box_extents = Vector3( 1, 1, 1 )
 flag_disable_z = true
@@ -75,10 +67,10 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 132.4
 angle_random = 0.46
-scale_curve = SubResource( 10 )
-color_ramp = SubResource( 8 )
+scale_curve = SubResource( 8 )
+color_ramp = SubResource( 6 )
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=12]
 length = 0.5
 step = 0.01
 tracks/0/type = "bezier"
@@ -112,7 +104,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.5 )
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Sprite/Collectable:visible")
+tracks/3/path = NodePath("DieSound:playing")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -121,10 +113,10 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ true ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Sprite/AnimatedSprite:visible")
+tracks/4/path = NodePath("LabelContainer:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -135,20 +127,8 @@ tracks/4/keys = {
 "update": 1,
 "values": [ false ]
 }
-tracks/5/type = "value"
-tracks/5/path = NodePath("DieSound:playing")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=13]
 length = 2.0
 loop = true
 tracks/0/type = "value"
@@ -164,47 +144,47 @@ tracks/0/keys = {
 "values": [ -10.0, 0.0, 10.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=14]
 length = 0.3
 step = 0.01
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite/AnimatedSprite:visible")
+tracks/0/path = NodePath("Sprite/emote_exclamation:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
+"times": PoolRealArray( 0.3 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
+"update": 0,
+"values": [ Vector2( -62.4766, -30.0361 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite/AnimatedSprite:scale")
+tracks/1/path = NodePath("Sprite/emote_exclamation2:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 1.4, 1.4 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 62.477, -30.036 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite/AnimatedSprite:rotation_degrees")
+tracks/2/path = NodePath("Sprite/emote_exclamation2:rotation_degrees")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 0.0, 360.0 ]
+"values": [ 30.0 ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Sprite/AnimatedSprite:position")
+tracks/3/path = NodePath("Sprite/emote_exclamation2:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -213,30 +193,90 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, -80 ), Vector2( 0, -62 ) ]
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1.3, 1.3 ), Vector2( 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite/emote_exclamation:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -30.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite/emote_exclamation:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1.3, 1.3 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=15]
 resource_name = "danger_active"
-length = 0.6
+length = 0.4
 loop = true
 step = 0.01
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite/AnimatedSprite:rotation_degrees")
+tracks/0/path = NodePath("Sprite/emote_exclamation:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15, 0.45, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.12, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ 0.0, 10.0, -10.0, 0.0 ]
+"values": [ -30.0, -40.0, -20.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/emote_exclamation2:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.12, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 30.0, 40.0, 20.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite/emote_exclamation:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite/emote_exclamation2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
-[node name="Enemy" type="KinematicBody2D"]
-collision_layer = 23
-collision_mask = 23
+[node name="Enemy" type="Area2D"]
+collision_layer = 20
+collision_mask = 20
 script = ExtResource( 3 )
 
 [node name="ParticlesContainer" type="Node" parent="."]
@@ -251,30 +291,78 @@ z_index = 1
 texture = ExtResource( 1 )
 offset = Vector2( 0, -45 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Sprite"]
+[node name="emote_exclamation" type="Sprite" parent="Sprite"]
 visible = false
-scale = Vector2( 1e-05, 1e-05 )
-frames = SubResource( 3 )
-animation = "danger"
+position = Vector2( -62.4766, -30.0361 )
+rotation = -0.523599
+texture = ExtResource( 7 )
 
-[node name="Collectable" type="Sprite" parent="Sprite"]
+[node name="emote_exclamation2" type="Sprite" parent="Sprite"]
 visible = false
-material = SubResource( 4 )
-position = Vector2( 37.1314, -41.6098 )
-rotation = -0.000872658
+position = Vector2( 62.477, -30.036 )
+rotation = 0.523599
+texture = ExtResource( 7 )
 
-[node name="Word" type="RichTextLabel" parent="."]
-margin_left = -154.745
-margin_top = 36.0379
-margin_right = 155.255
-margin_bottom = 86.0379
+[node name="LabelContainer" type="Node2D" parent="."]
+position = Vector2( -61, -97 )
+
+[node name="Label" type="TextureRect" parent="LabelContainer"]
+margin_top = -2.0
+margin_right = 122.0
+margin_bottom = 57.0
+grow_horizontal = 2
+rect_pivot_offset = Vector2( 67, 0 )
+texture = ExtResource( 9 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Circle" type="TextureRect" parent="LabelContainer/Label"]
+visible = false
+anchor_left = 0.894
+anchor_top = 0.615
+anchor_right = 0.894
+anchor_bottom = 0.615
+margin_left = -13.8113
+margin_top = -29.3752
+margin_right = 61.1887
+margin_bottom = 38.6249
+grow_horizontal = 2
+texture = ExtResource( 10 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Collectable" type="TextureRect" parent="LabelContainer/Label/Circle"]
+material = SubResource( 3 )
+anchor_left = 0.5
+anchor_top = 0.484
+anchor_right = 0.5
+anchor_bottom = 0.484
+margin_left = -20.7973
+margin_top = -21.5066
+margin_right = 22.2027
+margin_bottom = 21.4934
+texture = ExtResource( 11 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Word" type="RichTextLabel" parent="LabelContainer"]
+margin_left = -13.0
+margin_top = -2.0
+margin_right = 117.0
+margin_bottom = 53.0
+grow_horizontal = 2
 size_flags_horizontal = 3
-custom_styles/normal = SubResource( 5 )
-custom_fonts/normal_font = SubResource( 6 )
-custom_colors/default_color = Color( 0.117647, 0.117647, 0.117647, 1 )
+custom_fonts/normal_font = SubResource( 4 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
-bbcode_text = "[center]TEST[/center]"
-text = "TEST"
+bbcode_text = "[center]test[/center]"
+text = "test"
 scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -284,7 +372,7 @@ __meta__ = {
 emitting = false
 amount = 500
 lifetime = 2.5
-process_material = SubResource( 13 )
+process_material = SubResource( 11 )
 texture = ExtResource( 5 )
 
 [node name="DieSound" type="AudioStreamPlayer" parent="."]
@@ -296,12 +384,13 @@ volume_db = -8.982
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "move"
-anims/die = SubResource( 14 )
-anims/move = SubResource( 15 )
+anims/die = SubResource( 12 )
+anims/move = SubResource( 13 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
-anims/danger = SubResource( 16 )
-anims/danger_active = SubResource( 17 )
+anims/danger = SubResource( 14 )
+anims/danger_active = SubResource( 15 )
 
 [node name="Tween" type="Tween" parent="."]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer2" to="." method="_on_AnimationPlayer2_animation_finished"]

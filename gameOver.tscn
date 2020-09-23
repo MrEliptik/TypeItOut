@@ -122,3 +122,4 @@ icon = ExtResource( 8 )
 [connection signal="pressed" from="VBoxContainer/RetryBtn" to="." method="_on_RetryBtn_pressed"]
 [connection signal="pressed" from="VBoxContainer/HomeBtn" to="." method="_on_HomeBtn_pressed"]
 [connection signal="pressed" from="VBoxContainer/ExitBtn" to="." method="_on_ExitBtn_pressed"]
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_ConfirmationDialog_confirmed"]

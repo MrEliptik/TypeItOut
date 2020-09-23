@@ -11,17 +11,17 @@
 [ext_resource path="res://effects/outline.shader" type="Shader" id=9]
 [ext_resource path="res://player.gd" type="Script" id=10]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 23.3251, 34.9147 )
 
-[sub_resource type="CircleShape2D" id=3]
-radius = 222.79
+[sub_resource type="CircleShape2D" id=2]
+radius = 284.719
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="CapsuleShape2D" id=3]
 radius = 23.5102
 height = 25.8731
 
-[sub_resource type="ShaderMaterial" id=7]
+[sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 9 )
 shader_param/width = 3.5
 shader_param/outline_color = Color( 0.611765, 0.839216, 0.243137, 1 )
@@ -31,6 +31,26 @@ animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "S",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "SW",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "NE",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "NW",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "SE",
 "speed": 0.0
 }, {
 "frames": [ ExtResource( 3 ) ],
@@ -46,26 +66,6 @@ animations = [ {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
 "name": "E",
-"speed": 0.0
-}, {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "NE",
-"speed": 0.0
-}, {
-"frames": [ ExtResource( 5 ) ],
-"loop": true,
-"name": "NW",
-"speed": 0.0
-}, {
-"frames": [ ExtResource( 7 ) ],
-"loop": true,
-"name": "SW",
-"speed": 0.0
-}, {
-"frames": [ ExtResource( 6 ) ],
-"loop": true,
-"name": "SE",
 "speed": 0.0
 } ]
 
@@ -91,7 +91,7 @@ script = ExtResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.138077, -34.7008 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="DangerArea" type="Area2D" parent="."]
 position = Vector2( 0, -61.5088 )
@@ -100,7 +100,7 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DangerArea"]
 position = Vector2( 0, 27.7496 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="GameOverArea" type="Area2D" parent="."]
 position = Vector2( 0, -61.5088 )
@@ -109,10 +109,10 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameOverArea"]
 position = Vector2( 0.140312, 26.7358 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-material = SubResource( 7 )
+material = SubResource( 4 )
 position = Vector2( 0, -4.209 )
 frames = SubResource( 5 )
 animation = "S"

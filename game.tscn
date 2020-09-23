@@ -146,8 +146,8 @@ z_index = 2
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2( 960, 540 )
 current = true
+zoom = Vector2( 1.1, 1.1 )
 smoothing_enabled = true
-smoothing_speed = 10.0
 script = ExtResource( 5 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -207,8 +207,6 @@ visible = false
 
 [node name="Dictionary" parent="." instance=ExtResource( 12 )]
 
-[node name="Line2D" type="Line2D" parent="."]
-
 [node name="SFX" type="Node" parent="."]
 
 [node name="TypingErrorSound" type="AudioStreamPlayer" parent="SFX"]
@@ -226,11 +224,12 @@ pitch_scale = 0.89
 
 [node name="FreezeTimer" type="Timer" parent="."]
 pause_mode = 2
-wait_time = 0.075
+wait_time = 0.2
 one_shot = true
 
 [node name="InBetweenWaveTimer" type="Timer" parent="."]
 wait_time = 25.0
+one_shot = true
 
 [node name="Tween" type="Tween" parent="."]
 

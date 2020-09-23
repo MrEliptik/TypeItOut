@@ -27,7 +27,7 @@ func add_inventory(collectable):
 		inventory.append(collectable)
 		
 func remove_inventory(collectable):
-	inventory.remove(collectable)
+	inventory.erase(collectable)
 	
 func get_item(idx):
 	if idx < inventory.size():

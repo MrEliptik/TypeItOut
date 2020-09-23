@@ -39,7 +39,6 @@ scale_curve = SubResource( 4 )
 color_ramp = SubResource( 2 )
 
 [node name="HitEnemyParticles" type="Particles2D"]
-position = Vector2( 0.8909, 40.7586 )
 emitting = false
 amount = 1
 lifetime = 0.6

@@ -78,7 +78,9 @@ func init(type):
 	
 func place(where):
 	#TODO: add sfx or screen shake to show can't place
-	if !can_place(where): return
+	if !can_place(where): 
+		$NoSound.play()
+		return
 	$Groupe/VBoxContainer.visible = true
 	placed = true
 	global_position = where
@@ -108,24 +110,15 @@ func _on_Yes_pressed():
 	$Groupe/AnimatedSprite.modulate = Color("#ffffff")
 	# TODO: animate visibility (boucny effect?)
 	$AnimationPlayer.play("place")
-	emit_signal("place", self)
+	emit_signal("place", self, type)
 
 func _on_No_pressed():
 	$NoSound.play()
 	$Groupe/VBoxContainer.visible = false
 	placed = false
 
-func _on_AttackArea_body_entered(body):
-	if !target:
-		target = body
-		$AttackTimer.start()
-
-func _on_AttackArea_body_exited(body):
-	target = null
-	$AttackTimer.stop()
-
 func _on_AttackTimer_timeout():
-	print(global_position.angle_to(target.global_position))
+	#print(global_position.angle_to(target.global_position))
 	emit_signal("attack", self, target, letter)
 	$AttackSound.play()
 
@@ -134,3 +127,13 @@ func _on_Area2D_mouse_entered():
 
 func _on_Area2D_mouse_exited():
 	print("mouse exited")
+
+func _on_AttackArea_area_entered(area):
+	if !target && area.has_method("is_enemy"):
+		target = area
+		$AttackTimer.start()
+
+func _on_AttackArea_area_exited(area):
+	if area.has_method("is_enemy"):
+		target = null
+		$AttackTimer.stop()
