@@ -1,0 +1,181 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://sprites/ui/home.png" type="Texture" id=1]
+[ext_resource path="res://fonts/space_marine/SM.TTF" type="DynamicFontData" id=2]
+[ext_resource path="res://sprites/ui/exit.png" type="Texture" id=3]
+[ext_resource path="res://credits.gd" type="Script" id=4]
+[ext_resource path="res://exitPopup.tscn" type="PackedScene" id=5]
+[ext_resource path="res://fonts/Rubik-Regular.ttf" type="DynamicFontData" id=6]
+
+[sub_resource type="DynamicFont" id=5]
+size = 24
+font_data = ExtResource( 6 )
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="DynamicFont" id=3]
+size = 48
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 136
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 2 )
+
+[node name="Credits" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -500.0
+margin_top = -350.0
+margin_right = 500.0
+margin_bottom = 400.0
+custom_fonts/normal_font = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "[font=res://fonts/rubik_36.tres][center]Game developper[/center][/font]
+
+Victor MEUNIER
+[indent]
+-Website: [url]https://www.victormeunier.com[/url]
+- Twitter: https://twitter.com/VicMeunier
+- Itch.io: https://mreliptik.itch.io/
+- Sketchfab: https://sketchfab.com/victor.meunierpk[/indent]
+
+[font=res://fonts/rubik_36.tres][center]Assets (visual and audio)[/center][/font]
+
+[indent]- Kenney: [url]https://www.kenney.nl/[/url][/indent]
+
+
+[font=res://fonts/rubik_36.tres][center]Fonts[/center][/font]
+
+[indent]- Rubik: [url]https://fonts.google.com/specimen/Rubik?query=rubik[/url]][/indent]
+
+
+[font=res://fonts/rubik_36.tres][center]Shaders[/center][/font]
+
+[indent]- CRT shader: [url]https://github.com/hiulit/Godot-3-2D-CRT-Shader[/url]][/indent]
+[indent]- Vignette shader: [url]https://github.com/godotengine/godot-demo-projects/tree/3.2-8d9d58f/2d/screen_space_shaders[/url]][/indent]"
+text = "Game developper
+
+Victor MEUNIER
+	
+-Website: https://www.victormeunier.com
+- Twitter: https://twitter.com/VicMeunier
+- Itch.io: https://mreliptik.itch.io/
+- Sketchfab: https://sketchfab.com/victor.meunierpk
+
+Assets (visual and audio)
+
+	- Kenney: https://www.kenney.nl/
+
+
+Fonts
+
+	- Rubik: https://fonts.google.com/specimen/Rubik?query=rubik]
+
+
+Shaders
+
+	- CRT shader: https://github.com/hiulit/Godot-3-2D-CRT-Shader]
+	- Vignette shader: https://github.com/godotengine/godot-demo-projects/tree/3.2-8d9d58f/2d/screen_space_shaders]"
+fit_content_height = true
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -324.0
+margin_top = -106.0
+margin_right = 324.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HomeBtn" type="Button" parent="HBoxContainer"]
+margin_right = 310.0
+margin_bottom = 106.0
+rect_min_size = Vector2( 310, 0 )
+custom_styles/hover = SubResource( 1 )
+custom_styles/normal = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
+text = "HOME"
+icon = ExtResource( 1 )
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 314.0
+margin_right = 334.0
+margin_bottom = 106.0
+rect_min_size = Vector2( 20, 0 )
+
+[node name="ExitBtn" type="Button" parent="HBoxContainer"]
+margin_left = 338.0
+margin_right = 648.0
+margin_bottom = 106.0
+rect_min_size = Vector2( 310, 0 )
+custom_styles/hover = SubResource( 1 )
+custom_styles/normal = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
+text = "EXIT"
+icon = ExtResource( 3 )
+
+[node name="ConfirmationDialog" parent="." instance=ExtResource( 5 )]
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -433.0
+margin_right = 434.0
+margin_bottom = 113.0
+rect_scale = Vector2( 1, 1.5 )
+custom_fonts/font = SubResource( 4 )
+text = "CREDITS"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="meta_clicked" from="ColorRect/RichTextLabel" to="." method="_on_RichTextLabel_meta_clicked"]
+[connection signal="pressed" from="HBoxContainer/HomeBtn" to="." method="_on_HomeBtn_pressed"]
+[connection signal="pressed" from="HBoxContainer/ExitBtn" to="." method="_on_ExitBtn_pressed"]
