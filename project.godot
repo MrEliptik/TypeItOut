@@ -17,6 +17,7 @@ _global_script_class_icons={
 
 config/name="TypeItOut"
 run/main_scene="res://game.tscn"
+boot_splash/bg_color=Color( 0.0196078, 0.254902, 0.411765, 1 )
 config/icon="res://icon.png"
 
 [autoload]
