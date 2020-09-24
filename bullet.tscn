@@ -8,7 +8,9 @@
 radius = 21.5776
 
 [sub_resource type="DynamicFont" id=2]
-size = 42
+size = 64
+outline_size = 3
+outline_color = Color( 0.101961, 0.913725, 0.67451, 1 )
 use_filter = true
 font_data = ExtResource( 3 )
 
@@ -28,13 +30,13 @@ one_shot = true
 autostart = true
 
 [node name="Letter" type="Label" parent="."]
-margin_left = -59.0308
-margin_top = -15.7551
-margin_right = 59.9692
-margin_bottom = 35.2449
-rect_pivot_offset = Vector2( 45, 18 )
+margin_left = -57.9083
+margin_top = -36.5206
+margin_right = 61.0917
+margin_bottom = 39.4794
+rect_pivot_offset = Vector2( 59, 38 )
 custom_fonts/font = SubResource( 2 )
-text = "WORD"
+text = "W"
 align = 1
 valign = 1
 __meta__ = {

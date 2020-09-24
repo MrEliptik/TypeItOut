@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://fonts/space_marine/space_marine_136.tres" type="DynamicFont" id=1]
 [ext_resource path="res://sprites/ui/glassPanel_corners.png" type="Texture" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://sprites/ui/glassPanel_corners_hover.png" type="Texture" id=4]
 [ext_resource path="res://fonts/Rubik-Regular.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://fonts/space_marine/SM.TTF" type="DynamicFontData" id=6]
+[ext_resource path="res://sprites/ui/fastForward.png" type="Texture" id=7]
+[ext_resource path="res://sprites/ui/right.png" type="Texture" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 96
@@ -62,24 +64,12 @@ tracks/1/keys = {
 "values": [ Vector2( -2000, 10 ), Vector2( 72, 10 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("WaveFinished/ColorRect2:rect_position")
+tracks/2/path = NodePath("WaveFinished:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( -2500, -46 ), Vector2( -81, -46 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("WaveFinished:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -114,24 +104,12 @@ tracks/1/keys = {
 "values": [ Vector2( -2500, -6 ), Vector2( -81, -6 ), Vector2( -81, -6 ), Vector2( 2500, -6 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("WaveStart/ColorRect2:rect_position")
+tracks/2/path = NodePath("WaveStart/Label:rect_position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.4, 3, 3.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( -2500, -46 ), Vector2( -81, -46 ), Vector2( -81, -46 ), Vector2( 2500, -46 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("WaveStart/Label:rect_position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
 "times": PoolRealArray( 0, 0.4, 3, 3.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
@@ -150,6 +128,29 @@ outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 6 )
 
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="DynamicFont" id=10]
+size = 32
+font_data = ExtResource( 6 )
+
 [node name="GUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -163,15 +164,6 @@ visible = false
 margin_top = 104.0
 margin_right = 40.0
 margin_bottom = 144.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect2" type="ColorRect" parent="WaveFinished"]
-margin_left = -2500.0
-margin_top = -46.0
-margin_right = -409.0
-margin_bottom = 227.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -214,15 +206,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect2" type="ColorRect" parent="WaveStart"]
-margin_left = -2500.0
-margin_top = -46.0
-margin_right = -409.0
-margin_bottom = 227.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="ColorRect" type="ColorRect" parent="WaveStart"]
 margin_left = -2500.0
 margin_top = -6.0
@@ -257,15 +240,6 @@ visible = false
 margin_top = 96.0
 margin_right = 40.0
 margin_bottom = 136.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect2" type="ColorRect" parent="PlaceObjects"]
-margin_left = -81.0
-margin_top = -46.0
-margin_right = 2010.0
-margin_bottom = 227.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -554,12 +528,50 @@ text = "15"
 align = 2
 
 [node name="ShowFinishedTimer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 6.0
 one_shot = true
 
 [node name="InBetweenWaveTimer" type="Timer" parent="."]
 wait_time = 25.0
 one_shot = true
+
+[node name="SkipBtn" type="Button" parent="."]
+visible = false
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -226.036
+margin_top = -116.927
+margin_right = -16.0361
+margin_bottom = -16.9271
+custom_styles/hover = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+custom_fonts/font = SubResource( 10 )
+text = "SKIP"
+icon = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartBtn" type="Button" parent="."]
+visible = false
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -273.582
+margin_top = -118.709
+margin_right = -11.5815
+margin_bottom = -18.7089
+custom_styles/hover = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+custom_fonts/font = SubResource( 10 )
+text = "START"
+icon = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="mouse_entered" from="HBoxContainer/TextureButton" to="." method="_on_TextureButton_mouse_entered"]
 [connection signal="mouse_exited" from="HBoxContainer/TextureButton" to="." method="_on_TextureButton_mouse_exited"]
 [connection signal="pressed" from="HBoxContainer/TextureButton" to="." method="_on_TextureButton_pressed"]
@@ -577,3 +589,5 @@ one_shot = true
 [connection signal="pressed" from="HBoxContainer/TextureButton5" to="." method="_on_TextureButton5_pressed"]
 [connection signal="timeout" from="ShowFinishedTimer" to="." method="_on_ShowFinishedTimer_timeout"]
 [connection signal="timeout" from="InBetweenWaveTimer" to="." method="_on_InBetweenWaveTimer_timeout"]
+[connection signal="pressed" from="SkipBtn" to="." method="_on_SkipBtn_pressed"]
+[connection signal="pressed" from="StartBtn" to="." method="_on_StartBtn_pressed"]

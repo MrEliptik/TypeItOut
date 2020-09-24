@@ -14,11 +14,16 @@ var type_AnimatedSprite = {
 	TYPE.DOUBLE_TURRET : "res://sprites/defenses/turret_double.tres",
 }
 
+var type_AttackTime = {
+	TYPE.SINGLE_TURRET : 2.0,
+	TYPE.DOUBLE_TURRET : 1.5
+}
+
 var type
 # Until placed, follow the mouse position
 var placed = false
 
-var target = null
+var target = Array()
 var letter = ""
 
 # Called when the node enters the scene tree for the first time.
@@ -33,11 +38,13 @@ func _process(delta):
 		cancel()
 	elif Input.is_action_pressed("left_click"):
 		place(get_global_mouse_position())
+		update()
 	global_position = get_global_mouse_position()
 	can_place(global_position)
 	update()
 
 func _draw():
+	if placed: return
 	#draw_circle_custom($Groupe/AttackArea/CollisionShape2D.shape.radius, Color("#1c84defe"))
 	draw_circle_arc(Vector2(0.0, 0.0), $Groupe/AttackArea/CollisionShape2D.shape.radius, 0, 360, Color("#d684defe"))
 	draw_circle(Vector2(0.0, 0.0), $Groupe/AttackArea/CollisionShape2D.shape.radius, Color("#1c84defe"))
@@ -119,7 +126,7 @@ func _on_No_pressed():
 
 func _on_AttackTimer_timeout():
 	#print(global_position.angle_to(target.global_position))
-	emit_signal("attack", self, target)
+	emit_signal("attack", self, target.front())
 	$AttackSound.play()
 
 func _on_Area2D_mouse_entered():
@@ -129,11 +136,14 @@ func _on_Area2D_mouse_exited():
 	print("mouse exited")
 
 func _on_AttackArea_area_entered(area):
-	if !target && area.has_method("is_enemy"):
-		target = area
-		$AttackTimer.start()
+	if area.get_parent().has_method("is_enemy"):
+		if target.size() == 0:
+			$AttackTimer.wait_time = type_AttackTime[type]
+			print(type, $AttackTimer.wait_time)
+			$AttackTimer.start()
+		target.append(area.get_parent())
 
 func _on_AttackArea_area_exited(area):
-	if area.has_method("is_enemy"):
-		target = null
-		$AttackTimer.stop()
+	if area.get_parent().has_method("is_enemy"):
+		target.erase(area.get_parent())
+		if target.size() == 0: $AttackTimer.stop()

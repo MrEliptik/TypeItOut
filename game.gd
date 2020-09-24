@@ -55,6 +55,8 @@ func _ready():
 			
 	player.get_node("DangerArea").connect("area_entered", self, "on_dangerArea_body_entered")
 	player.get_node("GameOverArea").connect("area_entered", self, "on_gameOverArea_body_entered")
+	
+	$CanvasLayer/GUI/StartBtn.connect("pressed", self, "on_gui_start_btn_pressed")
 
 func spawn_enemies():
 	var spawn_points = spawn_points_container.get_children()
@@ -108,6 +110,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			if key_typed == next_char:
 				print("successfuly type %s" % key_typed)
 				curr_letter_idx += 1
+				active_enemy._curr_char_idx += 1
 				active_enemy.set_next_character(curr_letter_idx)
 				active_enemy.correctly_type()
 				enemy_correctly_typed(active_enemy, key_typed)
@@ -128,9 +131,6 @@ func _unhandled_input(event: InputEvent) -> void:
 					active_enemy.die()
 					active_enemy = null
 					reset_lean_camera()
-					
-					#get_tree().paused = true
-					#$FreezeTimer.start()
 			else:
 				print("incorrectly type %s instead of %s" % [key_typed, next_char])
 				player.emit_lost_letter(key_typed)
@@ -169,8 +169,13 @@ func find_new_active_enemy(typed_character: String):
 	var min_distance = 100000000
 	for enemy in enemies_container.get_children():
 		var prompt = enemy.get_prompt()
-		var next_char = prompt.substr(0, 1)
-		if prompt.substr(0, 1) == typed_character:
+		var next_char
+		# Enemy has already been typed
+		if enemy._curr_char_idx != -1:
+			next_char = prompt.substr(enemy._curr_char_idx, 1)
+		else:
+			next_char = prompt.substr(0, 1)
+		if next_char == typed_character:
 			print("found new enemy that starts with %s" % next_char)
 			var dist = enemy.get_position().distance_to(player.global_position)
 			if dist < min_distance:
@@ -182,8 +187,31 @@ func find_new_active_enemy(typed_character: String):
 	player.look_at_enemey(active_enemy)
 	# We selected the closest enemy that starts with the typed_char
 	start_word_time = OS.get_ticks_msec()
-	var next_char = active_enemy.get_prompt().substr(0, 1)
-	curr_letter_idx = 1
+	var next_char
+	# Enemy has already been typed
+	if active_enemy._curr_char_idx != -1:
+		active_enemy._curr_char_idx += 1
+		curr_letter_idx = active_enemy._curr_char_idx
+		next_char = active_enemy.get_prompt().substr(active_enemy._curr_char_idx, 1)
+		
+		# If we attack the enemy on its last letter (the rest has been done by the turret)
+		if curr_letter_idx == active_enemy.get_prompt().length():
+			print("done")
+			curr_letter_idx = -1
+			data["enemies"] += 1
+			
+			$AnimationPlayer.play("shockwave")
+			if active_enemy.has_collectable():
+				Inventory.add_inventory(active_enemy.collectable)
+				$CanvasLayer/GUI.update_inventory()
+			active_enemy.die()
+			active_enemy = null
+			reset_lean_camera()
+			return
+	else:
+		next_char = active_enemy.get_prompt().substr(0, 1)
+		curr_letter_idx = 1
+	
 	lean_camera_towards(active_enemy)
 	active_enemy.set_next_character(curr_letter_idx)
 	active_enemy.select()
@@ -275,40 +303,53 @@ func on_defense_attack(defense_obj, what):
 	var letter = null
 	if what == active_enemy:
 		letter = prompt.substr(curr_letter_idx, 1)
-		curr_letter_idx += 1	
-	else:
-		letter = prompt.substr(what._next_char_idx, 1)
-	what._next_char_idx += 1
-	what.set_next_character(what._next_char_idx)
-	what.correctly_type()
-	print("Defense launched: %s" % letter)
-	fire_bullet(defense_obj, what.get_node("Enemy"), letter)
-	enemy_correctly_typed(what, letter)
-			
-	if curr_letter_idx == prompt.length():
-		print("done")
-		curr_letter_idx = -1
-		data["enemies"] += 1
+		curr_letter_idx += 1
+		what._curr_char_idx += 1
+		what.set_next_character(what._curr_char_idx)
+		what.correctly_type()
+		print("Defense launched: %s" % letter)
+		fire_bullet(defense_obj, what.get_node("Enemy"), letter)
+		enemy_correctly_typed(what, letter)
 		
-		if what.has_collectable():
-			Inventory.add_inventory(what.collectable)
-			$CanvasLayer/GUI.update_inventory()
-		what.die()
-
-func _on_FreezeTimer_timeout():
-	pass
-#	get_tree().paused = false
-#	active_enemy.correctly_type()
-#	$SFX/GoodTypingSound.play()
-#	$AnimationPlayer.play("shockwave")
-#	if active_enemy.has_collectable():
-#		Inventory.add_inventory(active_enemy.collectable)
-#		$CanvasLayer/GUI.update_inventory()
-#	active_enemy.die()
-#	active_enemy = null
-#	reset_lean_camera()
+		if curr_letter_idx == prompt.length():
+			print("done")
+			curr_letter_idx = -1
+			data["enemies"] += 1
+			defense_obj.target = null
+			
+			if what.has_collectable():
+				Inventory.add_inventory(what.collectable)
+				$CanvasLayer/GUI.update_inventory()
+			what.die()
+			reset_lean_camera()
+	else:
+		if what._curr_char_idx == -1: what._curr_char_idx = 0
+		letter = prompt.substr(what._curr_char_idx, 1)
+		
+		what._curr_char_idx += 1
+		what.set_next_character(what._curr_char_idx)
+		what.correctly_type()
+		print("Defense launched: %s" % letter)
+		fire_bullet(defense_obj, what.get_node("Enemy"), letter)
+		enemy_correctly_typed(what, letter)
+		
+		if what._curr_char_idx == prompt.length():
+			print("done")
+			data["enemies"] += 1
+			
+			if what.has_collectable():
+				Inventory.add_inventory(what.collectable)
+				$CanvasLayer/GUI.update_inventory()
+			what.die()
 
 func _on_InBetweenWaveTimer_timeout():
+	$CanvasLayer/GUI.start_wave(wave_number)
+	# Start next wave
+	spawn_enemies()
+	in_between_wave = false
+	
+func on_gui_start_btn_pressed():
+	$InBetweenWaveTimer.stop()
 	$CanvasLayer/GUI.start_wave(wave_number)
 	# Start next wave
 	spawn_enemies()

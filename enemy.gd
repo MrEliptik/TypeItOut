@@ -28,6 +28,8 @@ var collectable = null
 
 var _next_char_idx = -1
 
+var _curr_char_idx = -1
+
 var following_path = true
 
 # Called when the node enters the scene tree for the first time.
@@ -166,14 +168,16 @@ func deselect():
 	z_index = 0
 
 func select():
-	$Enemy/Sprite.material.set_shader_param("width", 1.655)
+	$Enemy/Sprite.material.set_shader_param("width", 5.0)
 	z_index = 50
 	
 func die():
+	$Enemy.monitoring = false
 	$Enemy/AnimationPlayer.play("die")
 	
 func correctly_type():
 	$Enemy/AnimationPlayer3.play("hit")
+	$Enemy/HitSound.play()
 	
 func emit_letter(letter):
 	var instance = letter_particle.instance()

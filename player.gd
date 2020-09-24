@@ -16,7 +16,7 @@ func look_at_enemey(enemy):
 	curr_enemy = enemy
 	
 func orient_torward(what):
-	print(rad2deg(global_position.angle_to(curr_enemy.get_position())))
+	rad2deg(global_position.angle_to(curr_enemy.get_position()))
 
 func emit_lost_letter(letter):
 	var instance = lost_letter.instance()

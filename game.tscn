@@ -12,7 +12,7 @@
 [ext_resource path="res://effects/chromatic_aberration.shader" type="Shader" id=10]
 [ext_resource path="res://map.tscn" type="PackedScene" id=11]
 [ext_resource path="res://dictionary.tscn" type="PackedScene" id=12]
-[ext_resource path="res://sfx/typing/gun-sf-blaster.ogg" type="AudioStream" id=13]
+[ext_resource path="res://sfx/typing/257232__javierzumer__retro-shot-blaster.wav" type="AudioStream" id=13]
 [ext_resource path="res://gameOver.tscn" type="PackedScene" id=14]
 [ext_resource path="res://sfx/typing/error_006.ogg" type="AudioStream" id=15]
 [ext_resource path="res://sfx/environment/435730__scivirus__motor-noise.wav" type="AudioStream" id=17]
@@ -214,7 +214,6 @@ stream = ExtResource( 15 )
 
 [node name="GoodTypingSound" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 13 )
-volume_db = -2.364
 
 [node name="Environment" type="Node" parent="SFX"]
 
@@ -222,11 +221,6 @@ volume_db = -2.364
 stream = ExtResource( 17 )
 volume_db = -3.782
 pitch_scale = 0.89
-
-[node name="FreezeTimer" type="Timer" parent="."]
-pause_mode = 2
-wait_time = 0.2
-one_shot = true
 
 [node name="InBetweenWaveTimer" type="Timer" parent="."]
 wait_time = 25.0
@@ -240,7 +234,6 @@ anims/shockwave = SubResource( 5 )
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 6 )
 [connection signal="picked_from_inventory" from="CanvasLayer/GUI" to="." method="_on_GUI_picked_from_inventory"]
-[connection signal="timeout" from="FreezeTimer" to="." method="_on_FreezeTimer_timeout"]
 [connection signal="timeout" from="InBetweenWaveTimer" to="." method="_on_InBetweenWaveTimer_timeout"]
 
 [editable path="Map"]

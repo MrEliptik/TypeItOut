@@ -43,6 +43,7 @@ func start_place():
 	toggle_hide_inventory()
 	
 func start_wave(number):
+	$StartBtn.visible = false
 	$TimerContainer.visible = false
 	$WaveStart/Label.text = "WAVE " + str(number) + " START!"
 	$AnimationPlayer.play("wave_start")
@@ -101,6 +102,17 @@ func _on_TextureButton_mouse_exited():
 func _on_ShowFinishedTimer_timeout():
 	hide_wave_finished()
 	start_place()
+	$StartBtn.visible = true
 
 func _on_InBetweenWaveTimer_timeout():
 	pass # Replace with function body.
+
+func _on_SkipBtn_pressed():
+	$ShowFinishedTimer.stop()
+	hide_wave_finished()
+	start_place()
+
+func _on_StartBtn_pressed():
+	$PlaceObjects.visible = false
+	$ShowFinishedTimer.stop()
+	hide_wave_finished()
