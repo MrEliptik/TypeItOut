@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://exitPopup.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/ui/exitPopup.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gameOver.gd" type="Script" id=2]
 [ext_resource path="res://effects/vignette.png" type="Texture" id=3]
 [ext_resource path="res://effects/vignette.shader" type="Shader" id=4]
@@ -9,6 +9,7 @@
 [ext_resource path="res://sprites/ui/return.png" type="Texture" id=7]
 [ext_resource path="res://sprites/ui/exit.png" type="Texture" id=8]
 [ext_resource path="res://sprites/enemy/enemy_ufoPurple_E.png" type="Texture" id=9]
+
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 4 )

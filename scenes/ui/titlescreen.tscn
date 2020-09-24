@@ -1,0 +1,220 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://scenes/ui/titlescreen.gd" type="Script" id=1]
+[ext_resource path="res://fonts/space_marine/SM.TTF" type="DynamicFontData" id=2]
+[ext_resource path="res://sprites/ui/right.png" type="Texture" id=3]
+[ext_resource path="res://sprites/ui/information.png" type="Texture" id=4]
+[ext_resource path="res://sprites/ui/gear.png" type="Texture" id=5]
+[ext_resource path="res://scenes/ui/credits.tscn" type="PackedScene" id=6]
+[ext_resource path="res://fonts/rubik_32.tres" type="DynamicFont" id=7]
+[ext_resource path="res://scenes/ui/exitPopup.tscn" type="PackedScene" id=8]
+[ext_resource path="res://sprites/ui/exit.png" type="Texture" id=9]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.25098, 0.486275, 0.231373, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.992157, 0.984314, 0.984314, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.25098, 0.486275, 0.231373, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="DynamicFont" id=8]
+size = 82
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.992157, 0.984314, 0.984314, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="DynamicFont" id=3]
+size = 48
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.992157, 0.984314, 0.984314, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Titlescreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -2.37842
+margin_right = -2.37842
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -38.5
+margin_top = -7.0
+margin_right = 38.5
+margin_bottom = 7.0
+text = "TYPE IT OUT"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -267.0
+margin_top = -541.0
+margin_right = 267.0
+margin_bottom = -59.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayBtn" type="Button" parent="VBoxContainer"]
+margin_right = 534.0
+margin_bottom = 116.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = SubResource( 1 )
+custom_styles/normal = SubResource( 2 )
+custom_fonts/font = SubResource( 8 )
+text = "PLAY"
+icon = ExtResource( 3 )
+expand_icon = true
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 120.0
+margin_right = 534.0
+margin_bottom = 170.0
+rect_min_size = Vector2( 0, 50 )
+
+[node name="SettingsBtn" type="Button" parent="VBoxContainer"]
+margin_left = 31.0
+margin_top = 174.0
+margin_right = 501.0
+margin_bottom = 274.0
+rect_min_size = Vector2( 470, 0 )
+size_flags_horizontal = 4
+custom_styles/hover = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 3 )
+text = "SETTINGS"
+icon = ExtResource( 5 )
+
+[node name="CreditsBtn" type="Button" parent="VBoxContainer"]
+margin_left = 31.0
+margin_top = 278.0
+margin_right = 501.0
+margin_bottom = 378.0
+rect_min_size = Vector2( 470, 0 )
+size_flags_horizontal = 4
+custom_styles/hover = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = SubResource( 3 )
+text = "CREDITS"
+icon = ExtResource( 4 )
+
+[node name="ExitBtn" type="Button" parent="VBoxContainer"]
+margin_left = 31.0
+margin_top = 382.0
+margin_right = 501.0
+margin_bottom = 482.0
+rect_min_size = Vector2( 470, 0 )
+size_flags_horizontal = 4
+custom_styles/hover = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = SubResource( 3 )
+text = "EXIT"
+icon = ExtResource( 9 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 33.0
+margin_top = -50.0
+margin_right = -29.0
+margin_bottom = -12.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+margin_right = 923.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 7 )
+text = "Victor Meunier (MrEliptik)"
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer"]
+margin_left = 927.0
+margin_right = 930.0
+margin_bottom = 38.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Version" type="Label" parent="HBoxContainer"]
+margin_left = 934.0
+margin_right = 1858.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 7 )
+text = "1.0"
+align = 2
+valign = 1
+
+[node name="Credits" parent="." instance=ExtResource( 6 )]
+visible = false
+
+[node name="ConfirmationDialog" parent="." instance=ExtResource( 8 )]
+[connection signal="pressed" from="VBoxContainer/PlayBtn" to="." method="_on_PlayBtn_pressed"]
+[connection signal="pressed" from="VBoxContainer/SettingsBtn" to="." method="_on_SettingsBtn_pressed"]
+[connection signal="pressed" from="VBoxContainer/CreditsBtn" to="." method="_on_CreditsBtn_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExitBtn" to="." method="_on_ExitBtn_pressed"]
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_ConfirmationDialog_confirmed"]
