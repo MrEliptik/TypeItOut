@@ -79,6 +79,9 @@ func _process(delta):
 	if check_enemy_number() == 0 && !in_between_wave:
 		in_between_wave = true
 		next_wave()
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().paused = true
+		$CanvasLayer/PauseMenu.visible = true
 
 func _physics_process(delta):
 	pass
@@ -95,10 +98,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			active_enemy = null
 			reset_lean_camera()
 			
-		elif typed_event.scancode == KEY_ESCAPE:
-			get_tree().paused = true
-			$CanvasLayer/PauseMenu.visible = true
-		
 		var key_typed = PoolByteArray([typed_event.unicode]).get_string_from_utf8()
 		
 		if active_enemy == null:
@@ -136,7 +135,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				print("incorrectly type %s instead of %s" % [key_typed, next_char])
 				player.emit_lost_letter(key_typed)
 				$SFX/TypingErrorSound.play()
-				#camera.shake(0.5, 50, 20)
+				camera.shake(0.5, 50, 15)
 				data["errors"] += 1
 	
 func enemy_correctly_typed(who, letter):
@@ -179,6 +178,8 @@ func find_new_active_enemy(typed_character: String):
 	
 	# A typed character that doesn't match anyone
 	if !active_enemy: return
+	
+	player.look_at_enemey(active_enemy)
 	# We selected the closest enemy that starts with the typed_char
 	start_word_time = OS.get_ticks_msec()
 	var next_char = active_enemy.get_prompt().substr(0, 1)
@@ -241,14 +242,15 @@ func remove_small_text(value):
 	return text_cleaned
 
 func on_dangerArea_body_entered(area):
-	if area.has_method('is_enemy'):
-		area.danger()
+	if area.get_parent().has_method('is_enemy'):
+		area.get_parent().danger()
 		# TODO: add sfx
 
 func on_gameOverArea_body_entered(area):
-	if area.has_method('is_enemy'):
+	if area.get_parent().has_method('is_enemy'):
 		$Tween.interpolate_property(camera, "zoom", camera.zoom, Vector2(0.7, 0.7), 0.8, Tween.TRANS_EXPO, Tween.EASE_OUT)
 		$Tween.start()
+		player.get_node("AnimationPlayer").play("die")
 		Engine.time_scale = 0.25
 		$CanvasLayer/GameOver.visible = true
 		game_over = true

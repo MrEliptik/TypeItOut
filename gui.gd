@@ -9,9 +9,6 @@ const pickable = preload("res://pickableObject.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# TEST: to remove
-	Inventory.inventory.append(Inventory.TYPE.DOUBLE_TURRET)
-	Inventory.inventory.append(Inventory.TYPE.SINGLE_TURRET)
 	update_inventory()
 	
 func _process(delta):

@@ -7,11 +7,11 @@
 [ext_resource path="res://exitPopup.tscn" type="PackedScene" id=5]
 [ext_resource path="res://fonts/Rubik-Regular.ttf" type="DynamicFontData" id=6]
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=1]
 size = 24
 font_data = ExtResource( 6 )
 
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0, 0, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -22,19 +22,19 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0, 0, 0, 1 )
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 size = 48
 use_filter = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=5]
 size = 136
 outline_size = 5
 outline_color = Color( 0, 0, 0, 1 )
@@ -52,21 +52,22 @@ __meta__ = {
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 1 )
+rect_min_size = Vector2( 0, 160 )
+color = Color( 0.0117647, 0.0117647, 0.0117647, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect"]
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -500.0
+margin_left = -707.0
 margin_top = -350.0
-margin_right = 500.0
-margin_bottom = 400.0
-custom_fonts/normal_font = SubResource( 5 )
+margin_right = 710.0
+margin_bottom = 417.0
+custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "[font=res://fonts/rubik_36.tres][center]Game developper[/center][/font]
 
@@ -126,19 +127,20 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -324.0
-margin_top = -106.0
+margin_top = -115.0
 margin_right = 324.0
+margin_bottom = -15.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HomeBtn" type="Button" parent="HBoxContainer"]
 margin_right = 310.0
-margin_bottom = 106.0
+margin_bottom = 100.0
 rect_min_size = Vector2( 310, 0 )
-custom_styles/hover = SubResource( 1 )
-custom_styles/normal = SubResource( 2 )
-custom_fonts/font = SubResource( 3 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "HOME"
 icon = ExtResource( 1 )
 
@@ -146,17 +148,17 @@ icon = ExtResource( 1 )
 modulate = Color( 1, 1, 1, 0 )
 margin_left = 314.0
 margin_right = 334.0
-margin_bottom = 106.0
+margin_bottom = 100.0
 rect_min_size = Vector2( 20, 0 )
 
 [node name="ExitBtn" type="Button" parent="HBoxContainer"]
 margin_left = 338.0
 margin_right = 648.0
-margin_bottom = 106.0
+margin_bottom = 100.0
 rect_min_size = Vector2( 310, 0 )
-custom_styles/hover = SubResource( 1 )
-custom_styles/normal = SubResource( 2 )
-custom_fonts/font = SubResource( 3 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "EXIT"
 icon = ExtResource( 3 )
 
@@ -169,13 +171,13 @@ margin_left = -433.0
 margin_right = 434.0
 margin_bottom = 113.0
 rect_scale = Vector2( 1, 1.5 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 text = "CREDITS"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="meta_clicked" from="ColorRect/RichTextLabel" to="." method="_on_RichTextLabel_meta_clicked"]
+[connection signal="meta_clicked" from="RichTextLabel" to="." method="_on_RichTextLabel_meta_clicked"]
 [connection signal="pressed" from="HBoxContainer/HomeBtn" to="." method="_on_HomeBtn_pressed"]
 [connection signal="pressed" from="HBoxContainer/ExitBtn" to="." method="_on_ExitBtn_pressed"]

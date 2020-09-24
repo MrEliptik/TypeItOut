@@ -47,4 +47,5 @@ func _on_Timeout_timeout():
 	explode()
 
 func _on_Bullet_area_entered(area):
-	explode()
+	if area.get_parent().has_method("is_enemy"):
+		explode()

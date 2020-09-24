@@ -173,11 +173,7 @@ func die():
 	$Enemy/AnimationPlayer.play("die")
 	
 func correctly_type():
-	#var instance = hit_particles.instance()
-	#$ParticlesContainer.add_child(instance)
-	#instance.start()
-	#emit_letter(curr_letter)
-	pass
+	$Enemy/AnimationPlayer3.play("hit")
 	
 func emit_letter(letter):
 	var instance = letter_particle.instance()
