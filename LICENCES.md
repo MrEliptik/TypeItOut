@@ -2,7 +2,6 @@
 ## Assets (visual and audio)
 
 - Kenney: https://www.kenney.nl/
-- <a href='https://pngtree.com/so/light'>light png from pngtree.com</a>
 
 ## Audio
 
