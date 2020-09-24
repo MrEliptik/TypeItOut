@@ -97,8 +97,8 @@ func set_speed(value):
 	speed = value + speed_random
 	print("Value: "+str(value)+" Rand: "+str(speed_random)+" Speed: "+str(speed))
 	
-func set_target(target):
-	self.target = target
+func set_target(_target):
+	self.target = _target
 	
 func set_path(value: PoolVector2Array) -> void:
 #	var trail  = Line2D.new()

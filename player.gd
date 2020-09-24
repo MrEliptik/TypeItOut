@@ -10,7 +10,8 @@ func _ready():
 	
 func _process(delta):
 	if curr_enemy:
-		orient_torward(curr_enemy.get_position())
+		pass
+		#orient_torward(curr_enemy.get_position())
 	
 func look_at_enemey(enemy):
 	curr_enemy = enemy

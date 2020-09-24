@@ -212,6 +212,7 @@ func find_new_active_enemy(typed_character: String):
 		next_char = active_enemy.get_prompt().substr(0, 1)
 		curr_letter_idx = 1
 	
+	if !active_enemy: return
 	lean_camera_towards(active_enemy)
 	active_enemy.set_next_character(curr_letter_idx)
 	active_enemy.select()

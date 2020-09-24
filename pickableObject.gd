@@ -77,8 +77,8 @@ func draw_circle_custom(radius, color, maxerror = 0.25):
 
 	draw_colored_polygon(points, color)
 
-func init(type):
-	self.type = type
+func init(_type):
+	self.type = _type
 	$Groupe/AnimatedSprite.frames = load(type_AnimatedSprite[type])
 	$Groupe/VBoxContainer.visible = false
 	$AnimationPlayer.play("moving")
