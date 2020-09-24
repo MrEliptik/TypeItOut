@@ -12,9 +12,9 @@
 [ext_resource path="res://effects/chromatic_aberration.shader" type="Shader" id=10]
 [ext_resource path="res://map.tscn" type="PackedScene" id=11]
 [ext_resource path="res://dictionary.tscn" type="PackedScene" id=12]
+[ext_resource path="res://sfx/typing/gun-sf-blaster.ogg" type="AudioStream" id=13]
 [ext_resource path="res://gameOver.tscn" type="PackedScene" id=14]
 [ext_resource path="res://sfx/typing/error_006.ogg" type="AudioStream" id=15]
-[ext_resource path="res://sfx/typing/impactMining_004.ogg" type="AudioStream" id=16]
 [ext_resource path="res://sfx/environment/435730__scivirus__motor-noise.wav" type="AudioStream" id=17]
 
 [sub_resource type="ShaderMaterial" id=1]
@@ -213,7 +213,8 @@ visible = false
 stream = ExtResource( 15 )
 
 [node name="GoodTypingSound" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 16 )
+stream = ExtResource( 13 )
+volume_db = -2.364
 
 [node name="Environment" type="Node" parent="SFX"]
 

@@ -26,6 +26,8 @@ var path : = PoolVector2Array() setget set_path
 
 var collectable = null
 
+var _next_char_idx = -1
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
@@ -58,7 +60,7 @@ func move_along_path(distance: float) -> void:
 			break
 		elif distance < 0.0:
 			position = path[0]
-			set_process(false)
+			#set_process(false)
 			break
 		distance -= distance_to_next
 		starting_point = path[0]
@@ -117,6 +119,7 @@ func adjust_word_size():
 	$LabelContainer/Label.rect_pivot_offset.x = $LabelContainer/Label.rect_size.x/2
 	
 func set_next_character(next_char_idx: int):
+	_next_char_idx = next_char_idx
 	curr_letter = prompt_text.substr(next_char_idx, 1)
 	var green_text = get_bbcode_color_tag(green) + prompt_text.substr(0, next_char_idx) + get_bbcode_end_color_tag()
 	var blue_text = get_bbcode_color_tag(blue) + prompt_text.substr(next_char_idx, 1) + get_bbcode_end_color_tag()

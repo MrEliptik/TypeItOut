@@ -1,6 +1,6 @@
 extends Node2D
 
-signal attack(who)
+signal attack(who, what)
 signal place(who)
 signal cancel(who)
 
@@ -119,7 +119,7 @@ func _on_No_pressed():
 
 func _on_AttackTimer_timeout():
 	#print(global_position.angle_to(target.global_position))
-	emit_signal("attack", self, target, letter)
+	emit_signal("attack", self, target)
 	$AttackSound.play()
 
 func _on_Area2D_mouse_entered():

@@ -7,19 +7,19 @@
 [ext_resource path="res://fonts/Rubik-Regular.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://fonts/space_marine/SM.TTF" type="DynamicFontData" id=6]
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=1]
 size = 96
 outline_size = 5
 use_filter = true
 font_data = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 size = 64
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 5 )
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=3]
 resource_name = "place"
 length = 3.0
 tracks/0/type = "value"
@@ -35,7 +35,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=4]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("WaveFinished/ColorRect:rect_position")
@@ -86,7 +86,7 @@ tracks/3/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=5]
 resource_name = "wave_start"
 length = 3.4
 tracks/0/type = "value"
@@ -138,13 +138,13 @@ tracks/3/keys = {
 "values": [ Vector2( -2000, 10 ), Vector2( 72, 10 ), Vector2( 72, 10 ), Vector2( 2000, 10 ) ]
 }
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=6]
 size = 64
 outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=7]
 size = 64
 outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
@@ -159,9 +159,10 @@ __meta__ = {
 }
 
 [node name="WaveFinished" type="Control" parent="."]
-margin_top = 69.0
+visible = false
+margin_top = 104.0
 margin_right = 40.0
-margin_bottom = 109.0
+margin_bottom = 144.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -171,7 +172,6 @@ margin_left = -2500.0
 margin_top = -46.0
 margin_right = -409.0
 margin_bottom = 227.0
-color = Color( 0.568627, 0.278431, 0.6, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -181,7 +181,7 @@ margin_left = -2500.0
 margin_top = -6.0
 margin_right = -409.0
 margin_bottom = 186.0
-color = Color( 0.976471, 0.976471, 0.976471, 1 )
+color = Color( 0.0666667, 0.196078, 0.262745, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -197,7 +197,7 @@ margin_right = -228.0
 margin_bottom = 97.0
 rect_scale = Vector2( 1, 1.5 )
 custom_fonts/font = ExtResource( 1 )
-custom_colors/font_color = Color( 0.568627, 0.278431, 0.6, 1 )
+custom_colors/font_color = Color( 0.0666667, 0.196078, 0.262745, 1 )
 text = "WAVE 2 FINISHED!"
 align = 1
 valign = 1
@@ -206,9 +206,10 @@ __meta__ = {
 }
 
 [node name="WaveStart" type="Control" parent="."]
-margin_top = 69.0
+visible = false
+margin_top = 113.0
 margin_right = 40.0
-margin_bottom = 109.0
+margin_bottom = 153.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -218,7 +219,6 @@ margin_left = -2500.0
 margin_top = -46.0
 margin_right = -409.0
 margin_bottom = 227.0
-color = Color( 0.568627, 0.278431, 0.6, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -228,7 +228,7 @@ margin_left = -2500.0
 margin_top = -6.0
 margin_right = -409.0
 margin_bottom = 186.0
-color = Color( 0.976471, 0.976471, 0.976471, 1 )
+color = Color( 0.0666667, 0.196078, 0.262745, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -244,7 +244,7 @@ margin_right = -228.0
 margin_bottom = 97.0
 rect_scale = Vector2( 1, 1.5 )
 custom_fonts/font = ExtResource( 1 )
-custom_colors/font_color = Color( 0.568627, 0.278431, 0.6, 1 )
+custom_colors/font_color = Color( 0.0666667, 0.196078, 0.262745, 1 )
 text = "WAVE 2 START!"
 align = 1
 valign = 1
@@ -290,7 +290,7 @@ margin_top = -10.0
 margin_right = 1901.0
 margin_bottom = 97.0
 rect_scale = Vector2( 1, 1.5 )
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.0666667, 0.196078, 0.262745, 1 )
 text = "PLACE YOUR TURRETS"
 align = 1
@@ -325,7 +325,7 @@ size_flags_vertical = 3
 [node name="Label" type="Label" parent="StatsContainer/EnemiesKillerContainer"]
 margin_right = 495.0
 margin_bottom = 76.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "ENEMIES KILLED"
 
 [node name="HSeparator" type="HSeparator" parent="StatsContainer/EnemiesKillerContainer"]
@@ -342,7 +342,7 @@ __meta__ = {
 margin_left = 959.0
 margin_right = 1000.0
 margin_bottom = 76.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "0"
 
 [node name="ErrorsContainer" type="HBoxContainer" parent="StatsContainer"]
@@ -355,7 +355,7 @@ size_flags_vertical = 3
 [node name="Label" type="Label" parent="StatsContainer/ErrorsContainer"]
 margin_right = 248.0
 margin_bottom = 76.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "ERRORS"
 
 [node name="HSeparator" type="HSeparator" parent="StatsContainer/ErrorsContainer"]
@@ -372,7 +372,7 @@ __meta__ = {
 margin_left = 959.0
 margin_right = 1000.0
 margin_bottom = 76.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "0"
 
 [node name="WordTimeContainer" type="HBoxContainer" parent="StatsContainer"]
@@ -385,7 +385,7 @@ size_flags_vertical = 3
 [node name="Label" type="Label" parent="StatsContainer/WordTimeContainer"]
 margin_right = 799.0
 margin_bottom = 76.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "AVERAGE WORD TIME (MS)"
 
 [node name="HSeparator" type="HSeparator" parent="StatsContainer/WordTimeContainer"]
@@ -402,7 +402,7 @@ __meta__ = {
 margin_left = 959.0
 margin_right = 1000.0
 margin_bottom = 76.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "0"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
@@ -510,9 +510,9 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/place = SubResource( 7 )
-anims/wave_finished = SubResource( 2 )
-anims/wave_start = SubResource( 3 )
+anims/place = SubResource( 3 )
+anims/wave_finished = SubResource( 4 )
+anims/wave_start = SubResource( 5 )
 
 [node name="TimerContainer" type="HBoxContainer" parent="."]
 visible = false
@@ -521,9 +521,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -500.0
-margin_top = -207.0
+margin_top = -227.0
 margin_right = 500.0
-margin_bottom = -112.0
+margin_bottom = -132.0
 rect_min_size = Vector2( 1000, 95 )
 rect_scale = Vector2( 1, 1.5 )
 __meta__ = {
@@ -534,7 +534,7 @@ __meta__ = {
 margin_top = 23.0
 margin_right = 656.0
 margin_bottom = 71.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 6 )
 text = "NEXT WAVE IN"
 
 [node name="HSeparator" type="HSeparator" parent="TimerContainer"]
@@ -549,7 +549,7 @@ margin_left = 912.0
 margin_top = 23.0
 margin_right = 1000.0
 margin_bottom = 71.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 7 )
 text = "15"
 align = 2
 

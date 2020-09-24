@@ -113,10 +113,9 @@ func _unhandled_input(event: InputEvent) -> void:
 				curr_letter_idx += 1
 				active_enemy.set_next_character(curr_letter_idx)
 				active_enemy.correctly_type()
-				enemy_correctly_typed(key_typed)
+				enemy_correctly_typed(active_enemy, key_typed)
 				$SFX/GoodTypingSound.play()
-				camera.shake(0.1, 25, 5)
-				
+				camera.shake(0.1, 25, 5)			
 				fire_bullet(player, active_enemy, key_typed)
 				
 				if curr_letter_idx == prompt.length():
@@ -125,10 +124,6 @@ func _unhandled_input(event: InputEvent) -> void:
 					data["enemies"] += 1
 					
 					calculate_wpm(OS.get_ticks_msec() - start_word_time, prompt)
-					
-					active_enemy.correctly_type()
-					enemy_correctly_typed(key_typed)
-					$SFX/GoodTypingSound.play()
 					$AnimationPlayer.play("shockwave")
 					if active_enemy.has_collectable():
 						Inventory.add_inventory(active_enemy.collectable)
@@ -146,12 +141,13 @@ func _unhandled_input(event: InputEvent) -> void:
 				#camera.shake(0.5, 50, 20)
 				data["errors"] += 1
 	
-func enemy_correctly_typed(letter):
-	var instance = letter_particle.instance()
-	add_child(instance)
-	instance.set_letter(letter)
-	instance.global_position = active_enemy.global_position
-	instance.start()
+func enemy_correctly_typed(who, letter):
+	pass
+#	var instance = letter_particle.instance()
+#	add_child(instance)
+#	instance.set_letter(letter)
+#	instance.global_position = who.global_position
+#	instance.start()
 
 func fire_bullet(shooter, target, letter):
 	var bullet_instance = bullet.instance()
@@ -275,8 +271,30 @@ func on_place_defense(who, type):
 	$CanvasLayer/GUI.update_inventory()
 	who.connect("attack", self, "on_defense_attack")
 	
-func on_defense_attack(defense_obj, who, letter):
-	fire_bullet(defense_obj, who, letter)
+func on_defense_attack(defense_obj, what):
+	var prompt = what.get_prompt()
+	var letter = null
+	if what == active_enemy:
+		letter = prompt.substr(curr_letter_idx, 1)
+		curr_letter_idx += 1	
+	else:
+		letter = prompt.substr(what._next_char_idx, 1)
+	what._next_char_idx += 1
+	what.set_next_character(what._next_char_idx)
+	what.correctly_type()
+	print("Defense launched: %s" % letter)
+	fire_bullet(defense_obj, what, letter)
+	enemy_correctly_typed(what, letter)
+			
+	if curr_letter_idx == prompt.length():
+		print("done")
+		curr_letter_idx = -1
+		data["enemies"] += 1
+		
+		if what.has_collectable():
+			Inventory.add_inventory(what.collectable)
+			$CanvasLayer/GUI.update_inventory()
+		what.die()
 
 func _on_FreezeTimer_timeout():
 	pass
