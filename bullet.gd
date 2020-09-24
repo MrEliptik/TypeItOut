@@ -1,6 +1,6 @@
 extends Area2D
 
-export var speed = 2500.0
+export var speed = 3000.0
 export var steer_force = 1800.0
 
 const ANGLE = 10.0
@@ -13,10 +13,10 @@ var target = null
 func _ready():
 	pass # Replace with function body.
 
-func start(_transform, letter, _target):
+func start(_shooter, letter, _target):
 	$Letter.text = str(letter)
-	global_transform = _transform
-	look_at(_target.global_transform.origin)
+	global_position = _shooter.global_position
+	look_at(_target.global_position)
 	rotation_degrees += rand_range(-ANGLE, ANGLE)
 	velocity = transform.x * speed
 	target = _target
@@ -24,7 +24,7 @@ func start(_transform, letter, _target):
 func seek():
 	var steer = Vector2.ZERO
 	if target:
-		var desired = (target.position - position).normalized() * speed
+		var desired = (target.global_position - global_position).normalized() * speed
 		steer = (desired - velocity).normalized() * steer_force
 	return steer
 

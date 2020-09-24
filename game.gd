@@ -81,9 +81,7 @@ func _process(delta):
 		next_wave()
 
 func _physics_process(delta):
-	for enemy in enemies_container.get_children():
-		pass
-		#enemy.look_at(player.global_transform.origin)
+	pass
 		
 func _unhandled_input(event: InputEvent) -> void:	
 	if event is InputEventKey and not event.is_pressed():
@@ -116,7 +114,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				enemy_correctly_typed(active_enemy, key_typed)
 				$SFX/GoodTypingSound.play()
 				camera.shake(0.1, 25, 5)			
-				fire_bullet(player, active_enemy, key_typed)
+				fire_bullet(player, active_enemy.get_node("Enemy"), key_typed)
 				
 				if curr_letter_idx == prompt.length():
 					print("done")
@@ -142,21 +140,20 @@ func _unhandled_input(event: InputEvent) -> void:
 				data["errors"] += 1
 	
 func enemy_correctly_typed(who, letter):
-	pass
-#	var instance = letter_particle.instance()
-#	add_child(instance)
-#	instance.set_letter(letter)
-#	instance.global_position = who.global_position
-#	instance.start()
+	var instance = letter_particle.instance()
+	add_child(instance)
+	instance.set_letter(letter)
+	instance.global_position = who.get_position()
+	instance.start()
 
 func fire_bullet(shooter, target, letter):
 	var bullet_instance = bullet.instance()
 	bullets.add_child(bullet_instance)
-	bullet_instance.start(shooter.global_transform, letter, target)
+	bullet_instance.start(shooter, letter, target)
 				
 func lean_camera_towards(what):
 	var lean_vector = Vector2(0.0, 0.0)
-	lean_vector = what.global_transform.origin - (camera.global_transform.origin + camera.offset)
+	lean_vector = what.get_position() - (camera.global_transform.origin + camera.offset)
 	lean_vector = lean_vector.normalized()
 	camera.offset_h = lean_vector.x * MAX_CAMERA_LEANING
 	camera.offset_v = lean_vector.y * MAX_CAMERA_LEANING
@@ -176,7 +173,7 @@ func find_new_active_enemy(typed_character: String):
 		var next_char = prompt.substr(0, 1)
 		if prompt.substr(0, 1) == typed_character:
 			print("found new enemy that starts with %s" % next_char)
-			var dist = enemy.global_position.distance_to(player.global_position)
+			var dist = enemy.get_position().distance_to(player.global_position)
 			if dist < min_distance:
 				active_enemy = enemy
 	
@@ -190,7 +187,7 @@ func find_new_active_enemy(typed_character: String):
 	active_enemy.set_next_character(curr_letter_idx)
 	active_enemy.select()
 	
-	fire_bullet(player, active_enemy, next_char)
+	fire_bullet(player, active_enemy.get_node("Enemy"), next_char)
 	active_enemy.correctly_type()
 	$SFX/GoodTypingSound.play()
 	camera.shake(0.3, 25, 5)
@@ -283,7 +280,7 @@ func on_defense_attack(defense_obj, what):
 	what.set_next_character(what._next_char_idx)
 	what.correctly_type()
 	print("Defense launched: %s" % letter)
-	fire_bullet(defense_obj, what, letter)
+	fire_bullet(defense_obj, what.get_node("Enemy"), letter)
 	enemy_correctly_typed(what, letter)
 			
 	if curr_letter_idx == prompt.length():

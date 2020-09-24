@@ -33,6 +33,21 @@ animations = [ {
 "name": "S",
 "speed": 0.0
 }, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "N",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "W",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "E",
+"speed": 0.0
+}, {
 "frames": [ ExtResource( 7 ) ],
 "loop": true,
 "name": "SW",
@@ -51,21 +66,6 @@ animations = [ {
 "frames": [ ExtResource( 6 ) ],
 "loop": true,
 "name": "SE",
-"speed": 0.0
-}, {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "N",
-"speed": 0.0
-}, {
-"frames": [ ExtResource( 8 ) ],
-"loop": true,
-"name": "W",
-"speed": 0.0
-}, {
-"frames": [ ExtResource( 1 ) ],
-"loop": true,
-"name": "E",
 "speed": 0.0
 } ]
 
