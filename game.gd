@@ -88,8 +88,9 @@ func _process(delta):
 func _physics_process(delta):
 	pass
 		
-func _unhandled_input(event: InputEvent) -> void:	
-	if event is InputEventKey and not event.is_pressed():
+func _unhandled_input(event: InputEvent) -> void:
+	# Check event pressed because we don't see the event as being not pressed on windaube
+	if event is InputEventKey and event.is_pressed():
 		if game_over: return
 		var typed_event = event as InputEventKey
 		
