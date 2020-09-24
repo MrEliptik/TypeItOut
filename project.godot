@@ -19,6 +19,8 @@ config/name="TypeItOut"
 run/main_scene="res://game.tscn"
 boot_splash/bg_color=Color( 0.0196078, 0.254902, 0.411765, 1 )
 config/icon="res://icon.png"
+config/macos_native_icon="res://medias/icons/icon.icns"
+config/windows_native_icon="res://medias/icons/icon.ico"
 
 [autoload]
 
