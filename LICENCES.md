@@ -14,6 +14,7 @@
 ## Fonts 
 
 - Rubik: https://fonts.google.com/specimen/Rubik?query=rubik
+- Adventure: https://www.dafont.com/fr/adventure.font
 
 ## Shaders
 
