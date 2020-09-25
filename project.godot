@@ -28,10 +28,6 @@ config/windows_native_icon="res://medias/icons/icon.ico"
 Inventory="*res://inventory.gd"
 Music="*res://scenes/ui/music.tscn"
 
-[debug]
-
-settings/stdout/print_fps=true
-
 [display]
 
 window/size/width=1920
