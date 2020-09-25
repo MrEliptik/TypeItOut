@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://fonts/space_marine/SM.TTF" type="DynamicFontData" id=1]
 [ext_resource path="res://effects/vignette.shader" type="Shader" id=2]
 [ext_resource path="res://effects/vignette.png" type="Texture" id=3]
 [ext_resource path="res://pauseMenu.gd" type="Script" id=4]
+[ext_resource path="res://fonts/space_marine/SM.TTF" type="DynamicFontData" id=5]
+[ext_resource path="res://sprites/ui/right.png" type="Texture" id=6]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
@@ -13,7 +14,30 @@ shader_param/vignette = ExtResource( 3 )
 size = 100
 outline_color = Color( 0.00784314, 0.25098, 0.282353, 1 )
 use_filter = true
-font_data = ExtResource( 1 )
+font_data = ExtResource( 5 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="DynamicFont" id=3]
+size = 48
+font_data = ExtResource( 5 )
 
 [node name="PauseMenu" type="Control"]
 pause_mode = 2
@@ -51,3 +75,23 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ResumeBtn" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -198.0
+margin_top = -100.0
+margin_right = 198.0
+custom_styles/hover = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 3 )
+text = "RESUME"
+icon = ExtResource( 6 )
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="visibility_changed" from="." to="." method="_on_PauseMenu_visibility_changed"]
+[connection signal="pressed" from="ResumeBtn" to="." method="_on_ResumeBtn_pressed"]

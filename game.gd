@@ -110,8 +110,8 @@ func _process(delta):
 		in_between_wave = true
 		next_wave()
 	if Input.is_action_just_pressed("ui_cancel"):
-		get_tree().paused = true
-		$CanvasLayer/PauseMenu.visible = true
+		pass
+		#$CanvasLayer/PauseMenu.visible = true
 
 func _physics_process(delta):
 	pass
