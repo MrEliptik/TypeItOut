@@ -1,7 +1,7 @@
 extends Node2D
 
 signal attack(who, what)
-signal place(who)
+signal place(who, pos)
 signal cancel(who)
 
 enum TYPE{
@@ -39,6 +39,9 @@ func _process(delta):
 	elif Input.is_action_pressed("left_click"):
 		place(get_global_mouse_position())
 		update()
+		
+		
+	#global_position = get_global_mouse_position()
 	global_position = get_global_mouse_position()
 	can_place(global_position)
 	update()
@@ -115,9 +118,10 @@ func _on_Yes_pressed():
 	$YesSound.play()
 	$Groupe/VBoxContainer.visible = false
 	$Groupe/AnimatedSprite.modulate = Color("#ffffff")
-	# TODO: animate visibility (boucny effect?)
 	$AnimationPlayer.play("place")
-	emit_signal("place", self, type)
+	# Transform the coordinate to take into account the camera zoom and panning
+	# because the object is seen through the canvaslayer
+	emit_signal("place", self, type, get_viewport().canvas_transform.affine_inverse().xform(global_position))
 
 func _on_No_pressed():
 	$NoSound.play()

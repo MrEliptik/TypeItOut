@@ -6,6 +6,12 @@ const home_scene = "res://scenes/ui/titlescreen.tscn"
 func _ready():
 	pass # Replace with function body.
 
+func display_data(data):
+	$StatsContainer/WaveContainer/Value.text = str(data["wave"])
+	$StatsContainer/EnemiesKillerContainer/Value.text = str(data["enemies_total"])
+	$StatsContainer/ErrorsContainer/Value.text = str(data["errors_total"])
+	$StatsContainer/WordTimeContainer/Value.text = str(stepify(data["word_time_total"], 0.1))
+
 func _on_RetryBtn_pressed():
 	if !visible: return
 	Engine.time_scale = 1.0
@@ -23,3 +29,9 @@ func _on_ExitBtn_pressed():
 
 func _on_ConfirmationDialog_confirmed():
 	get_tree().quit()
+
+func _on_StatsDelay_timeout():
+	$StatsContainer.visible = true
+
+func _on_GameOver_visibility_changed():
+	if visible: $StatsDelay.start()

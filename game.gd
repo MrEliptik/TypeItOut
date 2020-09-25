@@ -36,9 +36,13 @@ onready var game_over = false
 var inventory_to_remove = null
 
 var data = {
+	"wave":0,
 	"errors": 0,
 	"enemies": 0,
 	"word_time":0,
+	"errors_total":0,
+	"enemies_total":0,
+	"word_time_total":0,
 }
 
 var start_word_time
@@ -147,6 +151,7 @@ func _unhandled_input(event: InputEvent) -> void:
 					print("done")
 					curr_letter_idx = -1
 					data["enemies"] += 1
+					data["enemies_total"] += 1
 					
 					calculate_wpm(OS.get_ticks_msec() - start_word_time, prompt)
 					$AnimationPlayer.play("shockwave")
@@ -162,6 +167,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				$SFX/TypingErrorSound.play()
 				camera.shake(0.5, 50, 15)
 				data["errors"] += 1
+				data["errors_total"] += 1
 	
 func enemy_correctly_typed(who, letter):
 	var instance = letter_particle.instance()
@@ -224,6 +230,7 @@ func find_new_active_enemy(typed_character: String):
 			print("done")
 			curr_letter_idx = -1
 			data["enemies"] += 1
+			data["enemies_total"] += 1
 			
 			$AnimationPlayer.play("shockwave")
 			if active_enemy.has_collectable():
@@ -255,6 +262,7 @@ func next_wave():
 	$CanvasLayer/GUI.start_wave_finished(wave_number, data)
 	
 	wave_number += 1
+	data["wave"] += 1
 	# Make number of enemies and speed increase
 	enemy_speed += enemy_speed_increment
 	# If wave nubmer is pair, we add 1 enemy
@@ -273,6 +281,8 @@ func reset_data():
 func calculate_wpm(time, word):
 	data["word_time"] += time 
 	data["word_time"] /= 2
+	data["word_time_total"] += data["word_time"]
+	data["word_time_total"] /= 2
 		
 func load_text_file(path):
 	var f = File.new()
@@ -313,6 +323,7 @@ func on_gameOverArea_body_entered(area):
 		player.get_node("AnimationPlayer").play("die")
 		Engine.time_scale = 0.25
 		$CanvasLayer/GameOver.visible = true
+		$"CanvasLayer/GameOver".display_data(data)
 		game_over = true
 		print("Game over")
 		
@@ -327,9 +338,10 @@ func _on_GUI_picked_from_inventory(object_type):
 	$CanvasLayer.add_child(instance)
 	instance.connect("place", self, "on_place_defense")
 	
-func on_place_defense(who, type):
+func on_place_defense(who, type, where):
 	$CanvasLayer.remove_child(who)
 	defenses.add_child(who)
+	who.global_position = where
 	Inventory.remove_inventory(type)
 	$CanvasLayer/GUI.update_inventory()
 	who.connect("attack", self, "on_defense_attack")
@@ -351,7 +363,8 @@ func on_defense_attack(defense_obj, what):
 			print("done")
 			curr_letter_idx = -1
 			data["enemies"] += 1
-			defense_obj.target = null
+			data["enemies_total"] += 1
+			defense_obj.target.erase(what)
 			
 			if what.has_collectable():
 				Inventory.add_inventory(what.collectable)
@@ -372,6 +385,7 @@ func on_defense_attack(defense_obj, what):
 		if what._curr_char_idx == prompt.length():
 			print("done")
 			data["enemies"] += 1
+			data["enemies_total"] += 1
 			
 			if what.has_collectable():
 				Inventory.add_inventory(what.collectable)
