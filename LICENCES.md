@@ -1,3 +1,13 @@
+## Developer
+
+- Victor Meunier (MrEliptik)
+  - [Twitter](https://twitter.com/VicMeunier)
+  - [GitHub](https://github.com/MrEliptik)
+  - [GitHub game's repo](https://github.com/MrEliptik/TypeItOut)
+  - [Itch.io page](https://mreliptik.itch.io/type-it-out)
+  - [Sketchfab](https://sketchfab.com/victor.meunierpk)
+  - [Website](https://www.victormeunier.com/)
+  - [Blog](https://blog.victormeunier.com/)
 
 ## Assets (visual and audio)
 
@@ -15,6 +25,7 @@
 ## Fonts 
 
 - Rubik: https://fonts.google.com/specimen/Rubik?query=rubik
+- Space marine: https://www.dafont.com/space-marine.font
 - Adventure: https://www.dafont.com/fr/adventure.font
 
 ## Shaders
