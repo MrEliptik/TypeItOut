@@ -109,7 +109,7 @@ corner_radius_bottom_left = 10
 
 [sub_resource type="Animation" id=12]
 resource_name = "title"
-length = 10.0
+length = 15.0
 step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("Title/Type:percent_visible")
@@ -118,7 +118,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.6, 1.8 ),
+"times": PoolRealArray( 0.2, 4.85 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.0, 1.0 ]
@@ -130,7 +130,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 2, 2.27, 2.37, 2.57 ),
+"times": PoolRealArray( 5.66, 5.93, 6.03, 6.23 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 100, 100 ), Vector2( 1, 1 ), Vector2( 1.1, 0.9 ), Vector2( 1, 1 ) ]
@@ -142,7 +142,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.6, 2.1, 2.27 ),
+"times": PoolRealArray( 0.05, 5.76, 5.93 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
@@ -154,7 +154,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0.6, 4.12, 4.43 ),
+"times": PoolRealArray( 0.05, 7.78, 8.09 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
@@ -166,7 +166,7 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0.6, 4.12, 4.43 ),
+"times": PoolRealArray( 0, 7.78, 8.09 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
@@ -178,7 +178,7 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 0.79, 1.78 ),
+"times": PoolRealArray( 0, 0.95, 4.83 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, true ]
@@ -190,7 +190,7 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0, 0.98, 1.57 ),
+"times": PoolRealArray( 0, 1.73, 4.05 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, true ]
@@ -202,7 +202,7 @@ tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0, 1.18 ),
+"times": PoolRealArray( 0, 2.51 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
@@ -214,7 +214,7 @@ tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 0, 1.39 ),
+"times": PoolRealArray( 0, 3.28 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
@@ -226,7 +226,7 @@ tracks/9/loop_wrap = true
 tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/keys = {
-"times": PoolRealArray( 0, 2.27 ),
+"times": PoolRealArray( 0, 5.93 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
@@ -238,7 +238,7 @@ tracks/10/loop_wrap = true
 tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/keys = {
-"times": PoolRealArray( 0, 2.27 ),
+"times": PoolRealArray( 0, 5.93 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
@@ -250,7 +250,7 @@ tracks/11/loop_wrap = true
 tracks/11/imported = false
 tracks/11/enabled = true
 tracks/11/keys = {
-"times": PoolRealArray( 0, 2.68 ),
+"times": PoolRealArray( 0, 6.34 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
@@ -263,7 +263,7 @@ tracks/12/imported = false
 tracks/12/enabled = true
 tracks/12/keys = {
 "clips": PoolStringArray( "ovni appear" ),
-"times": PoolRealArray( 4.12 )
+"times": PoolRealArray( 7.78 )
 }
 tracks/13/type = "animation"
 tracks/13/path = NodePath("AnimationPlayer2")
@@ -273,7 +273,19 @@ tracks/13/imported = false
 tracks/13/enabled = true
 tracks/13/keys = {
 "clips": PoolStringArray( "move_ovni" ),
-"times": PoolRealArray( 5.62 )
+"times": PoolRealArray( 9.28 )
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("BtnContainer:visible")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 7.99 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
 }
 
 [sub_resource type="Animation" id=13]
@@ -472,7 +484,7 @@ custom_constants/shadow_offset_y = 5
 text = "Type It"
 align = 1
 valign = 1
-percent_visible = 0.0166667
+percent_visible = 0.00860215
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -488,7 +500,7 @@ margin_top = -403.686
 margin_right = 648.832
 margin_bottom = 101.314
 rect_rotation = -13.7
-rect_scale = Vector2( 96.3333, 96.3333 )
+rect_scale = Vector2( 88.9999, 88.9999 )
 rect_pivot_offset = Vector2( 424, 252 )
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.278431, 0.733333, 0.529412, 1 )
@@ -503,6 +515,7 @@ __meta__ = {
 }
 
 [node name="BtnContainer" type="VBoxContainer" parent="."]
+visible = false
 modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_top = 1.0
@@ -539,6 +552,7 @@ margin_bottom = 129.0
 rect_min_size = Vector2( 0, 25 )
 
 [node name="SettingsBtn" type="Button" parent="BtnContainer"]
+visible = false
 margin_left = 107.0
 margin_top = 133.0
 margin_right = 427.0

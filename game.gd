@@ -101,8 +101,9 @@ func spawn_enemies():
 		# Set path for enemy
 		enemy_instance.path = nav_2d.get_simple_path(enemy_instance.global_position, player.global_position)
 		
-		# TEST: to remove
-		#$Dictionary.request(enemy_instance.get_prompt())
+		$Dictionary.clear_queue()
+		$Dictionary.add_to_queue(enemy_instance.get_prompt())
+	$Dictionary.request_queue()
 	
 func _process(delta):
 	if game_over: return
