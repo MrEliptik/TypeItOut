@@ -70,7 +70,28 @@ func spawn_enemies():
 		enemies_container.add_child(enemy_instance)
 		enemy_instance.global_position = spawn_points[idx].global_position
 		enemy_instance.set_target(player)
-		enemy_instance.set_prompt(text[int(rand_range(0.0, text.size()))])
+		
+		var txt = text[int(rand_range(0.0, text.size()))]
+		var same_starting_letter = false
+		# We loop through enemies to see if another has the same
+		# starting letter
+		for enemy in enemies_container.get_children():
+			# If we find one, we stop
+			if enemy.get_prompt().substr(0, 1) == txt.substr(0,1):
+				same_starting_letter = true
+				break
+		while(same_starting_letter):
+			txt = text[int(rand_range(0.0, text.size()))]
+			same_starting_letter = false
+			# We loop through enemies to see if another has the same
+			# starting letter
+			for enemy in enemies_container.get_children():
+				# If we find one, we stop
+				if enemy.get_prompt().substr(0, 1) == txt.substr(0,1):
+					same_starting_letter = true
+					break
+					
+		enemy_instance.set_prompt(txt)
 		enemy_instance.set_speed(enemy_speed)
 		
 		# Set path for enemy
@@ -282,6 +303,8 @@ func on_dangerArea_body_entered(area):
 func on_gameOverArea_body_entered(area):
 	if area.get_parent().has_method('is_enemy'):
 		if game_over: return
+		reset_lean_camera()
+		stop_rover_sound()
 		$SFX/Environment/Drill.stop()
 		Music.stop()
 		$SFX/Music/GameOver.play()
@@ -292,6 +315,10 @@ func on_gameOverArea_body_entered(area):
 		$CanvasLayer/GameOver.visible = true
 		game_over = true
 		print("Game over")
+		
+func stop_rover_sound():
+	for rover in $Map/Navigation2D/TileMap/Rovers.get_children():
+		rover.get_node("EngineSound").stop()
 
 func _on_GUI_picked_from_inventory(object_type):
 	# Temporary, just to be able to click the button to place definitely
