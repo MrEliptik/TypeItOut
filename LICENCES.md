@@ -10,6 +10,7 @@
 - blaster https://freesound.org/people/JavierZumer/sounds/257232/
 - https://freesound.org/people/JarredGibb/sounds/219030/
 - https://freesound.org/people/silverapple/sounds/84329/
+- keystroke: https://freesound.org/people/ThunderQuads/sounds/467188/
 
 ## Fonts 
 

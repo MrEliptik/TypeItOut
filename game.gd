@@ -47,6 +47,9 @@ var start_word_time
 func _ready():
 	randomize()
 	
+	if !Music.is_playing():
+		Music.play()
+	
 	text = load_text_file(easy_words_url)
 	text = convert_to_array(text)
 	text = remove_small_text(text)
@@ -278,6 +281,10 @@ func on_dangerArea_body_entered(area):
 
 func on_gameOverArea_body_entered(area):
 	if area.get_parent().has_method('is_enemy'):
+		if game_over: return
+		$SFX/Environment/Drill.stop()
+		Music.stop()
+		$SFX/Music/GameOver.play()
 		$Tween.interpolate_property(camera, "zoom", camera.zoom, Vector2(0.7, 0.7), 0.8, Tween.TRANS_EXPO, Tween.EASE_OUT)
 		$Tween.start()
 		player.get_node("AnimationPlayer").play("die")

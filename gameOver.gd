@@ -1,5 +1,7 @@
 extends Control
 
+const home_scene = "res://scenes/ui/homeBtn.tscn"
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -12,7 +14,7 @@ func _on_RetryBtn_pressed():
 	visible = false
 
 func _on_HomeBtn_pressed():
-	pass # Replace with function body.
+	get_tree().change_scene(home_scene)
 
 func _on_ExitBtn_pressed():
 	if !visible: return

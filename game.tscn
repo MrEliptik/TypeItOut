@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://pauseMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://effects/vignette.shader" type="Shader" id=2]
@@ -8,13 +8,13 @@
 [ext_resource path="res://gui.tscn" type="PackedScene" id=6]
 [ext_resource path="res://effects/shockwave.shader" type="Shader" id=7]
 [ext_resource path="res://effects/vignette.png" type="Texture" id=8]
-[ext_resource path="res://effects/crt.shader" type="Shader" id=9]
 [ext_resource path="res://effects/chromatic_aberration.shader" type="Shader" id=10]
 [ext_resource path="res://map.tscn" type="PackedScene" id=11]
 [ext_resource path="res://dictionary.tscn" type="PackedScene" id=12]
 [ext_resource path="res://sfx/typing/257232__javierzumer__retro-shot-blaster.wav" type="AudioStream" id=13]
 [ext_resource path="res://gameOver.tscn" type="PackedScene" id=14]
 [ext_resource path="res://sfx/typing/error_006.ogg" type="AudioStream" id=15]
+[ext_resource path="res://music/gameover/Sad Descent.ogg" type="AudioStream" id=16]
 [ext_resource path="res://sfx/environment/435730__scivirus__motor-noise.wav" type="AudioStream" id=17]
 
 [sub_resource type="ShaderMaterial" id=1]
@@ -23,22 +23,6 @@ shader_param/center = Vector2( 0.5, 0.5 )
 shader_param/force = 5.55227e-06
 shader_param/size = 0.000518582
 shader_param/thickness = 0.131
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 9 )
-shader_param/boost = 1.0
-shader_param/grille_opacity = 1.0
-shader_param/scanlines_opacity = 1.0
-shader_param/vignette_opacity = 0.16
-shader_param/scanlines_speed = 1.0
-shader_param/show_grille = false
-shader_param/show_scanlines = false
-shader_param/show_vignette = true
-shader_param/show_curvature = true
-shader_param/screen_size = Vector2( 320, 180 )
-shader_param/aberration_amount = 0.0
-shader_param/move_aberration = true
-shader_param/aberration_speed = 8.89
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 2 )
@@ -162,16 +146,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CRT" type="ColorRect" parent="CanvasLayer"]
-visible = false
-material = SubResource( 2 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Vignette" type="ColorRect" parent="CanvasLayer"]
 visible = false
 material = SubResource( 3 )
@@ -221,6 +195,11 @@ stream = ExtResource( 13 )
 stream = ExtResource( 17 )
 volume_db = -3.782
 pitch_scale = 0.89
+
+[node name="Music" type="Node" parent="SFX"]
+
+[node name="GameOver" type="AudioStreamPlayer" parent="SFX/Music"]
+stream = ExtResource( 16 )
 
 [node name="InBetweenWaveTimer" type="Timer" parent="."]
 wait_time = 25.0

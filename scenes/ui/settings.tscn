@@ -1,0 +1,70 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://effects/vignette.shader" type="Shader" id=1]
+[ext_resource path="res://effects/vignette.png" type="Texture" id=2]
+[ext_resource path="res://scenes/ui/homeBtn.tscn" type="PackedScene" id=3]
+[ext_resource path="res://fonts/space_marine/SM.TTF" type="DynamicFontData" id=4]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/vignette = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 100
+use_filter = true
+font_data = ExtResource( 4 )
+
+[node name="Settings" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0117647, 0.321569, 0.364706, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Vignette" type="ColorRect" parent="."]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -369.0
+margin_right = 369.0
+margin_bottom = 152.0
+rect_scale = Vector2( 1, 1.5 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 5
+custom_constants/shadow_offset_y = 5
+text = "SETTINGS"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -100.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HomeBtn" parent="HBoxContainer" instance=ExtResource( 3 )]
+margin_left = 805.0
+margin_right = 1115.0

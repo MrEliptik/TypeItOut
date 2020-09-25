@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://music/Space Cadet.ogg" type="AudioStream" id=1]
+[ext_resource path="res://scenes/ui/music.gd" type="Script" id=2]
+
+[node name="Music" type="Node2D"]
+pause_mode = 2
+script = ExtResource( 2 )
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )

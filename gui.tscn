@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://fonts/space_marine/space_marine_136.tres" type="DynamicFont" id=1]
 [ext_resource path="res://sprites/ui/glassPanel_corners.png" type="Texture" id=2]
@@ -8,6 +8,24 @@
 [ext_resource path="res://fonts/space_marine/SM.TTF" type="DynamicFontData" id=6]
 [ext_resource path="res://sprites/ui/fastForward.png" type="Texture" id=7]
 [ext_resource path="res://sprites/ui/right.png" type="Texture" id=8]
+[ext_resource path="res://effects/vignette.shader" type="Shader" id=9]
+[ext_resource path="res://effects/vignette.png" type="Texture" id=10]
+
+[sub_resource type="ShaderMaterial" id=11]
+shader = ExtResource( 9 )
+shader_param/vignette = ExtResource( 10 )
+
+[sub_resource type="ShaderMaterial" id=12]
+shader = ExtResource( 9 )
+shader_param/vignette = ExtResource( 10 )
+
+[sub_resource type="ShaderMaterial" id=13]
+shader = ExtResource( 9 )
+shader_param/vignette = ExtResource( 10 )
+
+[sub_resource type="ShaderMaterial" id=14]
+shader = ExtResource( 9 )
+shader_param/vignette = ExtResource( 10 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 96
@@ -169,6 +187,8 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="WaveFinished"]
+modulate = Color( 0.0313726, 0.886275, 1, 1 )
+material = SubResource( 11 )
 margin_left = -2500.0
 margin_top = -6.0
 margin_right = -409.0
@@ -189,7 +209,7 @@ margin_right = -228.0
 margin_bottom = 97.0
 rect_scale = Vector2( 1, 1.5 )
 custom_fonts/font = ExtResource( 1 )
-custom_colors/font_color = Color( 0.0666667, 0.196078, 0.262745, 1 )
+custom_colors/font_color = Color( 0.278431, 0.733333, 0.529412, 1 )
 text = "WAVE 2 FINISHED!"
 align = 1
 valign = 1
@@ -207,11 +227,12 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="WaveStart"]
+modulate = Color( 0.0313726, 0.886275, 1, 1 )
+material = SubResource( 12 )
 margin_left = -2500.0
 margin_top = -6.0
 margin_right = -409.0
 margin_bottom = 186.0
-color = Color( 0.0666667, 0.196078, 0.262745, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -227,7 +248,7 @@ margin_right = -228.0
 margin_bottom = 97.0
 rect_scale = Vector2( 1, 1.5 )
 custom_fonts/font = ExtResource( 1 )
-custom_colors/font_color = Color( 0.0666667, 0.196078, 0.262745, 1 )
+custom_colors/font_color = Color( 0.278431, 0.733333, 0.529412, 1 )
 text = "WAVE 2 START!"
 align = 1
 valign = 1
@@ -237,6 +258,7 @@ __meta__ = {
 
 [node name="PlaceObjects" type="Control" parent="."]
 visible = false
+material = SubResource( 13 )
 margin_top = 96.0
 margin_right = 40.0
 margin_bottom = 136.0
@@ -245,11 +267,12 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="PlaceObjects"]
+modulate = Color( 0.0313726, 0.886275, 1, 1 )
+material = SubResource( 14 )
 margin_left = -81.0
 margin_top = -6.0
 margin_right = 2010.0
 margin_bottom = 186.0
-color = Color( 0.0666667, 0.196078, 0.262745, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -265,7 +288,7 @@ margin_right = 1901.0
 margin_bottom = 97.0
 rect_scale = Vector2( 1, 1.5 )
 custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0.0666667, 0.196078, 0.262745, 1 )
+custom_colors/font_color = Color( 0.278431, 0.733333, 0.529412, 1 )
 text = "PLACE YOUR TURRETS"
 align = 1
 valign = 1

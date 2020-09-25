@@ -23,3 +23,9 @@ func _on_ExitBtn_pressed():
 
 func _on_ConfirmationDialog_confirmed():
 	get_tree().quit()
+
+func _on_button_mouse_entered():
+	$AudioStreamPlayer.play()
+
+func _on_button_mouse_exited():
+	pass
