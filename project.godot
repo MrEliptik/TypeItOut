@@ -25,7 +25,7 @@ config/windows_native_icon="res://medias/icons/icon.ico"
 
 [autoload]
 
-Inventory="*res://inventory.gd"
+Inventory="*res://scenes/inventory.gd"
 Music="*res://scenes/ui/music.tscn"
 
 [display]
