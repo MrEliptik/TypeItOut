@@ -5,24 +5,23 @@
 [ext_resource path="res://sfx/rover/279012__visions68__machine2.wav" type="AudioStream" id=3]
 [ext_resource path="res://effects/particles/smoke_07.png" type="Texture" id=4]
 
-[sub_resource type="Curve" id=3]
+[sub_resource type="Curve" id=1]
 max_value = 0.3
 _data = [ Vector2( 0, 0.0102273 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0375 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=4]
-curve = SubResource( 3 )
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
 
-[sub_resource type="ParticlesMaterial" id=2]
+[sub_resource type="ParticlesMaterial" id=3]
 flag_disable_z = true
 direction = Vector3( -1, 0, 0 )
 spread = 25.59
 initial_velocity = 24.51
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-scale_curve = SubResource( 4 )
+scale_curve = SubResource( 2 )
 
-[sub_resource type="Animation" id=1]
-resource_name = "work"
+[sub_resource type="Animation" id=4]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -44,7 +43,7 @@ script = ExtResource( 2 )
 [node name="SmokeParticles" type="Particles2D" parent="."]
 position = Vector2( 0, -6 )
 amount = 10
-process_material = SubResource( 2 )
+process_material = SubResource( 3 )
 texture = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -52,9 +51,10 @@ texture = ExtResource( 1 )
 offset = Vector2( 0, -65 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/work = SubResource( 1 )
+anims/work = SubResource( 4 )
 
 [node name="EngineSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
 autoplay = true
 max_distance = 600.0
+bus = "Effect"

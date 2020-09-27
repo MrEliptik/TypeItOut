@@ -672,6 +672,7 @@ stream = ExtResource( 19 )
 
 [node name="AmbianceMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 20 )
+bus = "Music"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "title"

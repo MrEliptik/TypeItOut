@@ -17,13 +17,6 @@
 [ext_resource path="res://music/gameover/Sad Descent.ogg" type="AudioStream" id=16]
 [ext_resource path="res://sfx/environment/435730__scivirus__motor-noise.wav" type="AudioStream" id=17]
 
-
-
-
-
-
-
-
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
 shader_param/center = Vector2( 0.5, 0.5 )
@@ -31,16 +24,16 @@ shader_param/force = 5.55227e-06
 shader_param/size = 0.000518582
 shader_param/thickness = 0.131
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 2 )
 shader_param/vignette = ExtResource( 8 )
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 10 )
 shader_param/apply = true
 shader_param/amount = 0.3
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 length = 0.3
 step = 0.01
 tracks/0/type = "bezier"
@@ -64,7 +57,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.3 )
 }
 
-[sub_resource type="Environment" id=6]
+[sub_resource type="Environment" id=5]
 fog_color = Color( 0.215686, 0.215686, 0.215686, 1 )
 fog_depth_begin = 0.0
 fog_depth_end = 80.7
@@ -155,7 +148,7 @@ __meta__ = {
 
 [node name="Vignette" type="ColorRect" parent="CanvasLayer"]
 visible = false
-material = SubResource( 3 )
+material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 1
@@ -165,7 +158,7 @@ __meta__ = {
 
 [node name="ChromaticAberration" type="ColorRect" parent="CanvasLayer"]
 visible = false
-material = SubResource( 4 )
+material = SubResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 1
@@ -192,9 +185,11 @@ visible = false
 
 [node name="TypingErrorSound" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 15 )
+bus = "Effect"
 
 [node name="GoodTypingSound" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 13 )
+bus = "Effect"
 
 [node name="Environment" type="Node" parent="SFX"]
 
@@ -202,11 +197,13 @@ stream = ExtResource( 13 )
 stream = ExtResource( 17 )
 volume_db = -3.782
 pitch_scale = 0.89
+bus = "Effect"
 
 [node name="Music" type="Node" parent="SFX"]
 
 [node name="GameOver" type="AudioStreamPlayer" parent="SFX/Music"]
 stream = ExtResource( 16 )
+bus = "Music"
 
 [node name="InBetweenWaveTimer" type="Timer" parent="."]
 wait_time = 25.0
@@ -215,10 +212,10 @@ one_shot = true
 [node name="Tween" type="Tween" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/shockwave = SubResource( 5 )
+anims/shockwave = SubResource( 4 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 6 )
+environment = SubResource( 5 )
 [connection signal="picked_from_inventory" from="CanvasLayer/GUI" to="." method="_on_GUI_picked_from_inventory"]
 [connection signal="timeout" from="InBetweenWaveTimer" to="." method="_on_InBetweenWaveTimer_timeout"]
 

@@ -261,6 +261,8 @@ anims/beam = SubResource( 8 )
 
 [node name="DieSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 13 )
+bus = "Effect"
 
 [node name="BeamSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 12 )
+bus = "Effect"

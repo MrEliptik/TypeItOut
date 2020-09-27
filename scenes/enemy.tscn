@@ -415,13 +415,16 @@ texture = ExtResource( 13 )
 
 [node name="DieSound" type="AudioStreamPlayer" parent="Enemy"]
 stream = ExtResource( 9 )
+bus = "Effect"
 
 [node name="MoveSound" type="AudioStreamPlayer" parent="Enemy"]
 stream = ExtResource( 6 )
 volume_db = -8.982
+bus = "Effect"
 
 [node name="HitSound" type="AudioStreamPlayer" parent="Enemy"]
 stream = ExtResource( 5 )
+bus = "Effect"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Enemy"]
 autoplay = "move"

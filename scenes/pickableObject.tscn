@@ -277,19 +277,24 @@ expand_icon = true
 stream = ExtResource( 10 )
 volume_db = 8.036
 pitch_scale = 0.64
+bus = "Effect"
 
 [node name="DeployementSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
 volume_db = -5.098
+bus = "Effect"
 
 [node name="YesSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+bus = "Effect"
 
 [node name="NoSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 12 )
+bus = "Effect"
 
 [node name="AttackSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
+bus = "Effect"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/moving = SubResource( 14 )
