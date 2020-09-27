@@ -1,6 +1,6 @@
 extends Control
 
-const game_scene = "res://scenes/game.tscn"
+const game_scene = "res://scenes/effects/game.tscn"
 #const settings_scene = preload("res://scenes/ui/settings.tscn")
 const credits_scene = preload("res://scenes/ui/credits.tscn")
 
