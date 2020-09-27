@@ -17,3 +17,39 @@ func play():
 
 func stop():
 	$Music.stop()
+	
+func get_volume():
+	pass
+
+func get_music_volume():
+	pass
+
+func get_effects_volume():
+	pass
+
+func is_master_mute():
+	pass
+
+func is_music_mute():
+	pass
+
+func is_effects_mute():
+	pass
+
+func set_volume(value):
+	pass
+
+func set_music_volume(value):
+	pass
+	
+func set_effects_volume(value):
+	pass
+
+func toggle_master_mute(btn):
+	pass
+
+func toggle_music_mute(btn):
+	pass
+
+func toggle_effects_mute(btn):
+	pass
