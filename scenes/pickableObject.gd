@@ -35,15 +35,11 @@ func _ready():
 func _process(delta):
 	if temp_placed or placed: return
 	if Input.is_action_pressed("right_click"):
-		# User cancel placement
-		# TODO: notify inventory of cancelling
 		cancel()
 	elif Input.is_action_pressed("left_click"):
 		place(get_global_mouse_position())
 		update()
 		
-		
-	#global_position = get_global_mouse_position()
 	global_position = get_global_mouse_position()
 	can_place(global_position)
 	update()
@@ -99,7 +95,11 @@ func place(where):
 	reset_pos()
 	
 func can_place(where):
-	if !true:
+	var roads_tilemap = get_parent().get_parent().get_node("Map/Navigation2D/TileMap/Roads")
+	var tilemap_pos = roads_tilemap.world_to_map(get_viewport().canvas_transform.affine_inverse().xform(global_position))
+	var cell_type = roads_tilemap.get_cellv(tilemap_pos)
+	print(tilemap_pos, cell_type)
+	if cell_type != -1:
 		$Groupe/AnimatedSprite.modulate = Color("#df6262")
 		return false
 	else:

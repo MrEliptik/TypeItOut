@@ -12,6 +12,7 @@ const enemy = preload("res://scenes/enemy.tscn")
 const bullet = preload("res://scenes/effects/bullet.tscn")
 const pickable_obj = preload("res://scenes/pickableObject.tscn")
 const letter_particle = preload("res://scenes/effects/lostLetter.tscn")
+const collectable_bullet = preload("res://scenes/effects/collectableBullet.tscn")
 
 const hard_words_url = "res://words_alpha.txt"
 const easy_words_url = "res://words_3000.txt"
@@ -169,6 +170,7 @@ func _unhandled_input(event: InputEvent) -> void:
 					$AnimationPlayer.play("shockwave")
 					if active_enemy.has_collectable():
 						Inventory.add_inventory(active_enemy.collectable)
+						collect_collectable(active_enemy, player, active_enemy.collectable)
 						$CanvasLayer/GUI.update_inventory()
 					active_enemy.die()
 					active_enemy = null
@@ -192,6 +194,11 @@ func fire_bullet(shooter, target, letter):
 	var bullet_instance = bullet.instance()
 	bullets.add_child(bullet_instance)
 	bullet_instance.start(shooter, letter, target)
+	
+func collect_collectable(shooter, target, type):
+	var instance = collectable_bullet.instance()
+	bullets.add_child(instance)
+	instance.start(shooter, type, target)
 				
 func lean_camera_towards(what):
 	var lean_vector = Vector2(0.0, 0.0)
@@ -248,6 +255,7 @@ func find_new_active_enemy(typed_character: String):
 			if active_enemy.has_collectable():
 				Inventory.add_inventory(active_enemy.collectable)
 				$CanvasLayer/GUI.update_inventory()
+				collect_collectable(active_enemy, player, active_enemy.collectable)
 			active_enemy.die()
 			active_enemy = null
 			reset_lean_camera()
