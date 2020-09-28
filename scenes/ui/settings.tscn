@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://effects/vignette.shader" type="Shader" id=1]
 [ext_resource path="res://effects/vignette.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/ui/settings.gd" type="Script" id=5]
 [ext_resource path="res://fonts/rubik_36.tres" type="DynamicFont" id=6]
 [ext_resource path="res://fonts/rubik_32.tres" type="DynamicFont" id=7]
+[ext_resource path="res://fonts/Rubik-Regular.ttf" type="DynamicFontData" id=8]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -16,6 +17,11 @@ shader_param/vignette = ExtResource( 2 )
 size = 100
 use_filter = true
 font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 42
+use_filter = true
+font_data = ExtResource( 8 )
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
@@ -91,9 +97,28 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VolumeContainer" type="VBoxContainer" parent="SettingsContainer"]
+[node name="SOUND" type="Label" parent="SettingsContainer"]
 margin_right = 958.0
-margin_bottom = 175.0
+margin_bottom = 51.0
+rect_min_size = Vector2( 200, 0 )
+custom_fonts/font = SubResource( 5 )
+text = "SOUND"
+align = 1
+
+[node name="VSeparator" type="VSeparator" parent="SettingsContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 55.0
+margin_right = 958.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 0, 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VolumeContainer" type="VBoxContainer" parent="SettingsContainer"]
+margin_top = 79.0
+margin_right = 958.0
+margin_bottom = 254.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -112,13 +137,23 @@ text = "General"
 
 [node name="GeneralSlider" type="HSlider" parent="SettingsContainer/VolumeContainer/GeneralContainer"]
 margin_left = 204.0
-margin_right = 878.0
+margin_right = 814.0
 margin_bottom = 43.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+value = 100.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Value" type="Label" parent="SettingsContainer/VolumeContainer/GeneralContainer"]
+margin_left = 818.0
+margin_top = 2.0
+margin_right = 878.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 60, 0 )
+custom_fonts/font = ExtResource( 7 )
+text = "100"
 
 [node name="GeneralToggle" type="CheckButton" parent="SettingsContainer/VolumeContainer/GeneralContainer"]
 margin_left = 882.0
@@ -148,13 +183,23 @@ text = "Music"
 
 [node name="MusicSlider" type="HSlider" parent="SettingsContainer/VolumeContainer/MusicContainer"]
 margin_left = 204.0
-margin_right = 878.0
+margin_right = 814.0
 margin_bottom = 43.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+value = 100.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Value" type="Label" parent="SettingsContainer/VolumeContainer/MusicContainer"]
+margin_left = 818.0
+margin_top = 2.0
+margin_right = 878.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 60, 0 )
+custom_fonts/font = ExtResource( 7 )
+text = "100"
 
 [node name="MusicToggle" type="CheckButton" parent="SettingsContainer/VolumeContainer/MusicContainer"]
 margin_left = 882.0
@@ -184,13 +229,23 @@ text = "Effect"
 
 [node name="EffectSlider" type="HSlider" parent="SettingsContainer/VolumeContainer/EffectContainer"]
 margin_left = 204.0
-margin_right = 878.0
+margin_right = 814.0
 margin_bottom = 43.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+value = 100.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Value" type="Label" parent="SettingsContainer/VolumeContainer/EffectContainer"]
+margin_left = 818.0
+margin_top = 2.0
+margin_right = 878.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 60, 0 )
+custom_fonts/font = ExtResource( 7 )
+text = "100"
 
 [node name="EffectToggle" type="CheckButton" parent="SettingsContainer/VolumeContainer/EffectContainer"]
 margin_left = 882.0
@@ -199,20 +254,39 @@ margin_bottom = 43.0
 pressed = true
 align = 1
 
-[node name="VSeparator" type="VSeparator" parent="SettingsContainer"]
+[node name="VSeparator2" type="VSeparator" parent="SettingsContainer"]
 modulate = Color( 1, 1, 1, 0 )
-margin_top = 179.0
+margin_top = 258.0
 margin_right = 958.0
-margin_bottom = 219.0
+margin_bottom = 298.0
 rect_min_size = Vector2( 0, 40 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DisplayContainer" type="VBoxContainer" parent="SettingsContainer"]
-margin_top = 223.0
+[node name="DISPLAY" type="Label" parent="SettingsContainer"]
+margin_top = 302.0
 margin_right = 958.0
-margin_bottom = 483.0
+margin_bottom = 353.0
+rect_min_size = Vector2( 200, 0 )
+custom_fonts/font = SubResource( 5 )
+text = "DISPLAY"
+align = 1
+
+[node name="VSeparator3" type="VSeparator" parent="SettingsContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 357.0
+margin_right = 958.0
+margin_bottom = 377.0
+rect_min_size = Vector2( 0, 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DisplayContainer" type="VBoxContainer" parent="SettingsContainer"]
+margin_top = 381.0
+margin_right = 958.0
+margin_bottom = 641.0
 alignment = 2
 
 [node name="ResolutionContainer" type="HBoxContainer" parent="SettingsContainer/DisplayContainer"]
@@ -335,3 +409,4 @@ margin_right = 1115.0
 [connection signal="item_selected" from="SettingsContainer/DisplayContainer/ResolutionContainer/ResolutionOptions" to="." method="_on_ResolutionOptions_item_selected"]
 [connection signal="item_selected" from="SettingsContainer/DisplayContainer/WindowTypeContainer/WindowTypeOptions" to="." method="_on_WindowTypeOptions_item_selected"]
 [connection signal="toggled" from="SettingsContainer/DisplayContainer/VSyncContainer/VSyncToggle" to="." method="_on_VSyncToggle_toggled"]
+[connection signal="pressed" from="HBoxContainer/HomeBtn" to="." method="_on_HomeBtn_pressed"]

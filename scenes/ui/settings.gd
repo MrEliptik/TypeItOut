@@ -25,12 +25,12 @@ var windows_size_str = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-#	$VBoxContainer/HBoxContainer/GeneralSlider.value = int(db2linear(Music.get_volume())*100)
-#	$VBoxContainer/HBoxContainer2/MusicSlider.value = int(db2linear(Music.get_music_volume())*100)
-#	$VBoxContainer/HBoxContainer3/EffectsSlider.value = int(db2linear(Music.get_effects_volume())*100)
-#	$VBoxContainer/HBoxContainer/GeneralToggle.pressed = !Music.is_master_mute()
-#	$VBoxContainer/HBoxContainer2/MusicToggle.pressed = !Music.is_music_mute()
-#	$VBoxContainer/HBoxContainer3/EffectsToggle.pressed = !Music.is_effects_mute()
+	$SettingsContainer/VolumeContainer/GeneralContainer/GeneralSlider.value = int(db2linear(Music.get_volume())*100)
+	$SettingsContainer/VolumeContainer/MusicContainer/MusicSlider.value = int(db2linear(Music.get_music_volume())*100)
+	$SettingsContainer/VolumeContainer/EffectContainer/EffectSlider.value = int(db2linear(Music.get_effects_volume())*100)
+	$SettingsContainer/VolumeContainer/GeneralContainer/GeneralToggle.pressed = !Music.is_master_mute()
+	$SettingsContainer/VolumeContainer/MusicContainer/MusicToggle.pressed = !Music.is_music_mute()
+	$SettingsContainer/VolumeContainer/EffectContainer/EffectToggle.pressed = !Music.is_effects_mute()
 
 	for resolution in windows_size_str.keys():
 		$SettingsContainer/DisplayContainer/ResolutionContainer/ResolutionOptions.add_item(resolution)
@@ -40,17 +40,17 @@ func _ready():
 		
 	$SettingsContainer/DisplayContainer/ResolutionContainer/ResolutionOptions.selected = 1
 
-
+########################## MUSIC ####################################
 func _on_GeneralSlider_value_changed(value):
-	$VBoxContainer/HBoxContainer/Value.text = str(value)
+	$SettingsContainer/VolumeContainer/GeneralContainer/Value.text = str(value)
 	Music.set_volume(linear2db(value/100))
 
 func _on_MusicSlider_value_changed(value):
-	$VBoxContainer/HBoxContainer2/Value.text = str(value)
+	$SettingsContainer/VolumeContainer/MusicContainer/Value.text = str(value)
 	Music.set_music_volume(linear2db(value/100))
 	
 func _on_EffectSlider_value_changed(value):
-	$VBoxContainer/HBoxContainer3/Value.text = str(value)
+	$SettingsContainer/VolumeContainer/EffectContainer/Value.text = str(value)
 	#db2linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master")))*100
 	Music.set_effects_volume(linear2db(value/100))
 	
@@ -63,9 +63,10 @@ func _on_MusicToggle_toggled(button_pressed):
 func _on_EffectToggle_toggled(button_pressed):
 	Music.toggle_effects_mute(!button_pressed)
 
+
+########################## DISPLAY ####################################
 func _on_ResolutionOptions_item_selected(index):
 	OS.set_window_size(windows_size[index])
-
 
 func _on_WindowTypeOptions_item_selected(index):
 	if index == WINDOW_TYPE.FULLSCREEN:
@@ -80,3 +81,7 @@ func _on_WindowTypeOptions_item_selected(index):
 
 func _on_VSyncToggle_toggled(button_pressed):
 	OS.vsync_enabled = button_pressed
+
+func _on_HomeBtn_pressed():
+	visible = false
+	queue_free()

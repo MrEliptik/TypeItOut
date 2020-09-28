@@ -552,7 +552,6 @@ margin_bottom = 138.0
 rect_min_size = Vector2( 0, 25 )
 
 [node name="SettingsBtn" type="Button" parent="BtnContainer"]
-visible = false
 margin_left = 107.0
 margin_top = 133.0
 margin_right = 427.0
