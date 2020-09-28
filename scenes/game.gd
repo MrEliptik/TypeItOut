@@ -35,6 +35,8 @@ onready var game_over = false
 
 var inventory_to_remove = null
 
+var defense_placeable = true
+
 var data = {
 	"wave":0,
 	"errors": 0,
@@ -333,13 +335,24 @@ func stop_rover_sound():
 		rover.get_node("EngineSound").stop()
 
 func _on_GUI_picked_from_inventory(object_type):
+	if !defense_placeable: return
+	defense_placeable = false
 	# Temporary, just to be able to click the button to place definitely
 	var instance = pickable_obj.instance()
 	instance.init(object_type)
 	$CanvasLayer.add_child(instance)
 	instance.connect("place", self, "on_place_defense")
+	instance.connect("cancel", self, "on_cancel_defense")
+	instance.connect("cancel_place", self, "on_cancel_place_defense")
+	
+func on_cancel_place_defense(who):
+	defense_placeable = false
+	
+func on_cancel_defense(who):
+	defense_placeable = true
 	
 func on_place_defense(who, type, where):
+	defense_placeable = true
 	$CanvasLayer.remove_child(who)
 	defenses.add_child(who)
 	who.global_position = where

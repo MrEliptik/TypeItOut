@@ -3,6 +3,7 @@ extends Node2D
 signal attack(who, what)
 signal place(who, pos)
 signal cancel(who)
+signal cancel_place(who)
 
 enum TYPE{
 	SINGLE_TURRET,
@@ -22,6 +23,7 @@ var type_AttackTime = {
 var type
 # Until placed, follow the mouse position
 var placed = false
+var temp_placed = false
 
 var target = Array()
 var letter = ""
@@ -31,7 +33,7 @@ func _ready():
 	pass
 	
 func _process(delta):
-	if placed: return
+	if temp_placed or placed: return
 	if Input.is_action_pressed("right_click"):
 		# User cancel placement
 		# TODO: notify inventory of cancelling
@@ -47,7 +49,7 @@ func _process(delta):
 	update()
 
 func _draw():
-	if placed: return
+	if temp_placed or placed: return
 	#draw_circle_custom($Groupe/AttackArea/CollisionShape2D.shape.radius, Color("#1c84defe"))
 	draw_circle_arc(Vector2(0.0, 0.0), $Groupe/AttackArea/CollisionShape2D.shape.radius, 0, 360, Color("#d684defe"))
 	draw_circle(Vector2(0.0, 0.0), $Groupe/AttackArea/CollisionShape2D.shape.radius, Color("#1c84defe"))
@@ -92,7 +94,7 @@ func place(where):
 		$NoSound.play()
 		return
 	$Groupe/VBoxContainer.visible = true
-	placed = true
+	temp_placed = true
 	global_position = where
 	reset_pos()
 	
@@ -110,6 +112,7 @@ func reset_pos():
 	$AnimationPlayer.stop()
 
 func cancel():
+	temp_placed = false
 	placed = false
 	emit_signal("cancel", self)
 	queue_free()
@@ -122,11 +125,14 @@ func _on_Yes_pressed():
 	# Transform the coordinate to take into account the camera zoom and panning
 	# because the object is seen through the canvaslayer
 	emit_signal("place", self, type, get_viewport().canvas_transform.affine_inverse().xform(global_position))
+	placed = true
 
 func _on_No_pressed():
 	$NoSound.play()
 	$Groupe/VBoxContainer.visible = false
 	placed = false
+	temp_placed = false
+	emit_signal("cancel_place", self)
 
 func _on_AttackTimer_timeout():
 	#print(global_position.angle_to(target.global_position))
