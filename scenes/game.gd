@@ -68,6 +68,8 @@ func _ready():
 	$CanvasLayer/GUI/StartBtn.connect("pressed", self, "on_gui_start_btn_pressed")
 
 func spawn_enemies():
+	var at_least_one_turret = false
+	
 	var spawn_points = spawn_points_container.get_children()
 	
 	for i in enemy_number:
@@ -96,9 +98,10 @@ func spawn_enemies():
 				if enemy.get_prompt().substr(0, 1) == txt.substr(0,1):
 					same_starting_letter = true
 					break
-					
+			
 		enemy_instance.set_prompt(txt)
 		enemy_instance.set_speed(enemy_speed)
+		if enemy_instance.collectable: at_least_one_turret = true
 		
 		# Set path for enemy
 		enemy_instance.path = nav_2d.get_simple_path(enemy_instance.global_position, player.global_position)
@@ -106,6 +109,12 @@ func spawn_enemies():
 		$Dictionary.clear_queue()
 		$Dictionary.add_to_queue(enemy_instance.get_prompt())
 	$Dictionary.request_queue()
+	
+	# We want at least one turret on the first level
+	if wave_number == 1:
+		if at_least_one_turret: return
+	# We give a double turret
+	enemies_container.get_child(0).set_collectable(1)
 	
 func _process(delta):
 	if game_over: return

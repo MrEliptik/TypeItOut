@@ -41,15 +41,7 @@ func _ready():
 	# Draw random item at 10% chance
 	if(randf() < collectable_chance):
 		var idx = int(rand_range(0, Inventory.type_Sprite.size()))
-		collectable = idx
-		
-		var sprite = $Enemy/LabelContainer/Label/Circle/Collectable
-		sprite.texture = load(Inventory.type_Sprite[idx])
-		$Enemy/LabelContainer/Label/Circle.visible = true
-		sprite.material = ShaderMaterial.new()
-		sprite.material.shader = load("res://effects/outline.shader")
-		sprite.material.set_shader_param("outline_color", Color("#f5eb97"))
-		sprite.material.set_shader_param("width", 2)
+		set_collectable(idx)
 	
 func _process(delta):
 	var move_distance = speed * delta
@@ -65,22 +57,17 @@ func _process(delta):
 		# this is because we take the transform, to follow the path rotation
 		if global_position.x > get_viewport().size.x:
 			$Enemy.rotation_degrees += 180
-	#move_along_path(move_distance)
 	
-func move_along_path(distance: float) -> void:
-	var starting_point = position
-	for i in range(path.size()):
-		var distance_to_next = starting_point.distance_to(path[0])
-		if distance <= distance_to_next and distance >= 0.0:
-			position = starting_point.linear_interpolate(path[0], distance / distance_to_next)
-			break
-		elif distance < 0.0:
-			position = path[0]
-			#set_process(false)
-			break
-		distance -= distance_to_next
-		starting_point = path[0]
-		path.remove(0)
+func set_collectable(idx):
+	collectable = idx
+		
+	var sprite = $Enemy/LabelContainer/Label/Circle/Collectable
+	sprite.texture = load(Inventory.type_Sprite[idx])
+	$Enemy/LabelContainer/Label/Circle.visible = true
+	sprite.material = ShaderMaterial.new()
+	sprite.material.shader = load("res://effects/outline.shader")
+	sprite.material.set_shader_param("outline_color", Color("#f5eb97"))
+	sprite.material.set_shader_param("width", 2)
 	
 func has_collectable():
 	return collectable != null

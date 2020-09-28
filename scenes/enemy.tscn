@@ -14,54 +14,54 @@
 [ext_resource path="res://effects/animation/hit.tres" type="Animation" id=12]
 [ext_resource path="res://effects/particles/star_07.png" type="Texture" id=13]
 
-[sub_resource type="Curve2D" id=17]
+[sub_resource type="Curve2D" id=1]
 _data = {
 "points": PoolVector2Array(  )
 }
 
-[sub_resource type="RectangleShape2D" id=18]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 53.62, 39.0067 )
 
-[sub_resource type="ShaderMaterial" id=19]
+[sub_resource type="ShaderMaterial" id=3]
 resource_local_to_scene = true
 shader = ExtResource( 1 )
 shader_param/width = 0.0
 shader_param/outline_color = Color( 0.364706, 0.921569, 0.360784, 1 )
 
-[sub_resource type="ShaderMaterial" id=20]
+[sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 1 )
 shader_param/width = 2.0
 shader_param/outline_color = Color( 0.960784, 0.921569, 0.592157, 1 )
 
-[sub_resource type="DynamicFont" id=21]
+[sub_resource type="DynamicFont" id=5]
 size = 48
 outline_size = 2
 use_filter = true
 extra_spacing_char = 1
 font_data = ExtResource( 3 )
 
-[sub_resource type="Gradient" id=22]
+[sub_resource type="Gradient" id=6]
 offsets = PoolRealArray( 0.0148148, 0.57037, 1 )
 colors = PoolColorArray( 0.972656, 0.971231, 0.94986, 1, 0.571699, 0.893915, 0.969238, 1, 0.0419922, 0.00164032, 0.00164032, 0 )
 
-[sub_resource type="GradientTexture" id=23]
-gradient = SubResource( 22 )
+[sub_resource type="GradientTexture" id=7]
+gradient = SubResource( 6 )
 
-[sub_resource type="Curve" id=24]
+[sub_resource type="Curve" id=8]
 _data = [ Vector2( 0.00632912, 0.155682 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.465909 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=25]
-curve = SubResource( 24 )
+[sub_resource type="CurveTexture" id=9]
+curve = SubResource( 8 )
 
-[sub_resource type="Curve" id=26]
+[sub_resource type="Curve" id=10]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.454545 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=27]
-curve = SubResource( 26 )
+[sub_resource type="CurveTexture" id=11]
+curve = SubResource( 10 )
 
-[sub_resource type="ParticlesMaterial" id=28]
+[sub_resource type="ParticlesMaterial" id=12]
 lifetime_randomness = 0.04
-trail_size_modifier = SubResource( 27 )
+trail_size_modifier = SubResource( 11 )
 emission_shape = 2
 emission_box_extents = Vector3( 1, 1, 1 )
 flag_disable_z = true
@@ -74,10 +74,10 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 132.4
 angle_random = 0.46
-scale_curve = SubResource( 25 )
-color_ramp = SubResource( 23 )
+scale_curve = SubResource( 9 )
+color_ramp = SubResource( 7 )
 
-[sub_resource type="Animation" id=29]
+[sub_resource type="Animation" id=13]
 length = 0.5
 step = 0.01
 tracks/0/type = "bezier"
@@ -135,7 +135,7 @@ tracks/4/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=30]
+[sub_resource type="Animation" id=14]
 length = 2.0
 loop = true
 tracks/0/type = "value"
@@ -151,7 +151,7 @@ tracks/0/keys = {
 "values": [ -10.0, 0.0, 10.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=31]
+[sub_resource type="Animation" id=15]
 length = 0.3
 step = 0.01
 tracks/0/type = "value"
@@ -305,7 +305,7 @@ tracks/3/keys = {
 }
 
 [node name="Path2D" type="Path2D"]
-curve = SubResource( 17 )
+curve = SubResource( 1 )
 script = ExtResource( 4 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
@@ -319,10 +319,10 @@ collision_mask = 31
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
 position = Vector2( 0.132889, -4.61152 )
-shape = SubResource( 18 )
+shape = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="Enemy"]
-material = SubResource( 19 )
+material = SubResource( 3 )
 z_index = 1
 texture = ExtResource( 11 )
 offset = Vector2( 0, -45 )
@@ -374,7 +374,7 @@ __meta__ = {
 }
 
 [node name="Collectable" type="TextureRect" parent="Enemy/LabelContainer/Label/Circle"]
-material = SubResource( 20 )
+material = SubResource( 4 )
 anchor_left = 0.5
 anchor_top = 0.484
 anchor_right = 0.5
@@ -396,7 +396,7 @@ margin_right = 117.0
 margin_bottom = 53.0
 grow_horizontal = 2
 size_flags_horizontal = 3
-custom_fonts/normal_font = SubResource( 21 )
+custom_fonts/normal_font = SubResource( 5 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]test[/center]"
@@ -410,7 +410,7 @@ __meta__ = {
 emitting = false
 amount = 500
 lifetime = 2.5
-process_material = SubResource( 28 )
+process_material = SubResource( 12 )
 texture = ExtResource( 13 )
 
 [node name="DieSound" type="AudioStreamPlayer" parent="Enemy"]
@@ -428,11 +428,11 @@ bus = "Effect"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Enemy"]
 autoplay = "move"
-anims/die = SubResource( 29 )
-anims/move = SubResource( 30 )
+anims/die = SubResource( 13 )
+anims/move = SubResource( 14 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="Enemy"]
-anims/danger = SubResource( 31 )
+anims/danger = SubResource( 15 )
 anims/danger_active = SubResource( 16 )
 
 [node name="AnimationPlayer3" type="AnimationPlayer" parent="Enemy"]
