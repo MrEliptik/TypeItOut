@@ -21,7 +21,7 @@ curve = SubResource( 4 )
 flag_disable_z = true
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 392.15
+initial_velocity = 553.07
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.1
@@ -31,7 +31,7 @@ color_ramp = SubResource( 3 )
 [node name="BulletParticles" type="Particles2D"]
 material = SubResource( 1 )
 amount = 1000
-lifetime = 2.0
+lifetime = 8.45
 speed_scale = 10.0
 explosiveness = 0.15
 local_coords = false

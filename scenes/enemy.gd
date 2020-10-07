@@ -141,7 +141,7 @@ func get_bbcode_end_color_tag() -> String:
 	return "[/color]"
 
 func deselect():
-	set_prompt(prompt_text)
+	#set_prompt(prompt_text)
 	z_index = 0
 
 func select():

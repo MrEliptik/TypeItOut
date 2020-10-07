@@ -223,6 +223,7 @@ func find_new_active_enemy(typed_character: String):
 		# Enemy has already been typed
 		if enemy._curr_char_idx != -1:
 			next_char = prompt.substr(enemy._curr_char_idx, 1)
+			print(next_char)
 		else:
 			next_char = prompt.substr(0, 1)
 		if next_char == typed_character:
@@ -262,6 +263,7 @@ func find_new_active_enemy(typed_character: String):
 			return
 	else:
 		next_char = active_enemy.get_prompt().substr(0, 1)
+		active_enemy._curr_char_idx = 1
 		curr_letter_idx = 1
 	
 	if !active_enemy: return
