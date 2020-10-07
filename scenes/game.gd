@@ -38,6 +38,8 @@ var inventory_to_remove = null
 
 var defense_placeable = true
 
+var not_started = true
+
 var data = {
 	"wave":0,
 	"errors": 0,
@@ -61,12 +63,59 @@ func _ready():
 	text = convert_to_array(text)
 	text = remove_small_text(text)
 	
-	spawn_enemies()
+	$AnimationPlayer.play("enemy_appearance")
 			
 	player.get_node("DangerArea").connect("area_entered", self, "on_dangerArea_body_entered")
 	player.get_node("GameOverArea").connect("area_entered", self, "on_gameOverArea_body_entered")
 	
 	$CanvasLayer/GUI/StartBtn.connect("pressed", self, "on_gui_start_btn_pressed")
+
+func spawn_enemies_with_animation():
+	var at_least_one_turret = false
+	var spawn_points = [$SpawnPoints/Node2D3, $SpawnPoints/Node2D4, $SpawnPoints/Node2D5, $SpawnPoints/Node2D6, $SpawnPoints/Node2D10, $SpawnPoints/Node2D11, $SpawnPoints/Node2D14]
+	
+	for i in enemy_number:
+		var enemy_instance = enemy.instance()
+		enemies_container.add_child(enemy_instance)
+		enemy_instance.global_position = spawn_points[i].global_position
+		enemy_instance.set_target(player)
+		
+		var txt = text[int(rand_range(0.0, text.size()))]
+		var same_starting_letter = false
+		# We loop through enemies to see if another has the same
+		# starting letter
+		for enemy in enemies_container.get_children():
+			# If we find one, we stop
+			if enemy.get_prompt().substr(0, 1) == txt.substr(0,1):
+				same_starting_letter = true
+				break
+		while(same_starting_letter):
+			txt = text[int(rand_range(0.0, text.size()))]
+			same_starting_letter = false
+			# We loop through enemies to see if another has the same
+			# starting letter
+			for enemy in enemies_container.get_children():
+				# If we find one, we stop
+				if enemy.get_prompt().substr(0, 1) == txt.substr(0,1):
+					same_starting_letter = true
+					break
+			
+		enemy_instance.set_prompt(txt)
+		enemy_instance.set_speed(enemy_speed)
+		if enemy_instance.collectable: at_least_one_turret = true
+		
+		# Set path for enemy
+		enemy_instance.path = nav_2d.get_simple_path(enemy_instance.global_position, player.global_position)
+		
+		$Dictionary.clear_queue()
+		$Dictionary.add_to_queue(enemy_instance.get_prompt())
+	$Dictionary.request_queue()
+	
+	# We want at least one turret on the first level
+	if wave_number == 1:
+		if at_least_one_turret: return
+	# We give a double turret
+	enemies_container.get_child(0).set_collectable(1)
 
 func spawn_enemies():
 	var at_least_one_turret = false
@@ -118,7 +167,7 @@ func spawn_enemies():
 	enemies_container.get_child(0).set_collectable(1)
 	
 func _process(delta):
-	if game_over: return
+	if game_over or not_started: return
 	if check_enemy_number() == 0 && !in_between_wave:
 		in_between_wave = true
 		next_wave()
@@ -130,6 +179,7 @@ func _physics_process(delta):
 	pass
 		
 func _unhandled_input(event: InputEvent) -> void:
+	if not_started: return
 	# Check event pressed because we don't see the event as being not pressed on windaube
 	if event is InputEventKey and event.is_pressed():
 		if game_over: return
@@ -437,3 +487,7 @@ func on_gui_start_btn_pressed():
 	# Start next wave
 	spawn_enemies()
 	in_between_wave = false
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	not_started = false

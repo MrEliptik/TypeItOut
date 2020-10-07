@@ -22,6 +22,10 @@ func update_inventory():
 		if i < Inventory.inventory.size():
 			$HBoxContainer2.get_child(i).texture = load(Inventory.type_Sprite[Inventory.inventory[i]])
 			
+func starting():
+	$Starting.visible = true
+	$AnimationPlayer.play("starting")
+			
 func start_wave_finished(number, data):
 	get_parent().get_node("Vignette").visible = true
 	$ShowFinishedTimer.start()
@@ -116,3 +120,7 @@ func _on_StartBtn_pressed():
 	$PlaceObjects.visible = false
 	$ShowFinishedTimer.stop()
 	hide_wave_finished()
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "starting":
+		$Starting.visible = false

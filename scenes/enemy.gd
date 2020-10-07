@@ -8,6 +8,7 @@ const hit_particles = preload("res://scenes/effects/hitEnemyParticles.tscn")
 const letter_particle = preload("res://scenes/effects/lostLetter.tscn")
 
 const COLOR_PADDING = 15
+const MAX_ANGLE = 85
 
 onready var prompt = $Enemy/LabelContainer/Word
 onready var prompt_text = prompt.text.to_lower()
@@ -53,10 +54,22 @@ func _process(delta):
 			
 		$Enemy.global_transform = $PathFollow2D.global_transform
 		
+		#print($Enemy.rotation_degrees)
+		
 		# Enemy is on the right side, we need to flip it to be upside
 		# this is because we take the transform, to follow the path rotation
 		if global_position.x > get_viewport().size.x:
-			$Enemy.rotation_degrees += 180
+			$Enemy.rotation_degrees += sign($Enemy.rotation_degrees)*180
+			#$Enemy.rotation_degrees += 180
+#			if $Enemy.rotation_degrees < -180:
+#				$Enemy.rotation_degrees = -180
+#			elif $Enemy.rotation_degrees > 180:
+#				$Enemy.rotation_degrees = 180
+		else:
+			if $Enemy.rotation_degrees < -MAX_ANGLE:
+				$Enemy.rotation_degrees = MAX_ANGLE
+			elif $Enemy.rotation_degrees > MAX_ANGLE:
+				$Enemy.rotation_degrees = MAX_ANGLE
 	
 func set_collectable(idx):
 	collectable = idx
