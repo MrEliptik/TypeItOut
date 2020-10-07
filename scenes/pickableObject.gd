@@ -97,7 +97,9 @@ func place(where):
 func can_place(where):
 	var roads_tilemap = get_parent().get_parent().get_node("Map/Navigation2D/TileMap/Roads")
 	var tilemap_pos = roads_tilemap.world_to_map(get_viewport().canvas_transform.affine_inverse().xform(global_position))
-	var cell_type = roads_tilemap.get_cellv(tilemap_pos)
+	print(tilemap_pos)
+	var offset = Vector2(2, 5)
+	var cell_type = roads_tilemap.get_cellv(tilemap_pos-offset)
 	print(tilemap_pos, cell_type)
 	if cell_type != -1:
 		$Groupe/AnimatedSprite.modulate = Color("#df6262")
